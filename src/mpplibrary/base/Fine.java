@@ -16,5 +16,29 @@ public class Fine {
     private long ID;
     private LocalDate fineDate;
     private LocalDate paidDate;
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
+    }
+
+    public LocalDate getFineDate() {
+        return fineDate;
+    }
+
+    public void setFineDate(LocalDate fineDate) {
+        this.fineDate = fineDate;
+    }
+
+    public LocalDate getPaidDate() {
+        return paidDate;
+    }
+
+    public void setPaidDate(LocalDate paidDate) {
+        this.paidDate = paidDate;
+    }
     
 }

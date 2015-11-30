@@ -5,72 +5,58 @@
  */
 package mpplibrary.base.roles;
 
-import mpplibrary.base.Person;
-
 /**
  *
  * @author 984970
  */
-public class Librarian extends Person implements Role {
+public class Librarian extends User implements Role {
 
     @Override
     public boolean canLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return true;     }
 
     @Override
     public boolean canAddBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canEditBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canDeleteBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canCheckoutBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return true;     }
 
     @Override
     public boolean canCheckinBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return true;     }
 
     @Override
     public boolean canAddMember() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canEditMember() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canDeleteMember() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canAddAuthor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canDeleteAuthor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
 
     @Override
     public boolean canEditAuthor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+return false;    }
     
 }
