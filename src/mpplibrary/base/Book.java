@@ -4,11 +4,22 @@
  * and open the template in the editor.
  */
 package mpplibrary.base;
-
 /**
  *
  * @author 984970
  */
-public class Book {
+public class Book extends Publication{
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+    private String ISBN;
+    
+    
+    
     
 }

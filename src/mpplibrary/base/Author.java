@@ -9,8 +9,9 @@ package mpplibrary.base;
  *
  * @author 984970
  */
-public class CheckoutRecordEntry {
-    
-    private long ID;
-   
+public class Author extends Person {
+
+    private String credentials;
+    private String bio;
+
 }

@@ -9,6 +9,12 @@ package mpplibrary.base;
  *
  * @author 984970
  */
-public class Member {
-    
+ public class User extends Person {
+     
+     private String username;
+     private String password;
+     
+
+  
+
 }
