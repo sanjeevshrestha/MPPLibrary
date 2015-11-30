@@ -5,12 +5,16 @@
  */
 package mpplibrary.base;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author 984970
  */
-public class CheckoutRecordEntry {
+public class Fine {
     
     private long ID;
-   
+    private LocalDate fineDate;
+    private LocalDate paidDate;
+    
 }
