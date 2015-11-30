@@ -5,7 +5,6 @@
  */
 package mpplibrary.base;
 
-import mpplibrary.base.roles.Member;
 import java.time.LocalDate;
 import java.util.List;
 

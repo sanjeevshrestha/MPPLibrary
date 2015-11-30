@@ -11,6 +11,9 @@ package mpplibrary.base;
  */
 public class Contact {
     private long ID;
+    private String phone;
+    private String email;
+    private String mobile;
 
     public long getID() {
         return ID;
@@ -43,9 +46,7 @@ public class Contact {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-    private String phone;
-    private String email;
-    private String mobile;
+    
     
     
 }
