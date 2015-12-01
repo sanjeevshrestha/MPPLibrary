@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mpplibrary.application.controllers.LoginController;
+import mpplibrary.application.controllers.MenuController;
 import mpplibrary.helper.DataHelper;
 import mpplibrary.interfaces.OnLoginSuccessListener;
 
@@ -23,7 +24,7 @@ import mpplibrary.interfaces.OnLoginSuccessListener;
  *
  * @author 984970
  */
-public class MPPLibrary extends Application implements OnLoginSuccessListener{
+public class MPPLibrary extends Application implements OnLoginSuccessListener {
 
     private Stage primaryStage;
 
@@ -37,12 +38,12 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener{
             ((LoginController) loader.getController()).initialize(this);
             Scene scene = new Scene(root, DataHelper.WINDOW_WIDTH, DataHelper.WINDOW_HEIGHT);
             primaryStage.setTitle("Login");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            primaryStage.setScene(scene);
+            primaryStage.show();
             this.primaryStage = primaryStage;
         } catch (IOException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
-    }
+        }
     }
 
     /**
@@ -56,17 +57,17 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener{
     @Override
     public void onLoginSuccess() {
         try {
-//            FXMLLoader loader = 
-            Parent root = FXMLLoader.load(getClass().getResource("/mpplibrary/views/MainWindow.fxml"));
-  
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/MainWindow.fxml"));
+            Parent root = loader.load();
+            ((MenuController) loader.getController()).initialize(primaryStage);
             Scene scene = new Scene(root, DataHelper.MAIN_WINDOW_WIDTH, DataHelper.MAIN_WINDOW_HEIGHT);
             primaryStage.setTitle("MPP LIBRARY");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(MPPLibrary.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
 
-}
+    }
 
 }

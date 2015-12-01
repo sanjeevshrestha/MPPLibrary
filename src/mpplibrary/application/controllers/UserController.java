@@ -5,10 +5,14 @@
  */
 package mpplibrary.application.controllers;
 
+import javafx.stage.Stage;
+
 /**
  *
  * @author 984970
  */
 public class UserController {
+
+  
     
 }

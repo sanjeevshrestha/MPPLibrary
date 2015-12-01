@@ -10,5 +10,12 @@ package mpplibrary.application.controllers;
  * @author 984970
  */
 public class BookController {
+
+    
+    public void listBooks(){
+        
+    }
     
 }
+
+
