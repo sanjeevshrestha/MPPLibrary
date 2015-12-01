@@ -7,22 +7,65 @@ package mpplibrary.application.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import mpplibrary.MppLibrary;
+import mpplibrary.interfaces.OnLoginSuccessListener;
 
 /**
  *
  * @author 984947
  */
 public class LoginController {
-
+    
     @FXML
     TextField txtUsername;
-
+    
     @FXML
     TextField txtPassword;
-
+    
+    String userName, password;
+    
+    @FXML
+    Label txtLoginInfo;
+    
+    private OnLoginSuccessListener onLoginSuccessListener;
+    
     @FXML
     protected void handleBtnLoginAction(ActionEvent event) {
-        System.out.println("LoginClicked!!");
+        userName = txtUsername.getText();
+        password = txtPassword.getText();
+        if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
+            txtLoginInfo.setText("Username or password cannot be empty");
+            txtLoginInfo.setVisible(true);
+            return;
+        }
+        
+        //get userName and password from the directory and match and show appropriate login
+//        if(userExists){
+            //Login
+        loadHomeScreen();
+//        }else{
+        //show error message; 
     }
+//        System.out.println("LoginClicked!!");
+    
+    
+    @FXML
+    protected void handleInputMethodActive(KeyEvent event){
+        txtLoginInfo.setVisible(false);
+    }
+    
+    private void loadHomeScreen(){
+      onLoginSuccessListener.onLoginSuccess();
+        
+    }
+
+    public void initialize(OnLoginSuccessListener onLoginSuccessListener) {
+        this.onLoginSuccessListener = onLoginSuccessListener;
+    }
+    
 }

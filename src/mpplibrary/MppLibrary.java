@@ -5,44 +5,43 @@ package mpplibrary;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import mpplibrary.application.controllers.LoginController;
+import mpplibrary.helper.DataHelper;
+import mpplibrary.interfaces.OnLoginSuccessListener;
 
 /**
  *
  * @author 984947
  */
-public class MppLibrary extends Application {
-    
+public class MppLibrary extends Application implements OnLoginSuccessListener {
+
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) {
-        
-//        Button btn = new Button();
-//        btn.setText("Say 'Hello World'");
-//        btn.setOnAction(new EventHandler<ActionEvent>() {
-//            
-//            @Override
-//            public void handle(ActionEvent event) {
-//                System.out.println("Hello World!");
-//            }
-//        });
-//        
-//        StackPane root = new StackPane();
-//        root.getChildren().add(btn);
-//        
-//        Scene scene = new Scene(root, 300, 250);
-//        
-//        Parent root = 
-//        primaryStage.setTitle("Hello World!");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/Login.fxml"));
+            Parent root = loader.load();
+            ((LoginController) loader.getController()).initialize(this);
+            Scene scene = new Scene(root, DataHelper.WINDOW_WIDTH, DataHelper.WINDOW_HEIGHT);
+            primaryStage.setTitle("Login");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            this.primaryStage = primaryStage;
+        } catch (IOException ex) {
+            Logger.getLogger(MppLibrary.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -51,5 +50,21 @@ public class MppLibrary extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
+    @Override
+    public void onLoginSuccess() {
+        try {
+//            FXMLLoader loader = 
+            Parent root = FXMLLoader.load(getClass().getResource("/mpplibrary/views/MainWindow.fxml"));
+  
+            Scene scene = new Scene(root, DataHelper.MAIN_WINDOW_WIDTH, DataHelper.MAIN_WINDOW_HEIGHT);
+            primaryStage.setTitle("MPP LIBRARY");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MppLibrary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }
