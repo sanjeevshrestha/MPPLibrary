@@ -10,7 +10,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mpplibrary.helper.LoadWindowFrame;
 
 /**
  *
@@ -24,14 +28,21 @@ public class MenuController {
     @FXML
     MenuBar mainMenuBar;
 
+    @FXML
+    VBox vBoxMainWindow;
+
+    @FXML
+    AnchorPane mainFramePane;
+
     protected Stage primaryStage;
-    
-    protected MemberController memberController;
+
+//    protected MemberController memberController;
+    protected LoadWindowFrame windowFrame;
 
     @FXML
     protected void onMenuAddMemberSelected(ActionEvent event) {
 
-        memberController.setSceneAddMember();
+        windowFrame.setSceneAddMember();
 
     }
 
@@ -82,8 +93,9 @@ public class MenuController {
     }
 
     public void initialize(Stage primaryStage) {
-       
-        memberController = new MemberController(primaryStage);
+//       vBoxMainWindow.getChildren().add(1, mainMenuBar);
+//        memberController = new MemberController(mainFramePane);
+        windowFrame = new LoadWindowFrame(mainFramePane);
     }
 
 }
