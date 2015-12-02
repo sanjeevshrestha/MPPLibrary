@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -23,6 +24,21 @@ import javafx.scene.layout.VBox;
  * @author 984970
  */
 public class BookController {
+
+    @FXML
+    private TextField txtisbn;
+    private TextField txtNoOfCopies;
+    private TextField txtBookTitle;
+    private TextField txtFirstName;
+    private TextField txtLastName;
+    private TextField txtStreet;
+    private TextField txtCity;
+    private TextField txtState;
+    private TextField txtZip;
+    private TextField txtPhone;
+    private TextField txtCredentials;
+    private TextField txtBio;
+    private Label errorLabel;
 
     @FXML
     private Button btnAddMoreBookAuthor;
@@ -70,10 +86,10 @@ public class BookController {
     public void initialize() {
         loadAuthor();
     }
-    
+
     @FXML
-    protected void onBtnAddBookClicked(ActionEvent event){
-        
+    protected void onBtnAddBookClicked(ActionEvent event) {
+
     }
 
 }

@@ -12,5 +12,8 @@ package mpplibrary.base;
 public class CheckoutRecordEntry {
     
     private long ID;
+    private Book book;
+    private String note;
+    
    
 }
