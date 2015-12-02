@@ -18,6 +18,8 @@ public class Database {
     private Properties prop;
     private Query query;
     private Connection c;
+    
+    
 
     public Database() {
 
@@ -26,6 +28,7 @@ public class Database {
             prop = new Properties();
             InputStream infile = Database.class.getResourceAsStream("/mpplibrary/resources/mpplibrary.properties");
             prop.load(infile);
+            this.connect();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -46,11 +49,33 @@ public class Database {
 
     }
 
-    public boolean execute() {
-        String query = this.query.getQuery();
-        System.out.println(query);
+    public boolean execute() throws QueryException {
+        try {
+            String sql = this.query.getQuery();
+            Statement stmt = null;
+            stmt = this.c.createStatement();
+            stmt.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
-        return true;
+    }
+
+    public ResultSet getResultSet() throws QueryException {
+        ResultSet rs = null;
+        try {
+            String sql = this.query.getQuery();
+            System.out.println(sql);
+            Statement stmt = null;
+            stmt = this.c.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (Exception e) {
+
+        }
+
+        return rs;
     }
 
     public Database connect() {

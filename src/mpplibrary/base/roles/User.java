@@ -5,16 +5,47 @@
  */
 package mpplibrary.base.roles;
 
+import java.time.LocalDate;
 import mpplibrary.base.Person;
+import mpplibrary.dao.UserDAO;
 
 /**
  *
  * @author 984970
  */
- abstract public class User extends Person implements Role{
-     
-     private String username;
-     private String password;
+public class User extends Person implements Role {
+
+    private String username;
+
+    private String password;
+    private LocalDate lastlogin;
+    private UserDAO dataAccess;
+    private String role;
+
+    public User() {
+
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public LocalDate getLastlogin() {
+        return lastlogin;
+    }
+
+    public void setLastlogin(LocalDate lastlogin) {
+        this.lastlogin = lastlogin;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;
@@ -31,7 +62,82 @@ import mpplibrary.base.Person;
     public void setPassword(String password) {
         this.password = password;
     }
-    
-  
+
+    private UserDAO getDataAccess() {
+        if (this.dataAccess == null) {
+            this.dataAccess = new UserDAO();
+        }
+
+        return this.dataAccess;
+    }
+
+    public boolean login() {
+
+        if (this.getDataAccess().login(this)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean canLogin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canAddBook() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canEditBook() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canDeleteBook() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canCheckoutBook() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canCheckinBook() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canAddMember() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canEditMember() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canDeleteMember() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canAddAuthor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canDeleteAuthor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canEditAuthor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

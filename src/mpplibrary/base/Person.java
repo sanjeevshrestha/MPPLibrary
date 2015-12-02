@@ -19,5 +19,6 @@ abstract public class Person {
     private String phone;
     private String email;
     private String mobile;
+    private boolean active;
    
 }
