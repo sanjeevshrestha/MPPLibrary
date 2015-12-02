@@ -8,10 +8,10 @@ package mpplibrary.application.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mpplibrary.helper.LoadWindowFrame;
@@ -24,6 +24,9 @@ public class MenuController {
 
     @FXML
     MenuItem menuAddNewMember, menuListMembers, menuMemberReport, menuSearchMember;
+
+    @FXML
+    Button checkinBttn, checkoutBttn, searchCheckedoutBooksBttn, addMemberBttn, listMemeberBttn, membersReportBttn, addBookBttn, listBooksBttn, bookReportsBttn, searchBookBttn;
 
     @FXML
     MenuBar mainMenuBar;
@@ -97,6 +100,61 @@ public class MenuController {
 //       vBoxMainWindow.getChildren().add(1, mainMenuBar);
 //        memberController = new MemberController(mainFramePane);
         windowFrame = new LoadWindowFrame(mainFramePane);
+    }
+
+    @FXML
+    protected void onCheckInBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onCheckoutBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onSearchCheckedoutBooksBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onAddMemberBttnClicked(ActionEvent event) {
+        windowFrame.popUpAddMemberScene();
+    }
+
+    @FXML
+    protected void onListMembersBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onMembersReportBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onSearchMembersBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onAddBookBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onListBooksBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onBookReportsBttnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onSearchBookBttnClicked(ActionEvent event) {
+
     }
 
 }

@@ -18,6 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import mpplibrary.rulesets.RuleException;
+import mpplibrary.rulesets.RuleSet;
+import mpplibrary.rulesets.RuleSetFactory;
 
 /**
  *
@@ -25,20 +28,45 @@ import javafx.scene.layout.VBox;
  */
 public class BookController {
 
+    private String isbn;
+    private String noOfCopies;
+    private String bookTitle;
+    private String firstName;
+    private String lastName;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
+    private String phone;
+    private String credentials;
+    private String bio;
+
     @FXML
-    private TextField txtisbn;
-    private TextField txtNoOfCopies;
-    private TextField txtBookTitle;
-    private TextField txtFirstName;
-    private TextField txtLastName;
-    private TextField txtStreet;
-    private TextField txtCity;
-    private TextField txtState;
-    private TextField txtZip;
-    private TextField txtPhone;
-    private TextField txtCredentials;
-    private TextField txtBio;
-    private Label errorLabel;
+    TextField txtIsbn;
+    @FXML
+    TextField txtNoOfCopies;
+    @FXML
+    TextField txtBookTitle;
+    @FXML
+    TextField txtFirstName;
+    @FXML
+    TextField txtLastName;
+    @FXML
+    TextField txtStreet;
+    @FXML
+    TextField txtCity;
+    @FXML
+    TextField txtState;
+    @FXML
+    TextField txtZip;
+    @FXML
+    TextField txtPhone;
+    @FXML
+    TextField txtCredentials;
+    @FXML
+    TextField txtBio;
+    @FXML
+    Label errorLabel;
 
     @FXML
     private Button btnAddMoreBookAuthor;
@@ -89,7 +117,79 @@ public class BookController {
 
     @FXML
     protected void onBtnAddBookClicked(ActionEvent event) {
+        this.isbn = txtIsbn.getText();
+        this.noOfCopies = txtNoOfCopies.getText();
+        this.bookTitle = txtBookTitle.getText();
+        this.firstName = txtFirstName.getText();
+        this.lastName = txtLastName.getText();
+        this.street = txtStreet.getText();
+        this.city = txtCity.getText();
+        this.state = txtState.getText();
+        this.zip = txtZip.getText();
+        this.phone = txtPhone.getText();
+        this.credentials = txtCredentials.getText();
+        this.bio = txtBio.getText();
 
+        try {
+            RuleSet addressRules = RuleSetFactory.getRuleSet(BookController.this);
+            addressRules.applyRules(BookController.this);
+        } catch (RuleException e) {
+            TextField errorTextField = (TextField) e.getErrorObject();
+            errorLabel.setText(e.getMessage());
+            errorLabel.setStyle("-fx-text-fill:red; -fx-font-size: 14pt; -fx-opacity: 0.6; -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );");
+            errorTextField.setStyle("-fx-border-color: red; -fx-border-width: 2px ;");
+        }
     }
 
+    public TextField getTxtIsbn() {
+        return txtIsbn;
+    }
+
+    public TextField getTxtNoOfCopies() {
+        return txtNoOfCopies;
+    }
+
+    public TextField getTxtBookTitle() {
+        return txtBookTitle;
+    }
+
+    public TextField getTxtFirstName() {
+        return txtFirstName;
+    }
+
+    public TextField getTxtLastName() {
+        return txtLastName;
+    }
+
+    public TextField getTxtStreet() {
+        return txtStreet;
+    }
+
+    public TextField getTxtCity() {
+        return txtCity;
+    }
+
+    public TextField getTxtState() {
+        return txtState;
+    }
+
+    public TextField getTxtZip() {
+        return txtZip;
+    }
+
+    public TextField getTxtPhone() {
+        return txtPhone;
+    }
+
+    public TextField getTxtCredentials() {
+        return txtCredentials;
+    }
+
+    public TextField getTxtBio() {
+        return txtBio;
+    }
+
+    public Label getErrorLabel() {
+        return errorLabel;
+    }
 }

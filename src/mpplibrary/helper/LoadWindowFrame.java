@@ -6,13 +6,13 @@
 package mpplibrary.helper;
 
 import java.io.IOException;
-import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import mpplibrary.MPPLibrary;
 import mpplibrary.application.controllers.AddMemberController;
 import mpplibrary.application.controllers.BookController;
@@ -55,7 +55,31 @@ public class LoadWindowFrame {
         } catch (IOException ex) {
             Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public void popUpAddMemberScene() {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/AddMember.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add Book");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+//            dialogStage.initOwner();
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the add book window into the controller.
+//            ((BookController) loader.getController()).initialize();
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

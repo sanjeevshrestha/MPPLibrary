@@ -5,12 +5,10 @@
  */
 package mpplibrary.application.controllers;
 
-import java.awt.Color;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javax.swing.JOptionPane;
 import mpplibrary.rulesets.RuleException;
 import mpplibrary.rulesets.RuleSet;
 import mpplibrary.rulesets.RuleSetFactory;
