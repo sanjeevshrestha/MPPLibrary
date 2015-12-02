@@ -23,12 +23,14 @@ public class User extends Person implements Role {
     private String role;
 
     public User() {
+        this.dataAccess = new UserDAO();
 
     }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.dataAccess = new UserDAO();
     }
 
     public LocalDate getLastlogin() {
@@ -64,10 +66,7 @@ public class User extends Person implements Role {
     }
 
     private UserDAO getDataAccess() {
-        if (this.dataAccess == null) {
-            this.dataAccess = new UserDAO();
-        }
-
+   
         return this.dataAccess;
     }
 

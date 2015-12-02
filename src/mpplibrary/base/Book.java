@@ -4,14 +4,34 @@
  * and open the template in the editor.
  */
 package mpplibrary.base;
+
+import mpplibrary.dao.BookDAO;
+
 /**
  *
  * @author 984970
  */
-public class Book extends Publication{
-    
+public class Book extends Publication {
+
     private boolean isAvailable;
-        private String ISBN;
+    private String ISBN;
+
+    public Book() {
+
+    }
+    
+    public Book(long ID,String title) {
+        super(ID,title);
+       
+
+    }
+
+    public Book(long ID,String title, String ISBN,boolean isAvailable) {
+        super(ID,title);
+        this.ISBN=ISBN;
+        this.isAvailable=isAvailable;
+
+    }
 
     public boolean isIsAvailable() {
         return isAvailable;
@@ -29,8 +49,4 @@ public class Book extends Publication{
         this.ISBN = ISBN;
     }
 
-    
-    
-    
-    
 }
