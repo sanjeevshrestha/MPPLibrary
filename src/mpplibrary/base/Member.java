@@ -13,6 +13,7 @@ import mpplibrary.base.Person;
  * @author 984970
  */
 public class Member extends Person  {
+        private double amount_due;
 
    
 }

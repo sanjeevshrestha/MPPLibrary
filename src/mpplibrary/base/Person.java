@@ -15,6 +15,9 @@ abstract public class Person {
     private String firstname;
     private String lastname;
     private Address address;
-    private Contact contact;
+    private String note;
+    private String phone;
+    private String email;
+    private String mobile;
    
 }
