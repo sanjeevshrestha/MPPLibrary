@@ -27,13 +27,11 @@ public class BookDAO {
     private ArrayList<Book> books;
 
     public BookDAO() {
-        this.dataAccess = new BookDAO();
         this.books = new ArrayList<>();
     }
 
     public BookDAO(Book b) {
         this.book = b;
-        this.dataAccess = new BookDAO();
         this.books = new ArrayList<>();
 
     }
@@ -49,7 +47,36 @@ public class BookDAO {
             rs = db.getResultSet();
             while (rs.next()) {
                 Book b;
-                b = new Book(rs.getInt("id"),rs.getString("title"),rs.getString("ISBN"),rs.getBoolean("available"));
+                b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
+                this.books.add(b);
+            }
+
+        } catch (QueryException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return this.books;
+
+    }
+
+    public ArrayList<Book> searchBooks(String key, String value) {
+        ResultSet rs = null;
+        try {
+
+            Database db = DatabaseFactory.getInstance();
+
+            Query q = db.getQuery(true);
+            q.select("*").from("books");
+
+            String[] valueParts = value.split(" ");
+            for (String str : valueParts) {
+                q.where(key + " LIKE \"%" + str + "%\"", "OR");
+            }
+
+            rs = db.getResultSet();
+            while (rs.next()) {
+                Book b;
+                b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
                 this.books.add(b);
             }
 
