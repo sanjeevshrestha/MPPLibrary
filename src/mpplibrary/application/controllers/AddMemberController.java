@@ -5,11 +5,15 @@
  */
 package mpplibrary.application.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import java.awt.Color;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javax.swing.JOptionPane;
+import mpplibrary.rulesets.RuleException;
+import mpplibrary.rulesets.RuleSet;
+import mpplibrary.rulesets.RuleSetFactory;
 
 /**
  *
@@ -19,27 +23,91 @@ public class AddMemberController {
 
     @FXML
     TextField txtMemberId, txtFirstName, txtLastName, txtAddress, txtCity, txtState, txtZip, txtPhone, txtEmail;
-    String memberId, firstName, lastName, address, city, state, zip, phone,email;
-    
+
+    @FXML
+    Label errorLabel;
+
+    private String memberId;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
+    private String phone;
+    private String email;
+
     public void initialize() {
+        //errorLabel = new Label("");
         Tooltip toolTip = new Tooltip("Member id must be numeric");
         txtMemberId.setTooltip(toolTip);
-        
+
         Tooltip nameToolTip = new Tooltip("Name must not be empty");
         txtFirstName.setTooltip(nameToolTip);
     }
-    
+
     @FXML
-    protected void onAddMemberClicked(){
-        memberId = txtMemberId.getText();
-        firstName = txtFirstName.getText();
-        lastName = txtLastName.getText();
-        address = txtAddress.getText();
-        city = txtCity.getText();
-        state = txtState.getText();
-        zip = txtZip.getText();
-        phone = txtPhone.getText();
-        email = txtEmail.getText();
+    protected void onAddMemberClicked() {
+
+        this.memberId = txtMemberId.getText();
+        this.firstName = txtFirstName.getText();
+        this.lastName = txtLastName.getText();
+        this.address = txtAddress.getText();
+        this.city = txtCity.getText();
+        this.state = txtState.getText();
+        this.zip = txtZip.getText();
+        this.phone = txtPhone.getText();
+        this.email = txtEmail.getText();
+
+        try {
+            RuleSet addressRules = RuleSetFactory.getRuleSet(AddMemberController.this);
+            addressRules.applyRules(AddMemberController.this);
+        } catch (RuleException e) {
+            TextField errorTextField = (TextField) e.getErrorObject();
+            errorLabel.setText(e.getMessage());
+            errorLabel.setStyle("-fx-font-size: 14pt; -fx-opacity: 0.6; -fx-font: bold; -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );");
+            errorTextField.setStyle("-fx-border-color: red; -fx-border-width: 2px ;");
+        }
     }
-    
+
+    public TextField getMemberComponent() {
+        return txtMemberId;
+    }
+
+    public TextField getFirstNameComponent() {
+        return txtFirstName;
+    }
+
+    public TextField getLastNameComponent() {
+        return txtLastName;
+    }
+
+    public TextField getAddressComponent() {
+        return txtAddress;
+    }
+
+    public TextField getCityComponent() {
+        return txtCity;
+    }
+
+    public TextField getStateComponent() {
+        return txtState;
+    }
+
+    public TextField getZipComponent() {
+        return txtZip;
+    }
+
+    public TextField getPhoneComponent() {
+        return txtPhone;
+    }
+
+    public TextField getEmailComponent() {
+        return txtEmail;
+    }
+
+    public Label getErrorLabel() {
+        return errorLabel;
+    }
+
 }
