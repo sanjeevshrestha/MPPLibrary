@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.BookController">
+    <children>
+        <GridPane layoutY="6.0" prefHeight="134.0" prefWidth="588.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="269.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="72.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="261.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="ISBN*" />
+                <TextField fx:id="txtIsbn" GridPane.rowIndex="1" />
+                <Label text="No. of copies*" GridPane.columnIndex="2" />
+                <TextField fx:id="txtNoOfCopies" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Label text="Title*" GridPane.rowIndex="2" />
+                <TextField fx:id="txtBookTitle" GridPane.rowIndex="3" />
+            </children>
+        </GridPane>
+        <Label layoutX="10.0" layoutY="161.0" text="Author" />
+     
+        <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="8.0" layoutY="188.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="640.0">
+            <content>
+                <VBox fx:id="mBoxPaneAuthor" layoutX="10.0" layoutY="200.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="326.0" prefWidth="638.0">
+                    <children>
+                    </children>
+                </VBox>
+
+            </content>
+        </ScrollPane>
+        <Button fx:id="btnAddMoreBookAuthor" layoutX="530.0" layoutY="530.0" mnemonicParsing="false" onAction="#onAddMoreAuthorClicked" prefHeight="25.0" prefWidth="120.0" text="Add More Author" />
+      <Button fx:id="btnAddBook" layoutX="10.0" layoutY="530.0" mnemonicParsing="false" onAction="#onBtnAddBookClicked" prefHeight="25.0" prefWidth="90.0" text="Add Book" />
+    </children>
+</AnchorPane>

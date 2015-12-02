@@ -39,8 +39,9 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Admin">
               <items>
-                <MenuItem mnemonicParsing="false" text="Add New User" />
-                  <MenuItem mnemonicParsing="false" text="Backup DB" />
+                <MenuItem fx:id="onMenuAddNewUserSelected" mnemonicParsing="false" text="Add New User" />
+                  <MenuItem fx:id="onMenuBackupDbSelected" mnemonicParsing="false" text="Backup DB" />
+                  <MenuItem fx:id="onMenuInitializeSelected" mnemonicParsing="false" text="Initialize" />
               </items>
             </Menu>
         </menus>
