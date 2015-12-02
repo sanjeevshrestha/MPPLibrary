@@ -57,5 +57,18 @@ public class LoadWindowFrame {
         }
 
     }
+    
+    public void setSceneListBooks(){
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListBooks.fxml"));
+            AnchorPane pane = loader.load();
+            mainFramePane.getChildren().clear();
+            mainFramePane.getChildren().add(pane);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

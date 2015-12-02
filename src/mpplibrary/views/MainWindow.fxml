@@ -46,6 +46,6 @@
             </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="mainFramePane" prefHeight="598.0" prefWidth="635.0" />
+      <AnchorPane fx:id="mainFramePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="635.0" />
    </children>
 </VBox>
