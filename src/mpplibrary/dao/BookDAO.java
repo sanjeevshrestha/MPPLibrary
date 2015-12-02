@@ -5,7 +5,14 @@
  */
 package mpplibrary.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import mpplibrary.base.Book;
+import mpplibrary.database.Database;
+import mpplibrary.database.DatabaseFactory;
+import mpplibrary.database.Query;
+import mpplibrary.database.QueryException;
 
 /**
  *
@@ -13,10 +20,45 @@ import mpplibrary.base.Book;
  */
 public class BookDAO {
 
+    private BookDAO dataAccess;
+
     private Book book;
+
+    private ArrayList<Book> books;
+
+    public BookDAO() {
+        this.dataAccess = new BookDAO();
+        this.books = new ArrayList<>();
+    }
 
     public BookDAO(Book b) {
         this.book = b;
+        this.dataAccess = new BookDAO();
+        this.books = new ArrayList<>();
+
+    }
+
+    public ArrayList<Book> getBooksResult() {
+        ResultSet rs = null;
+        try {
+
+            Database db = DatabaseFactory.getInstance();
+
+            Query q = db.getQuery(true);
+            q.select("*").from("books");
+            rs = db.getResultSet();
+            while (rs.next()) {
+                Book b;
+                b = new Book(rs.getInt("id"),rs.getString("title"),rs.getString("ISBN"),rs.getBoolean("available"));
+                this.books.add(b);
+            }
+
+        } catch (QueryException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return this.books;
+
     }
 
 }

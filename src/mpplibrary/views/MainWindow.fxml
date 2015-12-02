@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<<<<<<< HEAD
 <VBox fx:id="vBoxMainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.MenuController">
     <children>
         <MenuBar fx:id="mainMenuBar" prefHeight="0.0" prefWidth="583.0">
@@ -68,4 +69,50 @@
             </children>
         </AnchorPane>
     </children>
+=======
+<VBox fx:id="vBoxMainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.MenuController">
+   <children>
+      <MenuBar fx:id="mainMenuBar" prefHeight="0.0" prefWidth="583.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#onMenuLogOutSelected" text="Logout" />
+                  <MenuItem fx:id="menuExit" mnemonicParsing="false" onAction="#onMenuExitSelected" text="Exit" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Library">
+              <items>
+                <MenuItem mnemonicParsing="false" text="CheckIn Book" />
+                  <MenuItem mnemonicParsing="false" text="CheckOut Book" />
+                  <MenuItem mnemonicParsing="false" text="Search" />
+              </items>
+            </Menu>
+          <Menu fx:id="mainMenuMember" mnemonicParsing="false" text="Member">
+            <items>
+              <MenuItem fx:id="menuAddMember" mnemonicParsing="false" onAction="#onMenuAddMemberSelected" text="Add New Member" />
+                  <MenuItem fx:id="menuListMembers" mnemonicParsing="false" onAction="#onMenuListMembersSelected" text="Members List" />
+                  <MenuItem fx:id="menuMembersReport" mnemonicParsing="false" onAction="#onMenuMemberReportSelected" text="Report" />
+                  <MenuItem fx:id="menuSearchMember" mnemonicParsing="false" onAction="#onMenuSearchMemberSelected" text="Search" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Book">
+            <items>
+              <MenuItem fx:id="menuAddBook" mnemonicParsing="false" onAction="#onMenuAddBookSelected" text="Add New Book" />
+                  <MenuItem fx:id="menuListBooks" mnemonicParsing="false" onAction="#onMenuListBooks" text="List Books" />
+                  <MenuItem fx:id="menuBookReport" mnemonicParsing="false" onAction="#onMenuBookReportSelected" text="Report" />
+                  <MenuItem fx:id="menuSearchBook" mnemonicParsing="false" onAction="#onMenuSearchBookSelected" text="Search" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Admin">
+              <items>
+                <MenuItem fx:id="onMenuAddNewUserSelected" mnemonicParsing="false" text="Add New User" />
+                  <MenuItem fx:id="onMenuBackupDbSelected" mnemonicParsing="false" text="Backup DB" />
+                  <MenuItem fx:id="onMenuInitializeSelected" mnemonicParsing="false" text="Initialize" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="mainFramePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="635.0" />
+   </children>
+>>>>>>> 92e6cefb294ef56f43eda486ea46e2f112d7424c
 </VBox>

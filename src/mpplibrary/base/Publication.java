@@ -16,6 +16,18 @@ abstract public class Publication {
     private long ID;
     private String title;
     private List<Author> authors;
+    
+    
+    public Publication()
+    {
+        
+    }
+    
+    public Publication(long ID,String title)
+    {
+        this.ID=ID;
+        this.title=title;
+    }
 
     public long getID() {
         return ID;

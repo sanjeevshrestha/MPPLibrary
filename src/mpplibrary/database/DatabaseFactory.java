@@ -12,13 +12,11 @@ package mpplibrary.database;
 public class DatabaseFactory {
 
     public static Database db;
+    static{
+        db=new Database();
+    }
 
     public static Database getInstance() {
-
-        if (db == null) {
-            db = new Database();
-            db.connect();
-        }
 
         return db;
 
