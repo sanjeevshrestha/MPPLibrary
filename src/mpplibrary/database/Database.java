@@ -5,7 +5,12 @@
  */
 package mpplibrary.database;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStream;
 import java.util.Properties;
+import java.sql.*;
 
 /**
  *
@@ -15,21 +20,15 @@ public class Database {
 
     private Properties prop;
     private Query query;
+    private Connection c;
 
     public Database() {
 
         try {
-
             this.query = new Query();
             prop = new Properties();
-//            InputStream infile = getClass().getResourceAsStream("mpplibrary.properties");//new FileInputStream("mpplibrary.mpplibrary.properties");
-//
-//            prop.load(infile);
-//
-//            System.out.println(prop.getProperty("driver"));
-
-            prop.setProperty("driver", "org.sqlite.JDBC");
-            prop.setProperty("connectionPath", "jdbc:sqlite:mpplibrary.db");
+            InputStream infile = Database.class.getResourceAsStream("/mpplibrary/resources/mpplibrary.properties");
+            prop.load(infile);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -56,15 +55,48 @@ public class Database {
 
         return true;
     }
-    
-    public Database connect()
-    {
+
+    public Database connect() {
+        try {
+            Class.forName(this.prop.getProperty("driver"));
+            c = DriverManager.getConnection(this.prop.getProperty("connectionPath"));
+
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return this;
+
+    }
+
+    public Database initialize() {
+
+        try {
+            InputStream infile = Database.class.getResourceAsStream(this.prop.getProperty("installfile"));
+
+            StringBuilder sb = new StringBuilder();
+            int content;
+            while ((content = infile.read()) != -1) {
+                sb.append((char) content);
+            }
+
+            String sql = sb.toString();
+            Statement stmt = null;
+            for (String sqlPart : sql.split(";")) {
+                stmt = this.c.createStatement();
+                stmt.executeUpdate(sql);
+            }
+            stmt.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         return this;
     }
-    
-    public Database initialize()
-    {
-        return this;
+
+    public static void main(String[] args) {
+        Database db = new Database();
+        db.connect();
+        db.initialize();
     }
 
 }

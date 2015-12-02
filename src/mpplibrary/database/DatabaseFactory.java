@@ -13,10 +13,11 @@ public class DatabaseFactory {
 
     public static Database db;
 
-    public Database getInstance() {
+    public static Database getInstance() {
 
         if (db == null) {
             db = new Database();
+            db.connect();
         }
 
         return db;
