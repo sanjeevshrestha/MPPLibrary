@@ -84,3 +84,12 @@ CREATE  TABLE "recordentry" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,
 "book_id" INTEGER, 
 "note" TEXT);
 
+
+CREATE  TABLE  IF NOT EXISTS "fines" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 
+"member_id" INTEGER, 
+"fine_date" DATETIME, 
+"paid_date" DATETIME, 
+"created" DATETIME, 
+"created_by" INTEGER, 
+"modified" DATETIME, 
+"modified_by" INTEGER);
