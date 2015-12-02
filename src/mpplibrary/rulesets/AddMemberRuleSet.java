@@ -94,9 +94,14 @@ public class AddMemberRuleSet implements RuleSet {
         String id = amc.getMemberComponent().getText();
         try {
             Integer.parseInt(zipCode);
+        } catch (NumberFormatException e) {
+            throw new RuleException("ZIP must be numeric.", amc.getZipComponent());
+        }
+
+        try {
             Integer.parseInt(id);
         } catch (NumberFormatException e) {
-            throw new RuleException("ID and ZIP must be numeric...");
+            throw new RuleException("ID must be numeric.", amc.getMemberComponent());
         }
-    }        
+    }
 }
