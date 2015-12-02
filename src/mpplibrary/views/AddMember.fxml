@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.AddMemberController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.AddMemberController">
    <children>
       <GridPane layoutX="7.0" layoutY="2.0" prefHeight="388.0" prefWidth="586.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <columnConstraints>
@@ -53,12 +53,13 @@
             <TextField fx:id="txtAddress" GridPane.rowIndex="9" />
             <TextField fx:id="txtCity" GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <Label text="Contact Information" GridPane.rowIndex="13" />
-            <TextField GridPane.rowIndex="15" />
+            <TextField fx:id="txtPhone" GridPane.rowIndex="15" />
             <TextField fx:id="txtEmail" GridPane.columnIndex="2" GridPane.rowIndex="15" />
             <Label text="Phone" GridPane.rowIndex="14" />
             <Label text="Email*" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="ADD" GridPane.rowIndex="18" />
+            <Button mnemonicParsing="false" onAction="#onAddMemberClicked" prefHeight="25.0" prefWidth="62.0" text="ADD" GridPane.rowIndex="18" />
             <Label text="Fields marked with * are required." GridPane.rowIndex="17" />
+            <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="274.0" text="            " GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
