@@ -65,7 +65,7 @@ public class AddMemberController {
         } catch (RuleException e) {
             TextField errorTextField = (TextField) e.getErrorObject();
             errorLabel.setText(e.getMessage());
-            errorLabel.setStyle("-fx-font-size: 14pt; -fx-opacity: 0.6; -fx-font: bold; -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );");
+            errorLabel.setStyle("-fx-text-fill:red; -fx-font-size: 14pt; -fx-opacity: 0.6; -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );");
             errorTextField.setStyle("-fx-border-color: red; -fx-border-width: 2px ;");
         }
     }
