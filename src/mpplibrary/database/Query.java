@@ -82,7 +82,7 @@ public class Query {
     
     public String getQuery()
     {
-        return "";
+        return "select * from users";
     }
 
 }
