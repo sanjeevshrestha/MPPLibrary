@@ -10,6 +10,16 @@ package mpplibrary.base.roles;
  * @author 984970
  */
 public class Librarian extends User implements Role {
+    
+     public Librarian()
+    {
+        super();
+    }
+    
+    public Librarian(String username,String password)
+    {
+        super(username,password);
+    }
 
     @Override
     public boolean canLogin() {

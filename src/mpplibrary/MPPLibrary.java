@@ -9,14 +9,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mpplibrary.application.controllers.LoginController;
 import mpplibrary.application.controllers.MenuController;
+import mpplibrary.base.roles.User;
 import mpplibrary.helper.DataHelper;
 import mpplibrary.interfaces.OnLoginSuccessListener;
 
@@ -27,6 +26,7 @@ import mpplibrary.interfaces.OnLoginSuccessListener;
 public class MPPLibrary extends Application implements OnLoginSuccessListener {
 
     private Stage primaryStage;
+    
 
     @Override
     public void start(Stage primaryStage) {
