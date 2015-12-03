@@ -52,6 +52,8 @@ public class MemberDAO {
                 m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"));
                 this.members.add(m);
             }
+            
+            rs.close();
 
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());
@@ -140,7 +142,8 @@ public class MemberDAO {
             q.column("state").value(m.getState());
             q.column("zip").value(m.getZip());
 
-            long insertID = db.execute();
+            db.execute();
+            return true;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

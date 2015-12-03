@@ -50,6 +50,7 @@ public class LendableDAO {
                 copies.add(b);
             }
 
+            rs.close();
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());
         }
