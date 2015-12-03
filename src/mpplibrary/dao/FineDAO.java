@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mpplibrary.interfaces;
+package mpplibrary.dao;
 
 /**
  *
- * @author 984947
+ * @author sanjeev
  */
-public interface OnLoginSuccessListener {
-
-    public void onLoginSuccess();
+public class FineDAO {
+    
 }

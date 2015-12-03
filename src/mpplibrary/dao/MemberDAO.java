@@ -8,7 +8,7 @@ package mpplibrary.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import mpplibrary.base.Book;
+import mpplibrary.base.Member;
 import mpplibrary.database.Database;
 import mpplibrary.database.DatabaseFactory;
 import mpplibrary.database.Query;
@@ -16,58 +16,56 @@ import mpplibrary.database.QueryException;
 
 /**
  *
- * @author 984970
+ * @author sanjeev
  */
-public class BookDAO {
+public class MemberDAO {
+    
 
-    private BookDAO dataAccess;
+    private Member member;
 
-    private Book book;
+    private ArrayList<Member> members;
 
-    private ArrayList<Book> books;
-
-    public BookDAO() {
-
-        this.books = new ArrayList<>();
+    public MemberDAO() {
+        this.members = new ArrayList<>();
     }
 
-    public BookDAO(Book b) {
-        this.book = b;
-        this.books = new ArrayList<>();
+    public MemberDAO(Member m) {
+        this.member = m;
+        this.members = new ArrayList<>();
 
     }
 
-    public ArrayList<Book> getBooks() {
+    public ArrayList<Member> getMembers() {
         ResultSet rs = null;
         try {
 
             Database db = DatabaseFactory.getInstance();
 
             Query q = db.getQuery(true);
-            q.select("*").from("books");
+            q.select("*").from("members");
             rs = db.getResultSet();
             while (rs.next()) {
-                Book b;
-                b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
-                this.books.add(b);
+                Member m;
+                m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"));
+                this.members.add(m);
             }
 
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return this.books;
+        return this.members;
 
     }
 
-    public ArrayList<Book> searchBooks(String key, String value) {
+    public ArrayList<Member> searchMembers(String key, String value) {
         ResultSet rs = null;
         try {
 
             Database db = DatabaseFactory.getInstance();
 
             Query q = db.getQuery(true);
-            q.select("*").from("books");
+            q.select("*").from("members");
 
             String[] valueParts = value.split(" ");
             for (String str : valueParts) {
@@ -76,17 +74,17 @@ public class BookDAO {
 
             rs = db.getResultSet();
             while (rs.next()) {
-                Book b;
-                b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
-                this.books.add(b);
+               Member m;
+                m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"));
+                this.members.add(m);
             }
 
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return this.books;
+        return this.members;
 
     }
-
+    
 }

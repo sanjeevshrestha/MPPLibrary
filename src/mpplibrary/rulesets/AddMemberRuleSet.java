@@ -14,7 +14,8 @@ import mpplibrary.application.controllers.AddMemberController;
 public class AddMemberRuleSet implements RuleSet {
 
     @Override
-    public void applyRules(AddMemberController amc) throws RuleException {
+    public void applyRules(Object o) throws RuleException {
+        AddMemberController amc = (AddMemberController) o;
         amc.getErrorLabel().setText("");
         amc.getMemberComponent().setStyle("");
         amc.getFirstNameComponent().setStyle("");

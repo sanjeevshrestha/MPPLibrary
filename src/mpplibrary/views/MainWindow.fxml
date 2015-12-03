@@ -4,48 +4,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="vBoxMainWindow" prefHeight="619.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.MenuController">
-   <children>
-      <MenuBar fx:id="mainMenuBar" prefHeight="0.0" prefWidth="583.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#onMenuLogOutSelected" text="Logout" />
-                  <MenuItem fx:id="menuExit" mnemonicParsing="false" onAction="#onMenuExitSelected" text="Exit" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Library">
-              <items>
-                <MenuItem mnemonicParsing="false" text="CheckIn Book" />
-                  <MenuItem mnemonicParsing="false" text="CheckOut Book" />
-                  <MenuItem mnemonicParsing="false" text="Search" />
-              </items>
-            </Menu>
-          <Menu fx:id="mainMenuMember" mnemonicParsing="false" text="Member">
-            <items>
-              <MenuItem fx:id="menuAddMember" mnemonicParsing="false" onAction="#onMenuAddMemberSelected" text="Add New Member" />
-                  <MenuItem fx:id="menuListMembers" mnemonicParsing="false" onAction="#onMenuListMembersSelected" text="Members List" />
-                  <MenuItem fx:id="menuMembersReport" mnemonicParsing="false" onAction="#onMenuMemberReportSelected" text="Report" />
-                  <MenuItem fx:id="menuSearchMember" mnemonicParsing="false" onAction="#onMenuSearchMemberSelected" text="Search" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Book">
-            <items>
-              <MenuItem fx:id="menuAddBook" mnemonicParsing="false" onAction="#onMenuAddBookSelected" text="Add New Book" />
-                  <MenuItem fx:id="menuListBooks" mnemonicParsing="false" onAction="#onMenuListBooks" text="List Books" />
-                  <MenuItem fx:id="menuBookReport" mnemonicParsing="false" onAction="#onMenuBookReportSelected" text="Report" />
-                  <MenuItem fx:id="menuSearchBook" mnemonicParsing="false" onAction="#onMenuSearchBookSelected" text="Search" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Admin">
-              <items>
-                <MenuItem fx:id="onMenuAddNewUserSelected" mnemonicParsing="false" text="Add New User" />
-                  <MenuItem fx:id="onMenuBackupDbSelected" mnemonicParsing="false" text="Backup DB" />
-                  <MenuItem fx:id="onMenuInitializeSelected" mnemonicParsing="false" text="Initialize" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-      <AnchorPane fx:id="mainFramePane" />
-   </children>
+<VBox fx:id="vBoxMainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.MenuController">
+    <children>
+        <MenuBar fx:id="mainMenuBar" prefHeight="0.0" prefWidth="583.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#onMenuLogOutSelected" text="Logout" />
+                        <MenuItem fx:id="menuExit" mnemonicParsing="false" onAction="#onMenuExitSelected" text="Exit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Library">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="CheckIn Book" />
+                        <MenuItem mnemonicParsing="false" text="CheckOut Book" />
+                        <MenuItem mnemonicParsing="false" text="Search" />
+                    </items>
+                </Menu>
+                <Menu fx:id="mainMenuMember" mnemonicParsing="false" text="Member">
+                    <items>
+                        <MenuItem fx:id="menuAddMember" mnemonicParsing="false" onAction="#onMenuAddMemberSelected" text="Add New Member" />
+                        <MenuItem fx:id="menuListMembers" mnemonicParsing="false" onAction="#onMenuListMembersSelected" text="Members List" />
+                        <MenuItem fx:id="menuMembersReport" mnemonicParsing="false" onAction="#onMenuMemberReportSelected" text="Report" />
+                        <MenuItem fx:id="menuSearchMember" mnemonicParsing="false" onAction="#onMenuSearchMemberSelected" text="Search" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Book">
+                    <items>
+                        <MenuItem fx:id="menuAddBook" mnemonicParsing="false" onAction="#onMenuAddBookSelected" text="Add New Book" />
+                        <MenuItem fx:id="menuListBooks" mnemonicParsing="false" onAction="#onMenuListBooks" text="List Books" />
+                        <MenuItem fx:id="menuBookReport" mnemonicParsing="false" onAction="#onMenuBookReportSelected" text="Report" />
+                        <MenuItem fx:id="menuSearchBook" mnemonicParsing="false" onAction="#onMenuSearchBookSelected" text="Search" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Admin">
+                    <items>
+                        <MenuItem fx:id="onMenuAddNewUserSelected" mnemonicParsing="false" text="Add New User" />
+                        <MenuItem fx:id="onMenuBackupDbSelected" mnemonicParsing="false" text="Backup DB" />
+                        <MenuItem fx:id="onMenuInitializeSelected" mnemonicParsing="false" text="Initialize" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane fx:id="mainFramePane" prefHeight="598.0" prefWidth="635.0">
+            <children>
+                <ToolBar layoutY="5.0" prefHeight="40.0" prefWidth="635.0" stylesheets="@css/toolbar.css">
+                    <items>
+                        <Button fx:id="checkinBttn" mnemonicParsing="false" onAction="#onCheckInBttnClicked" text="ckhin" />
+                        <Button fx:id="checkoutBttn" mnemonicParsing="false" onAction="#onCheckoutBttnClicked" text="ckhout" />
+                        <Button fx:id="searchCheckedoutBooksBttn" mnemonicParsing="false" onAction="#onSearchCheckedoutBooksBttnClicked" text="src" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
+                        <Button fx:id="addMemberBttn" mnemonicParsing="false" onAction="#onAddMemberBttnClicked" text="add" />
+                        <Button fx:id="listMembersBttn" mnemonicParsing="false" onAction="#onListMembersBttnClicked" text="list" />
+                        <Button fx:id="membersReportBttn" mnemonicParsing="false" onAction="#onMembersReportBttnClicked" text="rpt" />
+                        <Button fx:id="searchMembersBttn" mnemonicParsing="false" onAction="#onSearchMembersBttnClicked" text="src" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
+                        <Button fx:id="addBookBttn" mnemonicParsing="false" onAction="#onAddBookBttnClicked" text="add" />
+                        <Button fx:id="listBooksBttn" mnemonicParsing="false" onAction="#onListBooksBttnClicked" text="lst" />
+                        <Button fx:id="bookReportsBttn" mnemonicParsing="false" onAction="#onBookReportsBttnClicked" text="rpt" />
+                        <Button fx:id="searchBookBttn" mnemonicParsing="false" onAction="#onSearchBookBttnClicked" text="src" />
+                    </items>
+                </ToolBar>
+            </children>
+        </AnchorPane>
+    </children>
 </VBox>

@@ -36,9 +36,29 @@ public class BookModel {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return books;
 
+    }
+
+    public ArrayList<Book> searchBooks(String key, String value) {
+        ArrayList<Book> books = new ArrayList<>();
+
+        try {
+            BookDAO bd = new BookDAO();
+            books = bd.searchBooks(key, value);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return books;
+
+    }
+
+    public static void main(String[] args) {
+        BookModel bm = new BookModel();
+        bm.searchBooks("ISBN", "test");
     }
 
 }

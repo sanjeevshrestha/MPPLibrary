@@ -18,8 +18,6 @@ public class Database {
     private Properties prop;
     private Query query;
     private Connection c;
-    
-    
 
     public Database() {
 
@@ -57,6 +55,7 @@ public class Database {
             stmt.executeUpdate(sql);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 
@@ -72,7 +71,7 @@ public class Database {
             rs = stmt.executeQuery(sql);
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         return rs;

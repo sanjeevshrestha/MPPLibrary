@@ -5,7 +5,7 @@
  */
 package mpplibrary.rulesets;
 
-import mpplibrary.application.controllers.AddMemberController;
+import mpplibrary.application.controllers.BookController;
 
 /**
  *
@@ -14,94 +14,81 @@ import mpplibrary.application.controllers.AddMemberController;
 public class AddBookAndAuthorRuleSet implements RuleSet {
 
     @Override
-    public void applyRules(AddMemberController amc) throws RuleException {
-        amc.getErrorLabel().setText("");
-        amc.getMemberComponent().setStyle("");
-        amc.getFirstNameComponent().setStyle("");
-        amc.getLastNameComponent().setStyle("");
-        amc.getAddressComponent().setStyle("");
-        amc.getCityComponent().setStyle("");
-        amc.getStateComponent().setStyle("");
-        amc.getZipComponent().setStyle("");
-        amc.getPhoneComponent().setStyle("");
-        amc.getEmailComponent().setStyle("");
+    public void applyRules(Object o) throws RuleException {
+        BookController bc = (BookController) o;
+        bc.getErrorLabel().setText("");
+        bc.getTxtIsbn().setStyle("");
+        bc.getTxtNoOfCopies().setStyle("");
+        bc.getTxtBookTitle().setStyle("");
+        bc.getTxtFirstName().setStyle("");
+        bc.getTxtLastName().setStyle("");
+        bc.getTxtStreet().setStyle("");
+        bc.getTxtCity().setStyle("");
+        bc.getTxtZip().setStyle("");
+        bc.getTxtPhone().setStyle("");
+        bc.getTxtCredentials().setStyle("");
+        bc.getTxtBio().setStyle("");
 
-        checkEmptyFields(amc);
-        numericRule(amc);
+        checkEmptyFields(bc);
+        numericRule(bc);
 
-        String stateValue = amc.getStateComponent().getText();
+        String stateValue = bc.getTxtZip().getText();
         if (stateValue.length() != 2) {
-            throw new RuleException("State field should be of 2 letters.", amc.getStateComponent());
+            throw new RuleException("State field should be of 2 letters.", bc.getTxtState());
         }
 
         if (!stateValue.matches("[A-Z]{2}")) {
-            throw new RuleException("State field should only contains A-Z.", amc.getStateComponent());
+            throw new RuleException("State field should only contains A-Z.", bc.getTxtState());
         }
-        if (amc.getZipComponent().getText().length() != 5) {
-            throw new RuleException("Zip field should be exactly of 5 digits.", amc.getZipComponent());
-        }
-
-        if (amc.getZipComponent().getText().equals(amc.getMemberComponent().getText())) {
-            throw new RuleException("ID and ZIP cannot be same.", amc.getZipComponent());
+        if (bc.getTxtZip().getText().length() != 5) {
+            throw new RuleException("Zip field should be exactly of 5 digits.", bc.getTxtZip());
         }
     }
 
-    private void checkEmptyFields(AddMemberController amc) throws RuleException {
-        if (amc.getMemberComponent().getText().length() == 0) {
-            throw new RuleException("ID cannot be empty.", amc.getMemberComponent());
+    private void checkEmptyFields(BookController bc) throws RuleException {
+        if (bc.getTxtIsbn().getText().length() == 0) {
+            throw new RuleException("ISBN cannot be empty.", bc.getTxtIsbn());
         }
 
-        if (amc.getFirstNameComponent().getText().length() == 0) {
-            throw new RuleException("First Name cannot be empty.", amc.getFirstNameComponent());
+        if (bc.getTxtFirstName().getText().length() == 0) {
+            throw new RuleException("First Name cannot be empty.", bc.getTxtFirstName());
         }
 
-        if (amc.getLastNameComponent().getText().length() == 0) {
-            throw new RuleException("Last Name cannot be empty.", amc.getLastNameComponent());
+        if (bc.getTxtLastName().getText().length() == 0) {
+            throw new RuleException("Last Name cannot be empty.", bc.getTxtLastName());
         }
 
-        if (amc.getAddressComponent().getText().length() == 0) {
-            throw new RuleException("Address cannot be empty.", amc.getAddressComponent());
+        if (bc.getTxtStreet().getText().length() == 0) {
+            throw new RuleException("Street cannot be empty.", bc.getTxtStreet());
         }
 
-        if (amc.getCityComponent().getText().length() == 0) {
-            throw new RuleException("City cannot be empty.", amc.getCityComponent());
+        if (bc.getTxtCity().getText().length() == 0) {
+            throw new RuleException("City cannot be empty.", bc.getTxtCity());
         }
 
-        if (amc.getStateComponent().getText().length() == 0) {
-            throw new RuleException("State cannot be empty.", amc.getStateComponent());
+        if (bc.getTxtState().getText().length() == 0) {
+            throw new RuleException("State cannot be empty.", bc.getTxtState());
         }
 
-        if (amc.getZipComponent().getText().length() == 0) {
-            throw new RuleException("ZIP cannot be empty.", amc.getZipComponent());
+        if (bc.getTxtZip().getText().length() == 0) {
+            throw new RuleException("ZIP cannot be empty.", bc.getTxtZip());
         }
 
-        if (amc.getPhoneComponent().getText().length() == 0) {
-            throw new RuleException("Phone cannot be empty.", amc.getPhoneComponent());
+        if (bc.getTxtPhone().getText().length() == 0) {
+            throw new RuleException("Phone cannot be empty.", bc.getTxtPhone());
         }
 
-        if (amc.getEmailComponent().getText().length() == 0) {
-            throw new RuleException("Email cannot be empty.", amc.getEmailComponent());
-        }
-
-        EmailValidator ev = new EmailValidator();
-        if (!ev.validate(amc.getEmailComponent().getText())) {
-            throw new RuleException("Invalid Email Address.", amc.getEmailComponent());
+        if (bc.getTxtCredentials().getText().length() == 0) {
+            throw new RuleException("Email cannot be empty.", bc.getTxtCredentials());
         }
     }
 
-    private void numericRule(AddMemberController amc) throws RuleException {
-        String zipCode = amc.getZipComponent().getText();
-        String id = amc.getMemberComponent().getText();
+    private void numericRule(BookController bc) throws RuleException {
+        String zipCode = bc.getTxtZip().getText();
         try {
             Integer.parseInt(zipCode);
         } catch (NumberFormatException e) {
-            throw new RuleException("ZIP must be numeric.", amc.getZipComponent());
-        }
-
-        try {
-            Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new RuleException("ID must be numeric.", amc.getMemberComponent());
+            throw new RuleException("ZIP must be numeric.", bc.getTxtZip());
         }
     }
 }
