@@ -69,5 +69,7 @@ public class Member extends Person {
     public void setAmountDue(double amount_due) {
         this.amount_due = amount_due;
     }
+    
+  
 
 }

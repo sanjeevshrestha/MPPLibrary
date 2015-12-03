@@ -13,17 +13,17 @@ abstract public class Person {
 
     private long ID;
 
-    private String firstname;
-    private String lastname;
-    private String note;
-    private String phone;
-    private String email;
-    private String mobile;
-    private boolean active;
-    private String address;
-    private String city;
-    private String state;
-    private String zip;
+    private String firstname = "";
+    private String lastname = "";
+    private String note = "";
+    private String phone = "";
+    private String email = "";
+    private String mobile = "";
+    private boolean active = true;
+    private String address = "";
+    private String city = "";
+    private String state = "";
+    private String zip = "";
 
     public Person(long ID) {
         this.ID = ID;
@@ -49,6 +49,7 @@ abstract public class Person {
         this.phone = phone;
         this.email = email;
         this.mobile = mobile;
+
     }
 
     public Person(long ID, String firstname, String lastname, boolean active, String email, String phone, String mobile, String note, String address, String city, String state, String zip) {
@@ -64,6 +65,7 @@ abstract public class Person {
         this.city = city;
         this.state = state;
         this.zip = zip;
+
     }
 
     public long getID() {
@@ -160,6 +162,35 @@ abstract public class Person {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getFullAddress() {
+        StringBuilder sb = new StringBuilder();
+        if (this.address != null && this.address.length() != 0) {
+            sb.append(this.address);
+            sb.append(",");
+        }
+
+        if (this.city != null && this.city.length() != 0) {
+            sb.append("\n");
+            sb.append(this.city);
+            sb.append(",");
+        }
+        if (this.state != null && this.state.length() != 0) {
+            sb.append(this.state);
+            sb.append(",");
+        }
+
+        if (this.zip != null && this.zip.length() != 0) {
+            sb.append(this.zip);
+            sb.append(",");
+        }
+
+        return sb.toString();
+    }
+
+    public String getFullname() {
+        return this.firstname + " " + this.lastname;
     }
 
 }
