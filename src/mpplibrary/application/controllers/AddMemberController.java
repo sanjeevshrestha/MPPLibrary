@@ -66,7 +66,7 @@ public class AddMemberController {
         try {
             RuleSet addressRules = RuleSetFactory.getRuleSet(AddMemberController.this);
             addressRules.applyRules(AddMemberController.this);
-            if(MemberModel.getInstance().save(0, firstName, lastName, true, 0, email, "", phone, "", address, city, state, zip)){
+            if(MemberModel.getInstance().save(0, firstName, lastName, true, 0.00, email, "", phone, "", address, city, state, zip)){
                 listMembersController.refreshListData();
                 this.dialogStage.close();
             }

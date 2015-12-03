@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import mpplibrary.MPPLibrary;
 import mpplibrary.application.controllers.AddMemberController;
 import mpplibrary.application.controllers.BookController;
+import mpplibrary.application.controllers.ListMembersController;
 
 /**
  *
@@ -42,9 +43,9 @@ public class LoadWindowFrame {
 //            Logger.getLogger(MPPLibrary.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
-        setSceneListMembers();
         
-        popUpAddMemberScene();
+        ListMembersController memberListController = setSceneListMembers();
+        popUpAddMemberScene(memberListController);
     }
     
     public void setSceneAddBook() {
@@ -61,13 +62,13 @@ public class LoadWindowFrame {
         }
     }
     
-    public void popUpAddMemberScene() {
+    public void popUpAddMemberScene(ListMembersController memberListController) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/AddMember.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
-
+            
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Add Book");
@@ -77,6 +78,7 @@ public class LoadWindowFrame {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             dialogStage.setResizable(false);
+            ((AddMemberController)loader.getController()).setMemberController(memberListController, dialogStage);
             // Set the add book window into the controller.
 //            ((BookController) loader.getController()).initialize();
             // Show the dialog and wait until the user closes it
@@ -99,10 +101,10 @@ public class LoadWindowFrame {
         }
     }
     
-    public void setSceneListMembers() {
-        
+    public ListMembersController setSceneListMembers() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListMembers.fxml"));
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListMembers.fxml"));
+            
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().clear();
             mainFramePane.getChildren().add(pane);
@@ -110,6 +112,7 @@ public class LoadWindowFrame {
         } catch (IOException ex) {
             Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return loader.getController();
     }
     
     public void setSceneCheckoutList() {
