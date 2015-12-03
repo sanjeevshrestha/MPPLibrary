@@ -52,6 +52,8 @@ public class MemberDAO {
                 m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"));
                 this.members.add(m);
             }
+            
+            rs.close();
 
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());

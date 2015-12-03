@@ -50,6 +50,7 @@ public class BookDAO {
                 b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
                 this.books.add(b);
             }
+            rs.close();
 
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());
@@ -79,6 +80,7 @@ public class BookDAO {
                 b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
                 this.books.add(b);
             }
+            rs.close();
 
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());

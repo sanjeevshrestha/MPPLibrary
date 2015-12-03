@@ -31,7 +31,6 @@ public class UserDAO extends DAO {
                 while (rs.next()) {
                     if (rs.getString("password").equals(u.getPassword())) {
                         u.setRole(rs.getString("role"));
-                        // u.setLastlogin(new LocalDate());
                         return true;
                     } else {
                         return false;
@@ -39,6 +38,7 @@ public class UserDAO extends DAO {
 
                 }
             }
+            rs.close();
 
             return false;
         } catch (QueryException | SQLException e) {
