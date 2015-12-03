@@ -27,8 +27,7 @@ public class BookDAO {
     private ArrayList<Book> books;
 
     public BookDAO() {
-        this.dataAccess = new BookDAO();
-        this.books = new ArrayList<>();
+              this.books = new ArrayList<>();
     }
 
     public BookDAO(Book b) {
@@ -38,7 +37,7 @@ public class BookDAO {
 
     }
 
-    public ArrayList<Book> getBooksResult() {
+    public ArrayList<Book> getBooks() {
         ResultSet rs = null;
         try {
 
