@@ -69,7 +69,10 @@ public class AddMemberController {
             if(MemberModel.getInstance().save(0, firstName, lastName, true, 0.00, email, "", phone, "", address, city, state, zip)){
                 listMembersController.refreshListData();
                 this.dialogStage.close();
+            }else{
+                System.out.println("Error in saving member");
             }
+            
         } catch (RuleException e) {
             TextField errorTextField = (TextField) e.getErrorObject();
             errorLabel.setText(e.getMessage());

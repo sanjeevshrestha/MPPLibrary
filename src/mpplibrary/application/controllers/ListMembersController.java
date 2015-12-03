@@ -142,6 +142,7 @@ public class ListMembersController {
     void refreshListData() {
         membersList.clear();
         membersList.addAll(memberModel.getMembers());
+        tblViewMembers.setItems(membersList);
         txtSearchQuery.setText("");
     }
     
