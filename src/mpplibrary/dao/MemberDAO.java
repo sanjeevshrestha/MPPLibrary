@@ -49,16 +49,16 @@ public class MemberDAO {
             while (rs.next()) {
                 Member m;
                 System.out.println(rs.getLong("id"));
-                m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"),rs.getDouble("amount_due"),
+                m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"), rs.getDouble("amount_due"),
                         rs.getString("email"),
                         rs.getString("phone"),
                         rs.getString("mobile"),
                         rs.getString("note"),
                         rs.getString("address"),
-                        rs.getString("city"),rs.getString("state"),rs.getString("zip"));
+                        rs.getString("city"), rs.getString("state"), rs.getString("zip"));
                 this.members.add(m);
             }
-            
+
             rs.close();
 
         } catch (QueryException | SQLException e) {
@@ -86,13 +86,13 @@ public class MemberDAO {
             rs = db.getResultSet();
             while (rs.next()) {
                 Member m;
-                m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"),rs.getDouble("amount_due"),
+                m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"), rs.getDouble("amount_due"),
                         rs.getString("email"),
                         rs.getString("phone"),
                         rs.getString("mobile"),
                         rs.getString("note"),
                         rs.getString("address"),
-                        rs.getString("city"),rs.getString("state"),rs.getString("zip"));
+                        rs.getString("city"), rs.getString("state"), rs.getString("zip"));
                 this.members.add(m);
             }
 
@@ -153,6 +153,27 @@ public class MemberDAO {
             q.column("city").value(m.getCity());
             q.column("state").value(m.getState());
             q.column("zip").value(m.getZip());
+
+            db.execute();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+
+    }
+
+    public boolean deleteMember(Member m) {
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+
+            User u = MPPLibraryFactory.getLoggedInUser();
+
+            q.delete("members");
+            q.where("id="+q.quote(String.valueOf(m.getID())));
 
             db.execute();
             return true;
