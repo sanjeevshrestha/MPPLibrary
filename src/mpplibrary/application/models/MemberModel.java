@@ -61,6 +61,11 @@ public class MemberModel {
         return m.saveMember();
 
     }
+    
+    public boolean delete(long ID)
+    {
+        return true;
+    }
 
     public static void main(String[] args) {
         BookModel bm = new BookModel();
