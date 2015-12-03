@@ -47,5 +47,18 @@ public class Member extends Person {
         return true;
 
     }
+    
+    public boolean saveMember()
+    {
+        return this.dataAccess.saveMember(this);
+    }
+
+    public double getAmountDue() {
+        return amount_due;
+    }
+
+    public void setAmountDue(double amount_due) {
+        this.amount_due = amount_due;
+    }
 
 }

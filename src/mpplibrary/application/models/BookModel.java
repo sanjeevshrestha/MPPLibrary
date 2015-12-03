@@ -33,7 +33,7 @@ public class BookModel {
 
         try {
             BookDAO bd = new BookDAO();
-            books = bd.getBooksResult();
+            books = bd.getBooks();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

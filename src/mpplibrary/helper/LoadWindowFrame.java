@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,7 +36,7 @@ public class LoadWindowFrame {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddMember.fxml"));
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().add(pane);
-//            ((AddMemberController) loader.getController()).initialize();
+            ((AddMemberController) loader.getController()).initialize();
 //              initValidators();
 
         } catch (IOException ex) {
@@ -51,7 +52,7 @@ public class LoadWindowFrame {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddBook.fxml"));
             pane = loader.load();
             mainFramePane.getChildren().add(pane);
-//            ((BookController) loader.getController()).initialize();
+            ((BookController) loader.getController()).initialize();
         } catch (IOException ex) {
             Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,6 +86,19 @@ public class LoadWindowFrame {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListBooks.fxml"));
+            AnchorPane pane = loader.load();
+            mainFramePane.getChildren().clear();
+            mainFramePane.getChildren().add(pane);
+
+        } catch (IOException ex) {
+            Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setSceneListMembers() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListMembers.fxml"));
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().clear();
             mainFramePane.getChildren().add(pane);

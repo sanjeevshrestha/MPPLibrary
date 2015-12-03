@@ -26,6 +26,7 @@ public class BookDAO {
     private ArrayList<Book> books;
 
     public BookDAO() {
+
         this.books = new ArrayList<>();
     }
 
@@ -35,7 +36,7 @@ public class BookDAO {
 
     }
 
-    public ArrayList<Book> getBooksResult() {
+    public ArrayList<Book> getBooks() {
         ResultSet rs = null;
         try {
 
@@ -85,6 +86,12 @@ public class BookDAO {
 
         return this.books;
 
+    }
+    
+    
+    public boolean save(Book b)
+    {
+        return true;
     }
 
 }
