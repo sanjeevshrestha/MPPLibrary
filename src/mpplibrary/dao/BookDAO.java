@@ -20,7 +20,6 @@ import mpplibrary.database.QueryException;
  */
 public class BookDAO {
 
-    private BookDAO dataAccess;
 
     private Book book;
 
@@ -87,6 +86,12 @@ public class BookDAO {
 
         return this.books;
 
+    }
+    
+    
+    public boolean save(Book b)
+    {
+        return true;
     }
 
 }

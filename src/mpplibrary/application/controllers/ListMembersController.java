@@ -20,59 +20,68 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import mpplibrary.application.models.BookModel;
+import mpplibrary.application.models.MemberModel;
 import mpplibrary.base.Book;
+import mpplibrary.base.Member;
 
 /**
  *
  * @author user
  */
-public class ListBooksController {
+public class ListMembersController {
 
     @FXML
     TextField txtSearchQuery;
 
     @FXML
-    TableView tblViewBooks;
+    TableView tblViewMembers;
 
     @FXML
-    AnchorPane anchorPaneBookPreview;
+    AnchorPane anchorPaneMemberPreview;
 
     @FXML
-    TableColumn<Book, String> tblColumnIsbn;
+    TableColumn<Member, Object> tblColumnMemberId;
 
     @FXML
-    TableColumn<Book, String> tblColumnTitle;
+    TableColumn<Member, Object> tblColumnFName;
 
     @FXML
-    TableColumn<Book, String> tblColumnAvailable;
+    TableColumn<Member, Object> tblColumnLName;
 
-    private ObservableList<Book> booksList;
+    @FXML
+    TableColumn<Member, Object> tblColumnAmountDue;
 
-    private ObservableList<Book> filteredBooksList;
+    private ObservableList<Member> membersList;
 
-    private BookModel bookModel;
+    private ObservableList<Member> filteredMembersList;
+
+    private MemberModel memberModel;
 
     @FXML
     public void initialize() {
-        booksList = FXCollections.observableArrayList();
-        filteredBooksList = FXCollections.observableArrayList();
-        bookModel = new BookModel();
+        membersList = FXCollections.observableArrayList();
+        filteredMembersList = FXCollections.observableArrayList();
+        memberModel = new MemberModel();
 
-        booksList.addAll(bookModel.getBooks());
-        System.out.println("Books:" + booksList.size());
-        onTableRowClicked();
-        
-        tblColumnIsbn.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
-        tblColumnIsbn.setCellFactory(cellFactory);
-        
-        tblColumnTitle.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-        tblColumnTitle.setCellFactory(cellFactory);
-        
-        tblColumnAvailable.setCellValueFactory(new PropertyValueFactory<Book, String>("available"));
-        tblColumnAvailable.setCellFactory(cellFactory);
-        
-        filteredBooksList.addAll(booksList);
-        tblViewBooks.setItems(filteredBooksList);
+        membersList.addAll(memberModel.getMembers());
+for(Member mem : membersList)
+    
+{  
+    System.out.println("mem:"+mem.getID());
+}
+onTableRowClicked();
+        tblColumnMemberId.setCellValueFactory(new PropertyValueFactory<Member, Object>("ID"));
+        tblColumnMemberId.setCellFactory(cellFactory);
+
+        tblColumnFName.setCellValueFactory(new PropertyValueFactory<Member, Object>("firstname"));
+        tblColumnFName.setCellFactory(cellFactory);
+        tblColumnLName.setCellValueFactory(new PropertyValueFactory<Member, Object>("lastname"));
+        tblColumnLName.setCellFactory(cellFactory);
+        tblColumnAmountDue.setCellValueFactory(new PropertyValueFactory<Member, Object>("amount_due"));
+        tblColumnAmountDue.setCellFactory(cellFactory);
+
+        filteredMembersList.addAll(membersList);
+        tblViewMembers.setItems(filteredMembersList);
         txtSearchQuery.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -84,27 +93,27 @@ public class ListBooksController {
     }
 
     private void updateFilteredData() {
-        filteredBooksList.clear();
+        filteredMembersList.clear();
 
-        for (Book book : booksList) {
-            if (matchesFilter(book)) {
-                filteredBooksList.add(book);
+        for (Member member : membersList) {
+            if (matchesFilter(member)) {
+                filteredMembersList.add(member);
             }
         }
 
         reapplyTableSortOrder();
     }
 
-    private boolean matchesFilter(Book book) {
+    private boolean matchesFilter(Member member) {
         String queryText = txtSearchQuery.getText();
         if (queryText == null || queryText.isEmpty()) {
-            // No filter --> Add all.
+            
             return true;
         }
 
         String lowerCaseFilterString = queryText.toLowerCase();
 
-        if (book.getTitle().toLowerCase().contains(lowerCaseFilterString)) {
+        if (member.getFirstname().toLowerCase().contains(lowerCaseFilterString)|| member.getLastname().toLowerCase().contains(lowerCaseFilterString)) {
             return true;
         }
 
@@ -112,30 +121,30 @@ public class ListBooksController {
     }
 
     private void reapplyTableSortOrder() {
-        ArrayList<TableColumn<Book, ?>> sortOrder = new ArrayList<>(tblViewBooks.getSortOrder());
-        tblViewBooks.getSortOrder().clear();
-        tblViewBooks.getSortOrder().addAll(sortOrder);
+        ArrayList<TableColumn<Book, ?>> sortOrder = new ArrayList<>(tblViewMembers.getSortOrder());
+        tblViewMembers.getSortOrder().clear();
+        tblViewMembers.getSortOrder().addAll(sortOrder);
     }
 
-    Callback<TableColumn<Book, String>, TableCell<Book, String>> cellFactory;
+    Callback<TableColumn<Member, Object>, TableCell<Member, Object>> cellFactory;
 
     private void onTableRowClicked() {
         cellFactory
-                = new Callback<TableColumn<Book, String>, TableCell<Book, String>>() {
+                = new Callback<TableColumn<Member, Object>, TableCell<Member, Object>>() {
             @Override
             public TableCell call(TableColumn p) {
                 MyStringTableCell cell = new MyStringTableCell();
                 cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
-                
+
                 return cell;
             }
         };
     }
 
-    class MyStringTableCell extends TableCell<Book, String> {
+    class MyStringTableCell extends TableCell<Member, Object> {
 
         @Override
-        public void updateItem(String item, boolean empty) {
+        public void updateItem(Object item, boolean empty) {
             super.updateItem(item, empty);
             setText(empty ? null : getString());
             setGraphic(null);
@@ -152,8 +161,7 @@ public class ListBooksController {
         public void handle(MouseEvent t) {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
-            System.out.println("id = " + filteredBooksList.get(index).getISBN());
-            System.out.println("name = " + filteredBooksList.get(index).getTitle());
+           
 
         }
     }

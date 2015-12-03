@@ -74,21 +74,23 @@ CREATE  TABLE  IF NOT EXISTS "books"
 "note" TEXT);
 
 
-CREATE TABLE IF NOT EXISTS  "checkoutrecords" 
-("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 
-"checkout_date" DATETIME, 
-"due_date" DATETIME, 
-"checkout_by" INTEGER, 
-"created" DATETIME, 
-"created_by" INTEGER, 
-"modified" DATETIME, 
-"modified_by" INTEGER);
+CREATE TABLE IF NOT EXISTS "checkoutrecords" (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`checkout_by`	INTEGER,
+	`created`	DATETIME,
+	`created_by`	INTEGER,
+	`modified`	DATETIME,
+	`modified_by`	INTEGER
+);
 
-CREATE  TABLE IF NOT EXISTS  "recordentry" 
-("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 
-"checkout_record_id" INTEGER, 
-"book_id" INTEGER, 
-"note" TEXT);
+CREATE TABLE IF NOT EXISTS "recordentry" (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`checkout_record_id`	INTEGER,
+	`lendable_id`	INTEGER,
+	`note`	TEXT,
+	`checkout_date`	INTEGER,
+	`due_date`	INTEGER
+);
 
 
 CREATE  TABLE  IF NOT EXISTS "fines" 
@@ -104,3 +106,8 @@ CREATE  TABLE  IF NOT EXISTS "fines"
 CREATE  TABLE IF NOT EXISTS  "books_authors" 
 ("book_id" INTEGER NOT NULL , 
 "author_id" INTEGER NOT NULL );
+
+CREATE  TABLE "lendablecopies" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 
+"isbn" VARCHAR(50), 
+"uniqueid" VARCHAR(50), 
+"available" BOOL);

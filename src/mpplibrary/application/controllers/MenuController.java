@@ -45,7 +45,7 @@ public class MenuController {
 
     @FXML
     protected void onMenuListMembersSelected(ActionEvent event) {
-        System.out.println("OnListMemeberSelected");
+        windowFrame.setSceneListMembers();
     }
 
     @FXML

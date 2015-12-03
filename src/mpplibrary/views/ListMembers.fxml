@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListMembersController">
+   <children>
+      <HBox layoutX="-7.0" layoutY="3.0" prefHeight="700.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="480.0">
+               <children>
+                  <TextField fx:id="txtSearchQuery" promptText="Search...">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TableView fx:id="tblViewMembers" prefHeight="600.0" prefWidth="480.0">
+                    <columns>
+                      <TableColumn fx:id="tblColumnMemberId" prefWidth="61.0" text="ID" />
+                      <TableColumn fx:id="tblColumnFName" prefWidth="155.0" text="First Name" />
+                        <TableColumn fx:id="tblColumnLName" minWidth="0.0" prefWidth="138.0" text="Last Name" />
+                        <TableColumn fx:id="tblColumnAmountDue" prefWidth="125.0" text="Amount Due" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <AnchorPane fx:id="anchorPaneMemberPreview" prefHeight="600.0" prefWidth="320.0" />
+         </children>
+      </HBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>
