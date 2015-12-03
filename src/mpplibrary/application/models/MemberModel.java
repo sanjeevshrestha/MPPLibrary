@@ -61,7 +61,7 @@ public class MemberModel {
     
     public boolean save(long ID, String firstname, String lastname, boolean active, double amt,String email, String phone, String mobile,String note,String address, String city, String state, String zip)
     {
-        Member m=new Member(ID,firstname, lastname, active, amt, email,  phone,  mobile, note);
+        Member m=new Member(ID,firstname, lastname, active, amt, email,  phone,  mobile, note,address,city,state,zip);
         Address addr=new Address(address, city, state,zip);
         m.setAddress(addr);
        return m.saveMember();
