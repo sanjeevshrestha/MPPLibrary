@@ -5,6 +5,8 @@
  */
 package mpplibrary.database;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author 984970
@@ -20,6 +22,16 @@ public class DatabaseFactory {
 
         return db;
 
+    }
+    
+    public static void closeConnection()
+    {
+        try {
+            db.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
     }
 
 }

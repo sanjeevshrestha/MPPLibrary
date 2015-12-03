@@ -13,10 +13,26 @@ public class Address {
 
     private long ID;
     private String address;
-    private String street;
     private String city;
     private String zip;
     private String state;
+
+    public Address(String address, String city, String zip, String state) {
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.state = state;
+    }
+
+    public Address(long ID, String address, String city, String zip, String state) {
+        this.ID = ID;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.state = state;
+    }
+    
+    
 
     public long getID() {
         return ID;
@@ -34,13 +50,7 @@ public class Address {
         this.address = address;
     }
 
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
+    
 
     public String getCity() {
         return city;

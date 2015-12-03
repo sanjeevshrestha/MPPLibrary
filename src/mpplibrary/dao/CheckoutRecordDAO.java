@@ -54,6 +54,8 @@ public class CheckoutRecordDAO {
                 r = new CheckoutRecord(rs.getLong("id"), m);
                 this.records.add(r);
             }
+            
+            rs.close();
 
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());
