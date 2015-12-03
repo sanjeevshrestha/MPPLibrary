@@ -22,9 +22,16 @@ public class Book extends Publication {
 
     }
 
+    public Book(long ID) {
+        super(ID);
+    }
+
     public Book(long ID, String title) {
         super(ID, title);
     }
+    
+
+   
 
     public Book(long ID, String title, String ISBN, boolean isAvailable) {
         super(ID, title);
@@ -50,5 +57,10 @@ public class Book extends Publication {
 
     public boolean save() {
         return this.dataAccess.save(this);
+    }
+    
+    public boolean delete()
+    {
+        return this.dataAccess.delete(this);
     }
 }

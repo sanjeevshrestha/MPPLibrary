@@ -13,13 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import mpplibrary.MPPLibrary;
 import mpplibrary.application.controllers.AddBookController;
 import mpplibrary.application.controllers.AddMemberController;
-import mpplibrary.application.controllers.BookController;
 import mpplibrary.application.controllers.ListBooksController;
 import mpplibrary.application.controllers.ListMembersController;
-import mpplibrary.rulesets.AddBookAndAuthorRuleSet;
 
 /**
  *
