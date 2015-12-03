@@ -50,6 +50,19 @@ abstract public class Person {
         this.mobile=mobile;
     }
 
+    public Person(long ID, String firstname, String lastname,  boolean active,  String email, String phone, String mobile, String note) {
+        this.ID = ID;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.note = note;
+        this.phone = phone;
+        this.email = email;
+        this.mobile = mobile;
+        this.active = active;
+    }
+     
+     
+
     public long getID() {
         return ID;
     }

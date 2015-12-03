@@ -17,16 +17,16 @@ public class CheckoutRecord {
     private long ID;
 
     private Member checkedOutBy;
+    private LocalDate checkoutDate;
 
     public CheckoutRecord() {
     }
 
     public CheckoutRecord(long ID, Member member) {
         this.ID = ID;
-        this.checkedOutBy=member;
-        
+        this.checkedOutBy = member;
+
     }
-    
 
     public long getID() {
         return ID;
@@ -36,7 +36,6 @@ public class CheckoutRecord {
         this.ID = ID;
     }
 
-  
     public Member getCheckedOutBy() {
         return checkedOutBy;
     }
@@ -60,6 +59,15 @@ public class CheckoutRecord {
     public void setFines(List<Fine> fines) {
         this.fines = fines;
     }
+
+    public LocalDate getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(LocalDate checkoutDate) {
+        this.checkoutDate = checkoutDate;
+    }
+
     private List<CheckoutRecordEntry> checkoutItems;
     private List<Fine> fines;
 

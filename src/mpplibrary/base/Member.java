@@ -39,6 +39,12 @@ public class Member extends Person {
         this.amount_due = amt;
 
     }
+    
+    public Member(long ID, String firstname, String lastname, boolean active, double amt,String email, String phone, String mobile,String note) {
+        super(ID, firstname, lastname, active,email,phone,mobile,note);
+        this.amount_due = amt;
+
+    }
 
     public boolean loadMember() {
         
