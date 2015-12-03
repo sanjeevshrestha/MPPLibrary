@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import mpplibrary.base.Book;
 import mpplibrary.helper.LoadWindowFrame;
 
 /**
@@ -30,17 +29,17 @@ public class CheckoutBookController {
     TextField filterStudentTxt, studentIdTxt, bookUniqueIdTxt, landableDaysTxt;
 
     @FXML
-    DatePicker datePicker, dueDatePicker;
+    DatePicker checkOutDate;
 
     @FXML
     TableView checkedoutBookTable, checkedOutBookDetailsTable, bookAddedTable;
-    
+
     @FXML
     TableColumn studentIDColumn, checkOutDateColumn;
-    
+
     @FXML
     TableColumn bookIdColumn, dueDateColumn, fineColumn;
-    
+
     @FXML
     TableColumn bookUniqueIdColumn, bookTitleColumn, checkOutDueDateColumn;
 
