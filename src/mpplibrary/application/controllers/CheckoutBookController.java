@@ -56,7 +56,7 @@ public class CheckoutBookController {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/CheckoutBooks.fxml"));
+            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/CheckOutBooks.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.

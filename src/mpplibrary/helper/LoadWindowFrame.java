@@ -105,7 +105,7 @@ public class LoadWindowFrame {
 
     public void setSceneCheckoutList() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/CheckoutBookList.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/CheckOutBookList.fxml"));
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().clear();
             mainFramePane.getChildren().add(pane);
