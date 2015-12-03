@@ -86,33 +86,33 @@ public class BookController {
 
     private void loadAuthor() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/Author.fxml"));
-        Pane pane;
-        int childSize = mBoxPaneAuthor.getChildren().size();
-        if (childSize > 0) {
-            AnchorPane childPane = (AnchorPane) (mBoxPaneAuthor.getChildren().get(childSize - 1));
-            TextField txtFirstName = (TextField) childPane.lookup("#txtFirstName");
-            TextField txtLastName = (TextField) childPane.lookup("#txtLastName");
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            if (txtFirstName != null && txtFirstName.getText().trim().length() == 0) {
-                alert.setContentText("Add author first name");
-//                alert.showAndWait();
-                return;
-            } else if (txtLastName != null && txtLastName.getText().trim().length() == 0) {
-                alert.setContentText("Add author last name");
-//                alert.showAndWait();
-                return;
-            }
-        }
-        try {
-            pane = loader.load();
-            mBoxPaneAuthor.getChildren().add(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(BookController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void initialize() {
-        loadAuthor();
+//        Pane pane;
+//        int childSize = mBoxPaneAuthor.getChildren().size();
+//        if (childSize > 0) {
+//            AnchorPane childPane = (AnchorPane) (mBoxPaneAuthor.getChildren().get(childSize - 1));
+//            TextField txtFirstName = (TextField) childPane.lookup("#txtFirstName");
+//            TextField txtLastName = (TextField) childPane.lookup("#txtLastName");
+//            Alert alert = new Alert(Alert.AlertType.NONE);
+//            if (txtFirstName != null && txtFirstName.getText().trim().length() == 0) {
+//                alert.setContentText("Add author first name");
+////                alert.showAndWait();
+//                return;
+//            } else if (txtLastName != null && txtLastName.getText().trim().length() == 0) {
+//                alert.setContentText("Add author last name");
+////                alert.showAndWait();
+//                return;
+//            }
+//        }
+//        try {
+//            pane = loader.load();
+//            mBoxPaneAuthor.getChildren().add(pane);
+//        } catch (IOException ex) {
+//            Logger.getLogger(BookController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    public void initialize() {
+//        loadAuthor();
     }
 
     @FXML
