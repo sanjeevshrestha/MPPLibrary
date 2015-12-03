@@ -64,17 +64,11 @@ public class MemberModel {
     
     public boolean delete(long ID)
     {
-        return true;
+        Member m=new Member(ID);
+        return m.delete();
     }
 
-    public static void main(String[] args) {
-        BookModel bm = new BookModel();
-        bm.searchBooks("ISBN", "test");
-    }
+ 
 
-    // id, member id to delete member
-    public boolean deleteMember(long id) {
-        return true;
-    }
 
 }

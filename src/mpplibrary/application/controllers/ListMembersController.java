@@ -133,7 +133,7 @@ public class ListMembersController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == buttonTypeConfirm) {
 
-                if (memberModel.deleteMember(filteredMembersList.get(selectedMemberPosition).getID())) {
+                if (memberModel.delete(filteredMembersList.get(selectedMemberPosition).getID())) {
 
                     refreshListData();
                 } else {

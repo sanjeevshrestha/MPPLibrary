@@ -15,6 +15,15 @@ abstract public class Publication {
 
     private long ID;
     private String title;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    private String description;
     private List<Author> authors;
     
     

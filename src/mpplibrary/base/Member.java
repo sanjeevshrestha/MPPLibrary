@@ -70,6 +70,12 @@ public class Member extends Person {
         this.amount_due = amount_due;
     }
     
+    
+    public boolean delete()
+    {
+        return this.dataAccess.deleteMember(this);
+        
+    }
   
 
 }
