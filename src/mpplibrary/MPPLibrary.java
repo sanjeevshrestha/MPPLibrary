@@ -25,7 +25,6 @@ import mpplibrary.interfaces.OnLoginSuccessListener;
 public class MPPLibrary extends Application implements OnLoginSuccessListener {
 
     private Stage primaryStage;
-    
 
     @Override
     public void start(Stage primaryStage) {
@@ -36,6 +35,10 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener {
             Parent root = loader.load();
             ((LoginController) loader.getController()).initialize(this);
             Scene scene = new Scene(root, DataHelper.WINDOW_WIDTH, DataHelper.WINDOW_HEIGHT);
+
+            
+            primaryStage.setResizable(false);
+
             primaryStage.setTitle("Login");
             primaryStage.setScene(scene);
             primaryStage.show();

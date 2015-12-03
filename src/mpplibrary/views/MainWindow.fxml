@@ -42,6 +42,7 @@
                         <MenuItem fx:id="onMenuAddNewUserSelected" mnemonicParsing="false" text="Add New User" />
                         <MenuItem fx:id="onMenuBackupDbSelected" mnemonicParsing="false" text="Backup DB" />
                         <MenuItem fx:id="onMenuInitializeSelected" mnemonicParsing="false" text="Initialize" />
+                  <MenuItem mnemonicParsing="false" text="Options" />
                     </items>
                 </Menu>
             </menus>
