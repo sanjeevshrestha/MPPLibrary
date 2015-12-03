@@ -21,8 +21,13 @@
                      <children>
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                           <items>
+                              <Label prefHeight="29.0" prefWidth="233.0" text="Members">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
                               <Button mnemonicParsing="false" text="Add New Member" />
-                            <Button mnemonicParsing="false" text="Delete Selected" />
+                            <Button mnemonicParsing="false" text="Delete" />
                           </items>
                         </ToolBar>
                         <GridPane hgap="5.0" vgap="5.0">

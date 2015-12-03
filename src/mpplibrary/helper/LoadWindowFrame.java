@@ -66,7 +66,7 @@ public class LoadWindowFrame {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/AddMember.fxml"));
+            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/AddMember2.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
             
             // Create the dialog Stage.
@@ -91,7 +91,7 @@ public class LoadWindowFrame {
     public void setSceneListBooks() {
         
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListBooks.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListBooks2.fxml"));
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().clear();
             mainFramePane.getChildren().add(pane);
@@ -117,7 +117,7 @@ public class LoadWindowFrame {
     
     public void setSceneCheckoutList() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/CheckOutBookList.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/CheckOutBookList2.fxml"));
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().clear();
             mainFramePane.getChildren().add(pane);
