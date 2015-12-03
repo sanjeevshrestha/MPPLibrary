@@ -40,8 +40,8 @@ public class Member extends Person {
 
     }
     
-    public Member(long ID, String firstname, String lastname, boolean active, double amt,String email, String phone, String mobile,String note) {
-        super(ID, firstname, lastname, active,email,phone,mobile,note);
+    public Member(long ID, String firstname, String lastname, boolean active, double amt,String email, String phone, String mobile,String note,String address,String city, String state, String zip) {
+        super(ID, firstname, lastname, active,email,phone,mobile,note,address,city,state,zip);
         this.amount_due = amt;
 
     }

@@ -20,10 +20,10 @@ abstract public class Person {
     private String email;
     private String mobile;
     private boolean active;
-        private String address;
-private String city;
-private String state;
-private String zip;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
 
     public Person(long ID) {
         this.ID = ID;
@@ -51,7 +51,7 @@ private String zip;
         this.mobile = mobile;
     }
 
-    public Person(long ID, String firstname, String lastname, boolean active, String email, String phone, String mobile, String note) {
+    public Person(long ID, String firstname, String lastname, boolean active, String email, String phone, String mobile, String note, String address, String city, String state, String zip) {
         this.ID = ID;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -60,6 +60,10 @@ private String zip;
         this.email = email;
         this.mobile = mobile;
         this.active = active;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
     }
 
     public long getID() {
@@ -86,7 +90,6 @@ private String zip;
         this.lastname = lastname;
     }
 
- 
     public String getNote() {
         return note;
     }
@@ -158,6 +161,5 @@ private String zip;
     public void setZip(String zip) {
         this.zip = zip;
     }
-    
 
 }
