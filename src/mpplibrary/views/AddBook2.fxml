@@ -186,7 +186,7 @@
                                     </GridPane>
                                     <TableView prefHeight="290.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="75.0" text="Copy Unique ID" />
+                                        <TableColumn prefWidth="577.0" text="Copy Unique ID" />
                                       </columns>
                                        <columnResizePolicy>
                                           
