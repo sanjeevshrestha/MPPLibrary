@@ -122,10 +122,18 @@ public class Database {
         return this;
     }
 
+    
+    public void close() throws SQLException
+    {
+         this.c.close();
+        
+    }
     public static void main(String[] args) {
         Database db = new Database();
         db.connect();
         db.initialize();
     }
+    
+    
 
 }
