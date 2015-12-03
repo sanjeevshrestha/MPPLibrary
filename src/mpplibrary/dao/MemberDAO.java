@@ -142,7 +142,8 @@ public class MemberDAO {
             q.column("state").value(m.getState());
             q.column("zip").value(m.getZip());
 
-            long insertID = db.execute();
+            db.execute();
+            return true;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
