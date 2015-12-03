@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="383.0" prefWidth="767.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="mpplibrary.application.controllers.CheckoutBookController">
+    <stylesheets>
+        <URL value="@/mpplibrary/views/css/newcheckoutbooks.css" />
+    </stylesheets>
+   <children>
+      <GridPane layoutX="14.0" prefHeight="81.0" prefWidth="472.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="235.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="10.0" prefWidth="237.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Student ID:" />
+            <Label text="Date:" GridPane.columnIndex="1" />
+            <TextField fx:id="studentIdTxt" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <ScrollPane layoutX="14.0" layoutY="66.0" prefHeight="255.0" prefWidth="747.0">
+         <content>
+            <TableView fx:id="bookAddedTable" prefHeight="253.0" prefWidth="745.0">
+              <columns>
+                <TableColumn prefWidth="150.0" text="Book Unique ID" />
+                <TableColumn prefWidth="362.0" text="Book Title" />
+                  <TableColumn prefWidth="232.0" text="Due Date" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <GridPane layoutX="14.0" layoutY="331.0" prefHeight="90.0" prefWidth="529.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Book Unique ID" />
+            <Label text="Due Date" GridPane.columnIndex="1" />
+            <DatePicker fx:id="dueDatePicker" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </DatePicker>
+            <TextField fx:id="bookUniqueIdTxt" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Lendable Days:" GridPane.columnIndex="2" />
+            <TextField fx:id="landableDaysTxt" prefHeight="25.0" prefWidth="246.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </TextField>
+         </children>
+      </GridPane>
+      <Button fx:id="addBookBttn" layoutX="561.0" layoutY="364.0" mnemonicParsing="false" onAction="#onAddBookBttnClicked" text="Add Book" />
+      <Button fx:id="checkoutBttn" layoutX="648.0" layoutY="364.0" mnemonicParsing="false" onAction="#onCheckoutBttnClicked" text="Checkout" />
+   </children>
+</AnchorPane>

@@ -6,27 +6,19 @@
 package mpplibrary.application.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import mpplibrary.application.models.BookModel;
 import mpplibrary.base.Book;
 
@@ -69,13 +61,16 @@ public class ListBooksController {
         booksList.addAll(bookModel.getBooks());
         System.out.println("Books:" + booksList.size());
         onTableRowClicked();
+        
         tblColumnIsbn.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
         tblColumnIsbn.setCellFactory(cellFactory);
         
         tblColumnTitle.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         tblColumnTitle.setCellFactory(cellFactory);
+        
         tblColumnAvailable.setCellValueFactory(new PropertyValueFactory<Book, String>("available"));
         tblColumnAvailable.setCellFactory(cellFactory);
+        
         filteredBooksList.addAll(booksList);
         tblViewBooks.setItems(filteredBooksList);
         txtSearchQuery.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {

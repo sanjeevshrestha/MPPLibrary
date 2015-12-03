@@ -16,9 +16,9 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Library">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="CheckIn Book" />
-                        <MenuItem mnemonicParsing="false" text="CheckOut Book" />
-                        <MenuItem mnemonicParsing="false" text="Search" />
+                        <MenuItem fx:id="checkInMenuItem" mnemonicParsing="false" onAction="#onCheckInMenuItemClicked" text="CheckIn Book" />
+                        <MenuItem fx:id="checkOutMenuItem" mnemonicParsing="false" onAction="#onCheckOutMenuItemClicked" text="CheckOut Book" />
+                        <MenuItem fx:id="searchCheckedOutMenuItem" mnemonicParsing="false" onAction="#onSearchCheckedOutMenuItemClicked" text="Search" />
                     </items>
                 </Menu>
                 <Menu fx:id="mainMenuMember" mnemonicParsing="false" text="Member">

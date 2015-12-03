@@ -26,7 +26,7 @@ public class MenuController {
 
     @FXML
     MenuBar mainMenuBar;
-    
+
     @FXML
     VBox vBoxMainWindow;
 
@@ -91,24 +91,24 @@ public class MenuController {
         Platform.exit();
     }
 
+    @FXML
+    protected void onCheckInMenuItemClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void onCheckOutMenuItemClicked(ActionEvent event) {
+        windowFrame.setSceneCheckoutList();
+    }
+
+    @FXML
+    protected void onSearchCheckedOutMenuItemClicked(ActionEvent event) {
+
+    }
+
     public void initialize(Stage primaryStage) {
 //       vBoxMainWindow.getChildren().add(1, mainMenuBar);
 //        memberController = new MemberController(mainFramePane);
         windowFrame = new LoadWindowFrame(mainFramePane);
     }
-
-    @FXML
-    protected void onCheckInBttnClicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    protected void onCheckoutBttnClicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    protected void onSearchCheckedoutBooksBttnClicked(ActionEvent event) {
-
-    }    
 }

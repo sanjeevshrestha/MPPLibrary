@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="477.0" prefWidth="691.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="mpplibrary.application.controllers.CheckoutBookController">
+    <stylesheets>
+        <URL value="@/mpplibrary/views/css/checkoutbook.css" />
+    </stylesheets>
+   <children>
+      <HBox layoutX="8.0" prefHeight="497.0" prefWidth="691.0">
+         <children>
+            <VBox prefHeight="477.0" prefWidth="249.0">
+               <children>
+                  <TextField fx:id="filterStudentTxt">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TableView fx:id="checkedoutBookTable">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Student ID" />
+                        <TableColumn prefWidth="172.0" text="Checkout Date" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="newCheckoutBttn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onNewCheckoutBttnClicked" prefHeight="25.0" prefWidth="112.0" text="New Checkout">
+                     <VBox.margin>
+                        <Insets left="140.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Pane prefHeight="477.0" prefWidth="433.0">
+               <children>
+                  <TableView fx:id="checkedOutBookDetailsTable" layoutX="14.0" layoutY="46.0" prefHeight="397.0" prefWidth="416.0">
+                    <columns>
+                      <TableColumn prefWidth="110.0" text="Book ID" />
+                      <TableColumn prefWidth="202.0" text="Due Date" />
+                        <TableColumn minWidth="4.0" prefWidth="102.0" text="Fine " />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
