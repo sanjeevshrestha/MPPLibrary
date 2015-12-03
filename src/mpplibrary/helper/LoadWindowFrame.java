@@ -56,7 +56,7 @@ public class LoadWindowFrame {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddBook.fxml"));
             pane = loader.load();
             mainFramePane.getChildren().add(pane);
-            ((BookController) loader.getController()).initialize();
+
         } catch (IOException ex) {
             Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
