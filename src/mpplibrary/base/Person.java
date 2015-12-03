@@ -10,7 +10,8 @@ package mpplibrary.base;
  * @author 984970
  */
 abstract public class Person {
-     private long ID;
+
+    private long ID;
 
     private String firstname;
     private String lastname;
@@ -24,33 +25,30 @@ abstract public class Person {
     public Person(long ID) {
         this.ID = ID;
     }
-    
-    
-    
-    public Person()
-    {
-        
-    }
-    
-    public Person(long ID,String firstname, String lastname,boolean active)
-    {
-        this.firstname=firstname;
-        this.lastname=lastname;
-        this.active=active;
-    }
-    
-    
-     public Person(long ID, String firstname, String lastname,boolean active, String phone, String email, String mobile)
-    {
-        this.firstname=firstname;
-        this.lastname=lastname;
-        this.active=active;
-        this.phone=phone;
-        this.email=email;
-        this.mobile=mobile;
+
+    public Person() {
+
     }
 
-    public Person(long ID, String firstname, String lastname,  boolean active,  String email, String phone, String mobile, String note) {
+    public Person(long ID, String firstname, String lastname, boolean active) {
+        this.ID = ID;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.active = active;
+    }
+
+    public Person(long ID, String firstname, String lastname, boolean active, String phone, String email, String mobile) {
+        this.ID = ID;
+
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.active = active;
+        this.phone = phone;
+        this.email = email;
+        this.mobile = mobile;
+    }
+
+    public Person(long ID, String firstname, String lastname, boolean active, String email, String phone, String mobile, String note) {
         this.ID = ID;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -60,8 +58,6 @@ abstract public class Person {
         this.mobile = mobile;
         this.active = active;
     }
-     
-     
 
     public long getID() {
         return ID;
@@ -134,7 +130,5 @@ abstract public class Person {
     public void setActive(boolean active) {
         this.active = active;
     }
-     
-     
-   
+
 }

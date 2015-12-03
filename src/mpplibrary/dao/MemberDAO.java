@@ -47,6 +47,7 @@ public class MemberDAO {
             rs = db.getResultSet();
             while (rs.next()) {
                 Member m;
+                System.out.println(rs.getLong("id"));
                 m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"));
                 this.members.add(m);
             }
