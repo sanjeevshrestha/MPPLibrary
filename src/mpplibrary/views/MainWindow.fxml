@@ -4,7 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<<<<<<< HEAD
 <VBox fx:id="vBoxMainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.MenuController">
     <children>
         <MenuBar fx:id="mainMenuBar" prefHeight="0.0" prefWidth="583.0">
@@ -69,7 +68,6 @@
             </children>
         </AnchorPane>
     </children>
-=======
 <VBox fx:id="vBoxMainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.MenuController">
    <children>
       <MenuBar fx:id="mainMenuBar" prefHeight="0.0" prefWidth="583.0">
@@ -114,5 +112,4 @@
       </MenuBar>
       <AnchorPane fx:id="mainFramePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="635.0" />
    </children>
->>>>>>> 92e6cefb294ef56f43eda486ea46e2f112d7424c
 </VBox>
