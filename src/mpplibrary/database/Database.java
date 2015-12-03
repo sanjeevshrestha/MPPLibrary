@@ -47,18 +47,26 @@ public class Database {
 
     }
 
-    public boolean execute() throws QueryException {
+    public long execute() throws QueryException {
+        long insertID = 0;
+
         try {
             String sql = this.query.getQuery();
             Statement stmt = null;
             stmt = this.c.createStatement();
             stmt.executeUpdate(sql);
-            return true;
+
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            while (generatedKeys.next()) {
+                insertID = generatedKeys.getLong(1);
+
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
+
         }
 
+        return insertID;
     }
 
     public ResultSet getResultSet() throws QueryException {

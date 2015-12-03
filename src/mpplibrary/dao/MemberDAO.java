@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import mpplibrary.MPPLibraryFactory;
+import mpplibrary.base.Address;
 import mpplibrary.base.Member;
 import mpplibrary.base.roles.User;
 import mpplibrary.database.Database;
@@ -108,7 +109,6 @@ public class MemberDAO {
                 m.setEmail(rs.getString("email"));
                 m.setPhone(rs.getString("phone"));
                 m.setMobile(rs.getString("mobile"));
-
             }
 
         } catch (QueryException | SQLException e) {
@@ -135,7 +135,13 @@ public class MemberDAO {
             q.column("email").value(m.getEmail());
             q.column("mobile").value(m.getMobile());
             q.column("amount_due").value(String.valueOf(m.getAmountDue()));
-            return db.execute();
+            q.column("address").value(m.getAddress());
+            q.column("city").value(m.getCity());
+            q.column("state").value(m.getState());
+            q.column("zip").value(m.getZip());
+
+            long insertID = db.execute();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -11,28 +11,35 @@ CREATE TABLE IF NOT EXISTS "users"
 "lastlogin" DATETIME,
 "email" VARCHAR(255), 
 "phone" VARCHAR(50), 
-"mobile" VARCHAR(50));
+"mobile" VARCHAR(50),
+"address" VARCHAR(255), 
+"city" VARCHAR(100), 
+"state" VARCHAR(10),
+ "zip" VARCHAR(20));
 
 INSERT INTO "users" VALUES(1,'Admin','Admin','admin@mpplibrary.edu','admin','password','admin',NULL,NULL,NULL,NULL,'true',NULL);
 INSERT INTO "users" VALUES(2,'Librarian','Librarian','libary@mpplibrary.edu','library','password','librarian',NULL,NULL,NULL,NULL,'true',NULL);
 
 
 
-CREATE TABLE IF NOT EXISTS  "members" 
-("id" INTEGER PRIMARY KEY  NOT NULL ,
+CREATE TABLE IF NOT EXISTS "members" ("id" INTEGER PRIMARY KEY  NOT NULL ,
 "firstname" VARCHAR(50) NOT NULL ,
 "lastname" VARCHAR(50) NOT NULL ,
-"created_by" INTEGER,
-"modified" DATETIME,
+"created_by" INTEGER,"modified" DATETIME,
 "modified_by" INTEGER,
 "active" BOOL, 
 "amount_due" DOUBLE, 
 "note" TEXT, 
 "email" VARCHAR(255), 
 "phone" VARCHAR(50), 
-"mobile" VARCHAR(50));
+"mobile" VARCHAR(50), 
+"address" VARCHAR(255), 
+"city" VARCHAR(100), 
+"state" VARCHAR(10),
+ "zip" VARCHAR(20));
 
-CREATE TABLE IF NOT EXISTS  "authors" ("id" INTEGER PRIMARY KEY  NOT NULL ,
+
+CREATE TABLE "authors" ("id" INTEGER PRIMARY KEY  NOT NULL ,
 "firstname" VARCHAR(50) NOT NULL ,
 "lastname" VARCHAR(50) NOT NULL ,
 "created_by" INTEGER,
@@ -41,10 +48,7 @@ CREATE TABLE IF NOT EXISTS  "authors" ("id" INTEGER PRIMARY KEY  NOT NULL ,
 "active" BOOL, 
 "credentials" TEXT,
 "bio" TEXT,
-"note" TEXT,
-"email" VARCHAR(255), 
-"phone" VARCHAR(50), 
-"mobile" VARCHAR(50));
+"note" TEXT, "address" VARCHAR(255), "city" VARCHAR(50), "state" VARCHAR(10), "zip" VARCHAR(10))
 
 
 CREATE  TABLE  IF NOT EXISTS "addresses" 

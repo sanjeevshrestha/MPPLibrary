@@ -15,12 +15,15 @@ abstract public class Person {
 
     private String firstname;
     private String lastname;
-    private Address address;
     private String note;
     private String phone;
     private String email;
     private String mobile;
     private boolean active;
+        private String address;
+private String city;
+private String state;
+private String zip;
 
     public Person(long ID) {
         this.ID = ID;
@@ -83,14 +86,7 @@ abstract public class Person {
         this.lastname = lastname;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
+ 
     public String getNote() {
         return note;
     }
@@ -130,5 +126,38 @@ abstract public class Person {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+    
 
 }
