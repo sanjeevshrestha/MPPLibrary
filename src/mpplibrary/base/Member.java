@@ -5,7 +5,7 @@
  */
 package mpplibrary.base;
 
-import mpplibrary.base.Person;
+import mpplibrary.dao.MemberDAO;
 
 /**
  *
@@ -15,21 +15,37 @@ public class Member extends Person {
 
     private double amount_due;
 
+    private MemberDAO dataAccess;
+
     public Member() {
 
+        this.dataAccess = new MemberDAO();
+
     }
-    
-     public Member(long ID, String firstname, String lastname, boolean active) {
+
+    public Member(long ID) {
+        super(ID);
+        this.dataAccess = new MemberDAO();
+
+    }
+
+    public Member(long ID, String firstname, String lastname, boolean active) {
         super(ID, firstname, lastname, active);
 
     }
 
-    public Member(long ID, String firstname, String lastname, boolean active,double amt) {
+    public Member(long ID, String firstname, String lastname, boolean active, double amt) {
         super(ID, firstname, lastname, active);
-        this.amount_due=amt;
+        this.amount_due = amt;
 
     }
-    
-   
+
+    public boolean loadMember() {
+        
+        this.dataAccess.loadMember(this);
+
+        return true;
+
+    }
 
 }

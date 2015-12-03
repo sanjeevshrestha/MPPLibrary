@@ -13,11 +13,20 @@ import java.util.List;
  * @author 984970
  */
 public class CheckoutRecord {
-    
+
     private long ID;
-    private LocalDate checkoutDate;
-    private LocalDate dueDate;
+
     private Member checkedOutBy;
+
+    public CheckoutRecord() {
+    }
+
+    public CheckoutRecord(long ID, Member member) {
+        this.ID = ID;
+        this.checkedOutBy=member;
+        
+    }
+    
 
     public long getID() {
         return ID;
@@ -27,22 +36,7 @@ public class CheckoutRecord {
         this.ID = ID;
     }
 
-    public LocalDate getCheckoutDate() {
-        return checkoutDate;
-    }
-
-    public void setCheckoutDate(LocalDate checkoutDate) {
-        this.checkoutDate = checkoutDate;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
+  
     public Member getCheckedOutBy() {
         return checkedOutBy;
     }
@@ -68,8 +62,5 @@ public class CheckoutRecord {
     }
     private List<CheckoutRecordEntry> checkoutItems;
     private List<Fine> fines;
-    
-    
-    
-    
+
 }

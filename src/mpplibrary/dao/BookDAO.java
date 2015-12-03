@@ -20,7 +20,6 @@ import mpplibrary.database.QueryException;
  */
 public class BookDAO {
 
-    private BookDAO dataAccess;
 
     private Book book;
 

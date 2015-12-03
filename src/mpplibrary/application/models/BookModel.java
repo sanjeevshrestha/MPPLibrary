@@ -7,7 +7,9 @@ package mpplibrary.application.models;
 
 import java.util.ArrayList;
 import mpplibrary.base.Book;
+import mpplibrary.base.LendableCopy;
 import mpplibrary.dao.BookDAO;
+import mpplibrary.dao.LendableDAO;
 
 /**
  *
@@ -55,10 +57,28 @@ public class BookModel {
         return books;
 
     }
+    
+    public ArrayList<LendableCopy> getLendableCopies(String isbn)
+    {
+        
+        ArrayList<LendableCopy> copies=new ArrayList<>();
+        try {
+                    LendableDAO lcd=new LendableDAO();
+                    copies=lcd.getLendableCopies(isbn);
+
+        } catch (Exception e) {
+        }
+        
+        
+        return copies;
+        
+    }
 
     public static void main(String[] args) {
         BookModel bm = new BookModel();
         bm.searchBooks("ISBN", "test");
     }
+    
+    
 
 }

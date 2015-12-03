@@ -20,6 +20,11 @@ abstract public class Person {
     private String email;
     private String mobile;
     private boolean active;
+
+    public Person(long ID) {
+        this.ID = ID;
+    }
+    
     
     
     public Person()
