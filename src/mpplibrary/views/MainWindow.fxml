@@ -46,26 +46,6 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane fx:id="mainFramePane" prefHeight="598.0" prefWidth="635.0">
-            <children>
-                <ToolBar layoutY="5.0" prefHeight="40.0" prefWidth="635.0" stylesheets="@css/toolbar.css">
-                    <items>
-                        <Button fx:id="checkinBttn" mnemonicParsing="false" onAction="#onCheckInBttnClicked" text="ckhin" />
-                        <Button fx:id="checkoutBttn" mnemonicParsing="false" onAction="#onCheckoutBttnClicked" text="ckhout" />
-                        <Button fx:id="searchCheckedoutBooksBttn" mnemonicParsing="false" onAction="#onSearchCheckedoutBooksBttnClicked" text="src" />
-                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
-                        <Button fx:id="addMemberBttn" mnemonicParsing="false" onAction="#onAddMemberBttnClicked" text="add" />
-                        <Button fx:id="listMembersBttn" mnemonicParsing="false" onAction="#onListMembersBttnClicked" text="list" />
-                        <Button fx:id="membersReportBttn" mnemonicParsing="false" onAction="#onMembersReportBttnClicked" text="rpt" />
-                        <Button fx:id="searchMembersBttn" mnemonicParsing="false" onAction="#onSearchMembersBttnClicked" text="src" />
-                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
-                        <Button fx:id="addBookBttn" mnemonicParsing="false" onAction="#onAddBookBttnClicked" text="add" />
-                        <Button fx:id="listBooksBttn" mnemonicParsing="false" onAction="#onListBooksBttnClicked" text="lst" />
-                        <Button fx:id="bookReportsBttn" mnemonicParsing="false" onAction="#onBookReportsBttnClicked" text="rpt" />
-                        <Button fx:id="searchBookBttn" mnemonicParsing="false" onAction="#onSearchBookBttnClicked" text="src" />
-                    </items>
-                </ToolBar>
-            </children>
-        </AnchorPane>
+        <AnchorPane fx:id="mainFramePane" prefHeight="596.0" prefWidth="635.0" />
     </children>
 </VBox>
