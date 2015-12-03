@@ -53,6 +53,9 @@ public class LoginController {
             System.out.println(loggedUser.canAddAuthor());
 
         } else {
+            
+                     txtLoginInfo.setText("Login unsuccessfull");
+            txtLoginInfo.setVisible(true);
             System.out.println("Login unsuccessfull");
         }
 

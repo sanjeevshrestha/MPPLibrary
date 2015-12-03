@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mpplibrary.application.controllers.LoginController;
 import mpplibrary.application.controllers.MenuController;
-import mpplibrary.base.roles.User;
 import mpplibrary.helper.DataHelper;
 import mpplibrary.interfaces.OnLoginSuccessListener;
 
@@ -61,7 +60,7 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener {
             Parent root = loader.load();
             ((MenuController) loader.getController()).initialize(primaryStage);
             Scene scene = new Scene(root, DataHelper.MAIN_WINDOW_WIDTH, DataHelper.MAIN_WINDOW_HEIGHT);
-            primaryStage.setTitle("MPP LIBRARY");
+            primaryStage.setTitle("MPP Library Management");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {

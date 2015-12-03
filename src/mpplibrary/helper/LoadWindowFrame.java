@@ -102,7 +102,7 @@ public class LoadWindowFrame {
     }
     
     public ListMembersController setSceneListMembers() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListMembers.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListMembers2.fxml"));
         try {
             
             AnchorPane pane = loader.load();

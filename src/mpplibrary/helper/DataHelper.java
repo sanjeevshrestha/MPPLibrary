@@ -11,8 +11,8 @@ package mpplibrary.helper;
  */
 public class DataHelper {
     
-    public static final int WINDOW_WIDTH = 650;
-    public static final int WINDOW_HEIGHT =400;
+    public static final int WINDOW_WIDTH = 400;
+    public static final int WINDOW_HEIGHT =320;
     public static final int MAIN_WINDOW_WIDTH = 800;
     public static final int MAIN_WINDOW_HEIGHT = 600;
 }

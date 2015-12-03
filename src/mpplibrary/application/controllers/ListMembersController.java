@@ -19,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import mpplibrary.application.models.BookModel;
 import mpplibrary.application.models.MemberModel;
 import mpplibrary.base.Book;
 import mpplibrary.base.Member;
@@ -64,17 +63,17 @@ public class ListMembersController {
         memberModel = new MemberModel();
         
         membersList.addAll(memberModel.getMembers());
-        for (Member mem : membersList) {
-            System.out.println("mem:" + mem.getID());
-        }
+//        for (Member mem : membersList) {
+//            System.out.println("mem:" + mem.getID());
+//        }
         onTableRowClicked();
         tblColumnMemberId.setCellValueFactory(new PropertyValueFactory<Member, Object>("ID"));
         tblColumnMemberId.setCellFactory(cellFactory);
         
         tblColumnFName.setCellValueFactory(new PropertyValueFactory<Member, Object>("firstname"));
         tblColumnFName.setCellFactory(cellFactory);
-        tblColumnLName.setCellValueFactory(new PropertyValueFactory<Member, Object>("lastname"));
-        tblColumnLName.setCellFactory(cellFactory);
+//        tblColumnLName.setCellValueFactory(new PropertyValueFactory<Member, Object>("lastname"));
+//        tblColumnLName.setCellFactory(cellFactory);
         tblColumnAmountDue.setCellValueFactory(new PropertyValueFactory<Member, Object>("amount_due"));
         tblColumnAmountDue.setCellFactory(cellFactory);
         
