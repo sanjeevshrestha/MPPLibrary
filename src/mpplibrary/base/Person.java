@@ -15,12 +15,15 @@ abstract public class Person {
 
     private String firstname;
     private String lastname;
-    private Address address;
     private String note;
     private String phone;
     private String email;
     private String mobile;
     private boolean active;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
 
     public Person(long ID) {
         this.ID = ID;
@@ -48,7 +51,7 @@ abstract public class Person {
         this.mobile = mobile;
     }
 
-    public Person(long ID, String firstname, String lastname, boolean active, String email, String phone, String mobile, String note) {
+    public Person(long ID, String firstname, String lastname, boolean active, String email, String phone, String mobile, String note, String address, String city, String state, String zip) {
         this.ID = ID;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -57,6 +60,10 @@ abstract public class Person {
         this.email = email;
         this.mobile = mobile;
         this.active = active;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
     }
 
     public long getID() {
@@ -81,14 +88,6 @@ abstract public class Person {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getNote() {
@@ -129,6 +128,38 @@ abstract public class Person {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
 }
