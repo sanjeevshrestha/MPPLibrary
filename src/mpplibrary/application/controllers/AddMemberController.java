@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.stage.Stage;
+import mpplibrary.application.models.MemberModel;
 import mpplibrary.rulesets.RuleException;
 import mpplibrary.rulesets.RuleSet;
 import mpplibrary.rulesets.RuleSetFactory;
@@ -35,6 +37,10 @@ public class AddMemberController {
     private String phone;
     private String email;
 
+    private ListMembersController listMembersController;
+    
+    private Stage dialogStage;
+    
     public void initialize() {
         //errorLabel = new Label("");
         Tooltip toolTip = new Tooltip("Member id must be numeric");
@@ -60,6 +66,10 @@ public class AddMemberController {
         try {
             RuleSet addressRules = RuleSetFactory.getRuleSet(AddMemberController.this);
             addressRules.applyRules(AddMemberController.this);
+            if(MemberModel.getInstance().save(0, firstName, lastName, true, 0, email, "", phone, "", address, city, state, zip)){
+                listMembersController.refreshListData();
+                this.dialogStage.close();
+            }
         } catch (RuleException e) {
             TextField errorTextField = (TextField) e.getErrorObject();
             errorLabel.setText(e.getMessage());
@@ -107,5 +117,11 @@ public class AddMemberController {
     public Label getErrorLabel() {
         return errorLabel;
     }
+
+    public void setMemberController(ListMembersController memberListController, Stage dialogStage) {
+       this.listMembersController = memberListController;
+       this.dialogStage = dialogStage;
+    }
+
 
 }
