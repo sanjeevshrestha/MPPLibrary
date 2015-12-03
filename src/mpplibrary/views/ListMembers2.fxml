@@ -26,8 +26,8 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" text="Add New Member" />
-                            <Button mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="fxBtnNewMember" mnemonicParsing="false" onAction="#onNewMemberButtonClick" text="Add New Member" />
+                            <Button fx:id="fxBtnDeleteMember" mnemonicParsing="false" onAction="#onDeleteMemberButtonClicked" text="Delete" />
                           </items>
                         </ToolBar>
                         <GridPane hgap="5.0" vgap="5.0">
