@@ -48,10 +48,9 @@ public class LoginController {
         UserModel um = UserModel.getInstance();
         if (um.login(userName, password)) {
             loadHomeScreen();
-            User loggedUser=MPPLibraryFactory.getLoggedInUser();
+            User loggedUser = MPPLibraryFactory.getLoggedInUser();
             System.out.println(loggedUser.canCheckoutBook());
-                        System.out.println(loggedUser.canAddAuthor());
-
+            System.out.println(loggedUser.canAddAuthor());
 
         } else {
             System.out.println("Login unsuccessfull");

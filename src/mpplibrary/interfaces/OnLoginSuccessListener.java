@@ -10,5 +10,6 @@ package mpplibrary.interfaces;
  * @author 984947
  */
 public interface OnLoginSuccessListener {
- public void onLoginSuccess();   
+
+    public void onLoginSuccess();
 }
