@@ -5,8 +5,10 @@
  */
 package mpplibrary.application.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import mpplibrary.base.CheckoutRecord;
+import mpplibrary.base.CheckoutRecordEntry;
 import mpplibrary.dao.CheckoutRecordDAO;
 
 /**
@@ -41,6 +43,26 @@ public class CheckoutModel {
 
         return records;
 
+    }
+    
+    
+    public boolean isBookValid(String uniqueID)
+    {
+        return true;
+        
+    }
+    
+    public boolean isBookAvailable(String uniqueID)
+    {
+        return true;
+        
+    }
+    
+    
+    public boolean checkout(long memberID,LocalDate checkoutDate,ArrayList<CheckoutRecordEntry> list)
+    {
+        
+        return true;
     }
 
 }
