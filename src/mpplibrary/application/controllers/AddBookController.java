@@ -195,7 +195,6 @@ public class AddBookController {
 
     }
 
-
     @FXML
     public void onSelectExistingAuthor() {
         int selectedAuthorIndex = fxComboSelectAuthor.getSelectionModel().getSelectedIndex();

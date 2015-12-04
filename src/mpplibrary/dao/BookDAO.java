@@ -115,7 +115,7 @@ public class BookDAO {
                 db.execute();
 
             }
-            
+
             for (LendableCopy l : b.getLendableCopies()) {
                 q = db.getQuery(true);
                 q.insert("lendablecopies");

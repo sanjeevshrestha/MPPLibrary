@@ -123,7 +123,7 @@ public class CheckoutBookController {
             if (!alreadyExists) {
                 String lendableDays = txtLendableDays.getText();
 
-                LocalDate dtCheckout = dtCheckoutDate.getValue();;
+                LocalDate dtCheckout = dtCheckoutDate.getValue();
                 if (dtCheckout == null) {
                     dtCheckout = LocalDate.now();
                 }
