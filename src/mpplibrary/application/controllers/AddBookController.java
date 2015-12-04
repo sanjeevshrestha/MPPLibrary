@@ -195,6 +195,21 @@ public class AddBookController {
 
     }
 
+
+    @FXML
+    public void onSelectExistingAuthor() {
+        int selectedAuthorIndex = fxComboSelectAuthor.getSelectionModel().getSelectedIndex();
+
+        if (selectedAuthorIndex >= 0) {
+            Author selectedAuthor = existingAuthorsList.get(selectedAuthorIndex);
+            if (!addedAuthorsList.contains(selectedAuthor)) {
+                addedAuthorsList.add(selectedAuthor);
+                fxTblAuthors.setItems(addedAuthorsList);
+            }
+
+        }
+    }
+
     public String getIsbn() {
         return isbn;
     }

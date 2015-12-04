@@ -135,7 +135,7 @@
                                                       <Label text="Email" GridPane.rowIndex="4" />
                                                       <Label alignment="TOP_LEFT" text="Credentials" GridPane.rowIndex="5" />
                                                       <Label text="Short Bio" GridPane.rowIndex="6" />
-                                                      <Button fx:id="fxBtnSelectAuthor" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" />
+                                                      <Button fx:id="fxBtnSelectAuthor" mnemonicParsing="false" onAction="#onSelectExistingAuthor" text="Add" GridPane.columnIndex="2" />
                                                       <TextField fx:id="fxTxtAuthorFirstName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                       <TextField fx:id="fxTxtAuthorLastName" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                       <TextField fx:id="fxTxtAuthorEmail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
