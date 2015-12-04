@@ -72,4 +72,15 @@ public class LendableCopy extends Book {
     {
        return this.dataAccess.isValidCopy(this);
     }
+    
+    public boolean isAvailable()
+    {
+        return this.dataAccess.isAvailable(this);
+        
+    }
+    
+    public void makeUnavailable()
+    {
+        this.dataAccess.makeUnvailable(this);
+    }
 }
