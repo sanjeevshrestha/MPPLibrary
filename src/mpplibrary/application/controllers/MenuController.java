@@ -8,6 +8,10 @@ package mpplibrary.application.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -16,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mpplibrary.MPPLibraryFactory;
 import mpplibrary.base.roles.User;
+import mpplibrary.helper.DataHelper;
 import mpplibrary.helper.LoadWindowFrame;
 
 /**
@@ -88,7 +93,24 @@ public class MenuController {
 
     @FXML
     protected void onMenuLogOutSelected(ActionEvent event) {
-        System.out.println("OnLogoutSelected");
+//        System.out.println("OnLogoutSelected");
+//        Platform.exit();
+        ((Node) mainFramePane.getParent()).getScene().getWindow().hide();
+//        ((Node) mainFramePane).getScene().getWindow().hide();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/Login.fxml"));
+            Parent root = loader.load();
+//            ((LoginController) loader.getController()).initialize();
+            Scene scene = new Scene(root, DataHelper.WINDOW_WIDTH, DataHelper.WINDOW_HEIGHT);
+
+            primaryStage.setResizable(false);
+
+            primaryStage.setTitle("Login");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -139,6 +161,7 @@ public class MenuController {
         }
 
         windowFrame = LoadWindowFrame.getInstance(mainFramePane);
+        this.primaryStage = primaryStage;
     }
 
     @FXML

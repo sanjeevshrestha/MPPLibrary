@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListBooksController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListBooksController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
@@ -26,8 +26,8 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" text="Add New Book" />
-                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="fxBtnAddNewBook" mnemonicParsing="false" onAction="#onBtnAddNewBookClicked" text="Add New Book" />
+                              <Button fx:id="fxBtnDeleteBook" mnemonicParsing="false" onAction="#onBtnDeleteBookCLicked" text="Delete" />
                            </items>
                         </ToolBar>
                         <GridPane hgap="5.0" vgap="5.0">

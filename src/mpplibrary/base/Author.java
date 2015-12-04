@@ -66,6 +66,11 @@ public class Author extends Person {
     {
        return  this.dataAccess.saveAuthor(this);
     }
+
+    @Override
+    public String toString() {
+    return getAuthorFullName();
+    }
     
     
 }

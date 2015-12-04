@@ -68,6 +68,7 @@ public class LoginController {
 
     }
 
+    @FXML
     public void initialize(OnLoginSuccessListener onLoginSuccessListener) {
         this.onLoginSuccessListener = onLoginSuccessListener;
     }
