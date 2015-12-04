@@ -5,6 +5,7 @@
  */
 package mpplibrary.application.controllers;
 
+import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -97,6 +98,16 @@ public class AddBookController {
         try {
             RuleSet addressRules = RuleSetFactory.getRuleSet(AddBookController.this);
             addressRules.applyRules(AddBookController.this);
+                    String type=fxComboPublicationType.getSelectionModel().getSelectedItem().toString();
+                    
+                    ArrayList<Author> al=new ArrayList<>();
+                    al.addAll(addedAuthorsList);
+                    ArrayList<String> lcl=new ArrayList<>();
+                    lcl.addAll(lendableCopiesList);
+                    
+
+            Book book = new Book(0,title,isbn,description,type,al,lcl);
+            book.save();
 //            if(MemberModel.getInstance().save(0, firstName, lastName, true, 0.00, email, "", phone, "", address, city, state, zip)){
 //                listMembersController.refreshListData();
 //                this.dialogStage.close();
@@ -249,6 +260,11 @@ public class AddBookController {
             alert.showAndWait();
         } else {
             Author author = new Author(authorFName, authorLName, authorEmail, authorCredentials, authorBio);
+            if(author.save())
+            {
+                System.out.println(author.getID());
+            }
+                    
             addedAuthorsList.add(author);
             fxTblAuthors.setItems(addedAuthorsList);
 //            tblAddedAuthors.

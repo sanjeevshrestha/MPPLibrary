@@ -5,6 +5,7 @@
  */
 package mpplibrary.base;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,10 @@ abstract public class Publication {
 
     private long ID;
     private String title;
-    
+    private String description;
+    private List<Author> authors;
+    private List<LendableCopy> lendableCopies;
+    private String type;
 
     public String getDescription() {
         return description;
@@ -24,24 +28,41 @@ abstract public class Publication {
     public void setDescription(String description) {
         this.description = description;
     }
-    private String description;
-    private List<Author> authors;
-    
-    
-    public Publication()
-    {
-        
+
+    public Publication() {
+        this.authors = new ArrayList<>();
+        this.lendableCopies = new ArrayList<>();
+
     }
 
     public Publication(long ID) {
         this.ID = ID;
+        this.authors = new ArrayList<>();
+        this.lendableCopies = new ArrayList<>();
     }
-    
-    
-    public Publication(long ID,String title)
-    {
-        this.ID=ID;
-        this.title=title;
+
+    public Publication(long ID, String title) {
+        this.ID = ID;
+        this.title = title;
+        this.authors = new ArrayList<>();
+        this.lendableCopies = new ArrayList<>();
+    }
+
+    public Publication(long ID, String title, String desc, String type) {
+        this.ID = ID;
+        this.title = title;
+        this.description = desc;
+        this.type = type;
+        this.authors = new ArrayList<>();
+        this.lendableCopies = new ArrayList<>();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public long getID() {
@@ -68,4 +89,23 @@ abstract public class Publication {
         this.authors = authors;
     }
 
+    public void addLendableCopies(LendableCopy l) {
+        this.lendableCopies.add(l);
+    }
+
+    public void addLendableCopies(long uniqueid) {
+        LendableCopy l = new LendableCopy(uniqueid);
+
+        this.lendableCopies.add(l);
+    }
+
+    public List<LendableCopy> getLendableCopies() {
+        return lendableCopies;
+    }
+
+    public void setLendableCopies(List<LendableCopy> lendableCopies) {
+        this.lendableCopies = lendableCopies;
+    }
+    
+    
 }
