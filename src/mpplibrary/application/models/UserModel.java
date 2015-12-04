@@ -20,7 +20,7 @@ import mpplibrary.dao.UserDAO;
 public class UserModel {
 
     private static UserModel instance;
-
+    
     static {
         instance = new UserModel();
     }
@@ -67,6 +67,11 @@ public class UserModel {
         }
         
         return users;
+    }
+    
+    public boolean delete(long ID) {
+        User m = new User(ID);
+        return m.delete();
     }
 
 }

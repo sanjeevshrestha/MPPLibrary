@@ -5,7 +5,6 @@
  */
 package mpplibrary.base.roles;
 
-import java.time.LocalDate;
 import java.util.Date;
 import mpplibrary.base.Person;
 import mpplibrary.dao.UserDAO;
@@ -28,7 +27,11 @@ public class User extends Person implements Role {
 
     public User() {
         this.dataAccess = new UserDAO();
+    }
 
+    public User(long id) {
+        super(id);
+        this.dataAccess = new UserDAO();
     }
 
     public User(String username, String password) {
@@ -135,6 +138,11 @@ public class User extends Person implements Role {
 
     public boolean saveMember() {
         return this.dataAccess.saveUser(this);
+    }
+
+    public boolean delete() {
+        return this.dataAccess.deleteMember(this);
+
     }
 
     @Override

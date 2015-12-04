@@ -53,6 +53,7 @@ public class AddUserController {
     public void initialize() {
 
         accountTypeComboBox.getItems().addAll("admin", "librarian", "both");
+        listUserController = new ListUserController();
 
     }
 

@@ -77,7 +77,7 @@ public class ListMembersController {
 
     @FXML
     public void initialize() {
-        selectedMemberPosition =-1;
+        selectedMemberPosition = -1;
         membersList = FXCollections.observableArrayList();
         filteredMembersList = FXCollections.observableArrayList();
         memberModel = new MemberModel();
@@ -113,7 +113,6 @@ public class ListMembersController {
     public void onNewMemberButtonClick(ActionEvent event) {
         LoadWindowFrame lf = LoadWindowFrame.getInstance();
         lf.setSceneAddMember();
-
     }
 
     @FXML
@@ -122,7 +121,7 @@ public class ListMembersController {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Member");
             Member selectedMember = filteredMembersList.get(selectedMemberPosition);
-            alert.setHeaderText("Are you sure you want to remove " + selectedMember.getFullname());
+            alert.setHeaderText("Are you sure you want to remove " + selectedMember.getFullname() + "?");
 
             ButtonType buttonTypeConfirm = new ButtonType("Ok", ButtonData.APPLY);
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
@@ -133,10 +132,9 @@ public class ListMembersController {
             if (result.get() == buttonTypeConfirm) {
 
                 if (memberModel.delete(filteredMembersList.get(selectedMemberPosition).getID())) {
-
                     refreshListData();
                 } else {
-                    System.out.println("Error in deleteing member");
+                    System.out.println("Error in deleting member");
                 }
                 alert.close();
             }
@@ -146,7 +144,7 @@ public class ListMembersController {
             alert.setTitle("Delete Member");
             alert.setHeaderText("Select a member to delete");
             alert.getButtonTypes().clear();
-            ButtonType buttonTypeCancel = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);      
+            ButtonType buttonTypeCancel = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
             alert.getButtonTypes().addAll(buttonTypeCancel);
             alert.show();
         }
@@ -192,14 +190,14 @@ public class ListMembersController {
     private void onTableRowClicked() {
         cellFactory
                 = new Callback<TableColumn<Member, Object>, TableCell<Member, Object>>() {
-            @Override
-            public TableCell call(TableColumn p) {
-                MyStringTableCell cell = new MyStringTableCell();
-                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+                    @Override
+                    public TableCell call(TableColumn p) {
+                        MyStringTableCell cell = new MyStringTableCell();
+                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
 
-                return cell;
-            }
-        };
+                        return cell;
+                    }
+                };
     }
 
     void refreshListData() {

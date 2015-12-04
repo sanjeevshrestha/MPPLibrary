@@ -124,4 +124,25 @@ public class UserDAO extends DAO {
 
     }
 
+    public boolean deleteMember(User user) {
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+
+            User u = MPPLibraryFactory.getLoggedInUser();
+
+            q.delete("users");
+            q.where("id=" + q.quote(String.valueOf(user.getID())));
+
+            db.execute();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+
+    }
+
 }
