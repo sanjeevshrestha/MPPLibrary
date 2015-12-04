@@ -71,7 +71,6 @@ public class ListMembersController {
     private ObservableList<Member> filteredMembersList;
 
     private MemberModel memberModel;
-
     private LoadWindowFrame windowFrame;
 
     private int selectedMemberPosition;

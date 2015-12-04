@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import mpplibrary.MPPLibraryFactory;
-import mpplibrary.base.Address;
 import mpplibrary.base.Member;
 import mpplibrary.base.roles.User;
 import mpplibrary.database.Database;
@@ -49,6 +48,7 @@ public class MemberDAO {
             while (rs.next()) {
                 Member m;
                 System.out.println(rs.getLong("id"));
+
                 m = new Member(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"), rs.getDouble("amount_due"),
                         rs.getString("email"),
                         rs.getString("phone"),
