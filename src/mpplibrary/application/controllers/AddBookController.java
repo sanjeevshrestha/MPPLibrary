@@ -143,7 +143,7 @@ public class AddBookController {
         lendableCopiesList = FXCollections.observableArrayList();
         addedAuthorsList = FXCollections.observableArrayList();
         existingAuthorsList = FXCollections.observableArrayList();
-//        existingAuthorsList.addAll(BookModel.getInstance().);
+        existingAuthorsList.addAll(BookModel.getInstance().getAllAuthors());
 
         fxTblColumnLendableId.setCellValueFactory(new Callback<CellDataFeatures<String, String>, ObservableValue<String>>() {
             @Override
@@ -167,6 +167,7 @@ public class AddBookController {
             }
         });
 
+        System.out.println("Authorlist:" + existingAuthorsList.size());
         fxComboSelectAuthor.setItems(existingAuthorsList);
         fxComboSelectAuthor.setCellFactory(new Callback<ListView<Author>, ListCell<Author>>() {
             @Override
@@ -178,6 +179,7 @@ public class AddBookController {
                         super.updateItem(author, bln);
 
                         if (author != null) {
+                            System.out.println("Author:" + author.getFirstname() + " " + author.getLastname());
                             setText(author.getAuthorFullName());
                         } else {
                             setText(null);
