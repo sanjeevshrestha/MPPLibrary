@@ -67,11 +67,10 @@ public class LendableDAO {
             Query q = db.getQuery(true);
             q.select("l.uniqueid,b.*").from("lendablecopies as l");
             q.join("LEFT", "books as b", " b.id=l.book_id");
-            
 
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
             rs = db.getResultSet();
-           while (rs.next()) {
+            while (rs.next()) {
 
                 l.setTitle(rs.getString("title"));
                 l.setISBN(rs.getString("isbn"));
@@ -99,11 +98,11 @@ public class LendableDAO {
 
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
             rs = db.getResultSet();
-            
+
             while (rs.next()) {
-                
-                int rowcount=rs.getInt("cnt");
-                isValid=rowcount>0;
+
+                int rowcount = rs.getInt("cnt");
+                isValid = rowcount > 0;
 
             }
 
@@ -113,6 +112,52 @@ public class LendableDAO {
         }
 
         return isValid;
+    }
+
+    public boolean isAvailable(LendableCopy l) {
+
+        boolean isValid = false;
+        ResultSet rs = null;
+        try {
+
+            Database db = DatabaseFactory.getInstance();
+
+            Query q = db.getQuery(true);
+            q.select("count(*) as cnt").from("lendablecopies as l");
+
+            q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
+            q.where("available=" + q.quote("true"));
+            rs = db.getResultSet();
+
+            while (rs.next()) {
+
+                int rowcount = rs.getInt("cnt");
+                isValid = rowcount > 0;
+
+            }
+
+            rs.close();
+        } catch (QueryException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return isValid;
+    }
+
+    public void makeUnvailable(LendableCopy l) {
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+
+            q.update("lendablecopies");
+            q.set("available", q.quote("false"));
+            q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
+            db.execute();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

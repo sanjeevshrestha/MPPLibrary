@@ -69,7 +69,7 @@ public class CheckoutRecordDAO {
 
     }
 
-    public ArrayList<CheckoutRecord> searchMembers(String key, String value) {
+    public ArrayList<CheckoutRecord> searchCheckoutRecords(String key, String value) {
         ResultSet rs = null;
         try {
 
@@ -154,6 +154,7 @@ public class CheckoutRecordDAO {
                 q.column("due_date").value(r.calculateDueDateWithCheckoutDate(record.getCheckoutDate()).toString());
                 q.column("checked_in").value("false");
                 db.execute();
+                r.getBook().makeUnavailable();
                 
             }
 

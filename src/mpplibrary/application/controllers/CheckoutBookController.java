@@ -86,11 +86,18 @@ public class CheckoutBookController {
             String memberID = txtMemberID.getText();
             Member m = new Member(Integer.parseInt(memberID));
             if (m.isValid()) {
-                LocalDate dtCheckout = dtCheckoutDate.getValue();
-                List<CheckoutRecordEntry> entries = new ArrayList<>();
-                entries.addAll(this.bookList);
-                CheckoutRecord r = new CheckoutRecord(m, dtCheckout, entries);
-                r.save();
+                if (this.bookList.size() > 0) {
+                    LocalDate dtCheckout = dtCheckoutDate.getValue();
+                    List<CheckoutRecordEntry> entries = new ArrayList<>();
+                    entries.addAll(this.bookList);
+                    CheckoutRecord r = new CheckoutRecord(m, dtCheckout, entries);
+                    r.save();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("No Items to Checkout");
+                    alert.setContentText("Please add items to checkout. The checkout list is empty");
+                    alert.showAndWait();
+                }
 
             } else {
                 Alert alert = new Alert(AlertType.ERROR);
@@ -100,10 +107,12 @@ public class CheckoutBookController {
             }
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Invalid Checkout");
+            alert.setContentText("There are error with this checkout request. Please fill in all the fields");
+            alert.showAndWait();
         }
 
-        System.out.println("Clicked Checkout");
     }
 
     @FXML
@@ -133,13 +142,20 @@ public class CheckoutBookController {
 
                 CheckoutRecordEntry cp = new CheckoutRecordEntry(l, dtCheckout, Integer.parseInt(lendableDays));
                 if (cp.getBook().isValidCopy()) {
-                    cp.getBook().loadBookDetail();
-                    cp.setLendableDays(Integer.parseInt(lendableDays));
-                    cp.calculateDueDate();
-                    txtBookUniqueID.setText("");
-                    txtLendableDays.setText("");
+                    if (cp.getBook().isAvailable()) {
+                        cp.getBook().loadBookDetail();
+                        cp.setLendableDays(Integer.parseInt(lendableDays));
+                        cp.calculateDueDate();
+                        txtBookUniqueID.setText("");
+                        txtLendableDays.setText("");
 
-                    this.bookList.add(cp);
+                        this.bookList.add(cp);
+                    } else {
+                        Alert alert = new Alert(AlertType.ERROR);
+                        alert.setTitle("Not Available");
+                        alert.setContentText("The Copy you are tying to checkout is not available right now.");
+                        alert.showAndWait();
+                    }
 
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
@@ -155,7 +171,10 @@ public class CheckoutBookController {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Invalid Checkout Entry");
+            alert.setContentText("There are error with this checkout request. Please fill in all the fields");
+            alert.showAndWait();
         }
 
     }

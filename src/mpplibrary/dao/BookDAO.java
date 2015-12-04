@@ -115,12 +115,13 @@ public class BookDAO {
                 db.execute();
 
             }
-            
+
             for (LendableCopy l : b.getLendableCopies()) {
                 q = db.getQuery(true);
                 q.insert("lendablecopies");
                 q.column("book_id").value(String.valueOf(insertid));
                 q.column("uniqueid").value(String.valueOf(l.getUniqueID()));
+                q.column("available").value("true");
                 db.execute();
 
             }

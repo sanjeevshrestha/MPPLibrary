@@ -6,6 +6,7 @@
 package mpplibrary.base;
 
 import java.time.LocalDate;
+import mpplibrary.dao.CheckoutRecordEntryDAO;
 
 /**
  *
@@ -20,11 +21,14 @@ public class CheckoutRecordEntry {
     private LocalDate dueDate;
     private int lendableDays;
 
+    private CheckoutRecordEntryDAO dataAccess;
+
     public CheckoutRecordEntry(long ID, LendableCopy book, LocalDate checkoutDate, LocalDate dueDate) {
         this.ID = ID;
         this.book = book;
         this.checkoutDate = checkoutDate;
         this.dueDate = dueDate;
+        this.dataAccess = new CheckoutRecordEntryDAO();
     }
 
     public CheckoutRecordEntry(long ID, LendableCopy book, LocalDate checkoutDate, int lendableDays) {
@@ -32,16 +36,22 @@ public class CheckoutRecordEntry {
         this.book = book;
         this.checkoutDate = checkoutDate;
         this.lendableDays = lendableDays;
+        this.dataAccess = new CheckoutRecordEntryDAO();
+
     }
-    
-       public CheckoutRecordEntry(LendableCopy book, LocalDate checkoutDate, int lendableDays) {
+
+    public CheckoutRecordEntry(LendableCopy book, LocalDate checkoutDate, int lendableDays) {
         this.book = book;
         this.checkoutDate = checkoutDate;
         this.lendableDays = lendableDays;
+        this.dataAccess = new CheckoutRecordEntryDAO();
+
     }
 
     public CheckoutRecordEntry(long ID) {
         this.ID = ID;
+        this.dataAccess = new CheckoutRecordEntryDAO();
+
     }
 
     public long getID() {
@@ -91,9 +101,8 @@ public class CheckoutRecordEntry {
     public String getTitle() {
         return this.book.getTitle();
     }
-    
-    public long getUniqueID()
-    {
+
+    public long getUniqueID() {
         return this.book.getUniqueID();
     }
 
@@ -104,16 +113,15 @@ public class CheckoutRecordEntry {
     public void setLendableDays(int lendableDays) {
         this.lendableDays = lendableDays;
     }
-    
-    
-    public void calculateDueDate()
-    {
-        this.dueDate=this.checkoutDate.plusDays(this.lendableDays);
+
+    public void calculateDueDate() {
+        this.dueDate = this.checkoutDate.plusDays(this.lendableDays);
     }
-    
-    public LocalDate calculateDueDateWithCheckoutDate(LocalDate dt)
-    {
+
+    public LocalDate calculateDueDateWithCheckoutDate(LocalDate dt) {
         return dt.plusDays(this.lendableDays);
     }
+
+  
 
 }
