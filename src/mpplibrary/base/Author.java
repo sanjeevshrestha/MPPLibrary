@@ -14,4 +14,14 @@ public class Author extends Person {
     private String credentials;
     private String bio;
 
+    public Author(String firstName, String lastName, String email, String credentials, String bio) {
+        super(0, firstName, lastName, true, "", email, "");
+        this.credentials = credentials;
+        this.bio = bio;
+    }
+    
+    public String getAuthorFullName(){
+        return getFirstname() + " " + getLastname();
+    }
+
 }
