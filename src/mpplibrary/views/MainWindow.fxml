@@ -39,7 +39,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Admin">
                     <items>
-                        <MenuItem fx:id="onMenuAddNewUserSelected" mnemonicParsing="false" text="Add New User" />
+                        <MenuItem fx:id="addNewUserMenuItem" mnemonicParsing="false" onAction="#onAddNewUserMenuItemSelected" text="Add New User" />
+                  <MenuItem fx:id="listUserMenuItem" mnemonicParsing="false" onAction="#onListUserMenuItemClicked" text="List User(s)" />
                         <MenuItem fx:id="onMenuBackupDbSelected" mnemonicParsing="false" text="Backup DB" />
                         <MenuItem fx:id="onMenuInitializeSelected" mnemonicParsing="false" text="Initialize" />
                   <MenuItem mnemonicParsing="false" text="Options" />

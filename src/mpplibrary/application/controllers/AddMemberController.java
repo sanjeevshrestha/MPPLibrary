@@ -125,6 +125,4 @@ public class AddMemberController {
        this.listMembersController = memberListController;
        this.dialogStage = dialogStage;
     }
-
-
 }

@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author 984970
  */
-public class Query{
+public class Query {
 
     public static final int OP_SELECT = 1;
     public static final int OP_INSERT = 2;
@@ -28,16 +28,16 @@ public class Query{
     private String delete = "";
     private String insert = "";
     private String from = "";
-    private String limit="";
+    private String limit = "";
 
     private List<WhereString> where = new ArrayList<>();
     private List<String> join = new ArrayList<>();
     private List<String> group = new ArrayList<>();
     private List<String> order = new ArrayList<>();
-    private List<String> columns=new ArrayList<>();
-    private List<String> values=new ArrayList<>();
-    
-    private HashMap<String,String> set=new HashMap<String,String>();
+    private List<String> columns = new ArrayList<>();
+    private List<String> values = new ArrayList<>();
+
+    private HashMap<String, String> set = new HashMap<String, String>();
 
     private int operation = 1;
 
@@ -114,51 +114,45 @@ public class Query{
         return this;
     }
 
-    
-    public Query column(String column)
-    {
+    public Query column(String column) {
         this.columns.add(column);
         return this;
     }
-    
-    public Query value(String value)
-    {
+
+    public Query value(String value) {
         this.values.add(value);
         return this;
     }
-    
-    
-    public Query limit(String limit)
-    {
-        this.limit=limit;
+
+    public Query limit(String limit) {
+        this.limit = limit;
         return this;
     }
-    
-    public Query set(String key, String value)
-    {
+
+    public Query set(String key, String value) {
         this.set.put(key, value);
         return this;
     }
-    
+
     public String getQuery() {
         String sql = "";
         switch (this.operation) {
             case Query.OP_SELECT:
                 sql = getSelectQuery();
                 break;
-                
+
             case Query.OP_INSERT:
-                sql=getInsertQuery();
+                sql = getInsertQuery();
                 break;
-            
+
             case Query.OP_UPDATE:
-                sql=getUpdateQuery();
+                sql = getUpdateQuery();
                 break;
-                
+
             case Query.OP_DELETE:
-                sql=getDeleteQuery();
+                sql = getDeleteQuery();
                 break;
-                
+
         }
 
         return sql;
@@ -199,7 +193,7 @@ public class Query{
                 sb.append(this.group.get(i));
             }
         }
-        
+
         if (this.order.size() > 0) {
             sb.append(" ORDER BY ");
             sb.append(this.order.get(0));
@@ -208,9 +202,7 @@ public class Query{
             }
         }
 
-        
-        if(this.limit.length()!=0)
-        {
+        if (this.limit.length() != 0) {
             sb.append("LIMIT (");
             sb.append(this.limit);
             sb.append(")");
@@ -218,65 +210,58 @@ public class Query{
         return sb.toString();
 
     }
-    
-    
-    private String getInsertQuery() throws QueryException
-    {
-        if(this.columns.size()!=this.values.size()) throw new QueryException("Number of Columns and Values should be equal");
-        StringBuilder sb=new StringBuilder();
+
+    private String getInsertQuery() throws QueryException {
+        if (this.columns.size() != this.values.size()) {
+            throw new QueryException("Number of Columns and Values should be equal");
+        }
+        StringBuilder sb = new StringBuilder();
         sb.append("INSERT ");
         sb.append(" INTO ");
         sb.append(this.insert);
         sb.append(" (");
         sb.append(this.columns.get(0));
-        
-        for(int i=1;i<this.columns.size();i++)
-        {
-             sb.append(",");
+
+        for (int i = 1; i < this.columns.size(); i++) {
+            sb.append(",");
             sb.append(this.columns.get(i));
-           
+
         }
-        
+
         sb.append(")");
-       
+
         sb.append(" VALUES(");
-         sb.append(quote(this.values.get(0)));
-         for(int i=1;i<this.values.size();i++)
-        {
-             sb.append(",");
+        sb.append(quote(this.values.get(0)));
+        for (int i = 1; i < this.values.size(); i++) {
+            sb.append(",");
             sb.append(quote(this.values.get(i)));
-           
+
         }
-         sb.append(")");
-        
+        sb.append(")");
+
         return sb.toString();
     }
 
-    
-    private String getUpdateQuery() throws QueryException
-    {
-        StringBuilder sb=new StringBuilder();
+    private String getUpdateQuery() throws QueryException {
+        StringBuilder sb = new StringBuilder();
         sb.append("UPDATE ");
         sb.append(this.update);
         sb.append(" SET ");
-        
-        
-        Iterator<String> keyIterator=this.set.keySet().iterator();
-        int size=this.set.size();
-        int count=0;
-        
-        while(keyIterator.hasNext())
-        {
-            String key=keyIterator.next();
-            String value=this.set.get(key);
-            sb.append(key+"="+quote(value));
-            if(count<(size-1))
-            {
+
+        Iterator<String> keyIterator = this.set.keySet().iterator();
+        int size = this.set.size();
+        int count = 0;
+
+        while (keyIterator.hasNext()) {
+            String key = keyIterator.next();
+            String value = this.set.get(key);
+            sb.append(key + "=" + quote(value));
+            if (count < (size - 1)) {
                 sb.append(", ");
             }
             count++;
         }
-        
+
         if (this.where.size() > 0) {
             sb.append(" WHERE ");
             for (WhereString wStr : this.where) {
@@ -289,20 +274,18 @@ public class Query{
             }
 
         }
-        
+
         return sb.toString();
-        
+
     }
-    
-    
-    private String getDeleteQuery() throws QueryException
-    {
-        StringBuilder sb=new StringBuilder();
-        
+
+    private String getDeleteQuery() throws QueryException {
+        StringBuilder sb = new StringBuilder();
+
         sb.append("DELETE FROM ");
         sb.append(this.delete);
-        
-         if (this.where.size() > 0) {
+
+        if (this.where.size() > 0) {
             sb.append(" WHERE ");
             for (WhereString wStr : this.where) {
                 if (!wStr.getGlue().equals("")) {
@@ -314,12 +297,10 @@ public class Query{
             }
 
         }
-        
-        
+
         return sb.toString();
     }
-    
-    
+
     public String quote(String str) {
         return "\"" + str + "\"";
     }

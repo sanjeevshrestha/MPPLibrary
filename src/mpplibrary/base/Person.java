@@ -12,7 +12,6 @@ package mpplibrary.base;
 abstract public class Person {
 
     private long ID;
-
     private String firstname = "";
     private String lastname = "";
     private String note = "";
@@ -66,6 +65,19 @@ abstract public class Person {
         this.state = state;
         this.zip = zip;
 
+    }
+
+    public Person(long id, String firstname, String lastname, String email, boolean active, String phone, String address, String city, String state, String zip) {
+        this.ID = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.active = active;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
     }
 
     public long getID() {
@@ -168,22 +180,22 @@ abstract public class Person {
         StringBuilder sb = new StringBuilder();
         if (this.address != null && this.address.length() != 0) {
             sb.append(this.address);
-            sb.append(",");
+            sb.append(", ");
         }
 
         if (this.city != null && this.city.length() != 0) {
             sb.append("\n");
             sb.append(this.city);
-            sb.append(",");
+            sb.append(", ");
         }
         if (this.state != null && this.state.length() != 0) {
             sb.append(this.state);
-            sb.append(",");
+            sb.append(", ");
         }
 
         if (this.zip != null && this.zip.length() != 0) {
             sb.append(this.zip);
-            sb.append(",");
+            sb.append(", ");
         }
 
         return sb.toString();

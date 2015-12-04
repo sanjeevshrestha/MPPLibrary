@@ -41,24 +41,23 @@ public class Member extends Person {
         this.dataAccess = new MemberDAO();
 
     }
-    
-    public Member(long ID, String firstname, String lastname, boolean active, double amt,String email, String phone, String mobile,String note,String address,String city, String state, String zip) {
-        super(ID, firstname, lastname, active,email,phone,mobile,note,address,city,state,zip);
+
+    public Member(long ID, String firstname, String lastname, boolean active, double amt, String email, String phone, String mobile, String note, String address, String city, String state, String zip) {
+        super(ID, firstname, lastname, active, email, phone, mobile, note, address, city, state, zip);
         this.amount_due = amt;
         this.dataAccess = new MemberDAO();
 
     }
 
     public boolean loadMember() {
-        
+
         this.dataAccess.loadMember(this);
 
         return true;
 
     }
-    
-    public boolean saveMember()
-    {
+
+    public boolean saveMember() {
         return this.dataAccess.saveMember(this);
     }
 
@@ -69,7 +68,5 @@ public class Member extends Person {
     public void setAmountDue(double amount_due) {
         this.amount_due = amount_due;
     }
-    
-  
 
 }

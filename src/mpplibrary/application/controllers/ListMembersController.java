@@ -59,7 +59,7 @@ public class ListMembersController {
     private ObservableList<Member> filteredMembersList;
 
     private MemberModel memberModel;
-
+    
     @FXML
     public void initialize() {
         membersList = FXCollections.observableArrayList();
@@ -177,7 +177,6 @@ public class ListMembersController {
             fxTxtPhone.setText(m.getPhone());
             fxTxtAddress.setText(m.getFullAddress());
             System.out.println(m.getEmail());
-
         }
     }
 }

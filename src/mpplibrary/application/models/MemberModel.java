@@ -6,7 +6,6 @@
 package mpplibrary.application.models;
 
 import java.util.ArrayList;
-import mpplibrary.base.Address;
 import mpplibrary.base.Member;
 import mpplibrary.dao.MemberDAO;
 
@@ -15,6 +14,7 @@ import mpplibrary.dao.MemberDAO;
  * @author 984970
  */
 public class MemberModel {
+
     private static MemberModel instance;
 
     static {
@@ -31,7 +31,7 @@ public class MemberModel {
 
         try {
             MemberDAO md = new MemberDAO();
-             members = md.getMembers();
+            members = md.getMembers();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -53,22 +53,17 @@ public class MemberModel {
         }
 
         return members;
-
-        
-        
     }
-    
-    
-    public boolean save(long ID, String firstname, String lastname, boolean active, double amt,String email, String phone, String mobile,String note,String address, String city, String state, String zip)
-    {
-        Member m=new Member(ID,firstname, lastname, active, amt, email,  phone,  mobile, note,address,city,state,zip);
-       return m.saveMember();
-        
+
+    public boolean save(long ID, String firstname, String lastname, boolean active, double amt, String email, String phone, String mobile, String note, String address, String city, String state, String zip) {
+        Member m = new Member(ID, firstname, lastname, active, amt, email, phone, mobile, note, address, city, state, zip);
+        return m.saveMember();
+
     }
 
     public static void main(String[] args) {
         BookModel bm = new BookModel();
         bm.searchBooks("ISBN", "test");
     }
-    
+
 }

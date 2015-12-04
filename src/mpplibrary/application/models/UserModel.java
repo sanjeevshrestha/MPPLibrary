@@ -5,10 +5,13 @@
  */
 package mpplibrary.application.models;
 
+import java.util.ArrayList;
+import java.util.Date;
 import mpplibrary.MPPLibraryFactory;
 import mpplibrary.base.roles.Admin;
 import mpplibrary.base.roles.Librarian;
 import mpplibrary.base.roles.User;
+import mpplibrary.dao.UserDAO;
 
 /**
  *
@@ -31,7 +34,7 @@ public class UserModel {
         User u = new User(username, password);
         if (u.login()) {
             String role = u.getRole();
-            User lUser=null;
+            User lUser = null;
             switch (role) {
                 case "admin":
                     lUser = new Admin(username, password);
@@ -43,13 +46,27 @@ public class UserModel {
             }
             MPPLibraryFactory.setLoggedInUser(lUser);
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
+    }
 
+    public boolean save(long ID, String firstname, String lastname, String email, String username, String password, String role, Date createdDate, long createdBy, Date modifiedDate, long modifiedBy, boolean active, String phone, String address, String city, String state, String zip) {
+        User user = new User(0, firstname, lastname, email, username, password, role, createdDate, createdBy, modifiedDate, modifiedBy, true, phone, address, city, state, zip);
+        return user.saveMember();
     }
     
-  
+    public ArrayList<User> getUsers(){
+        ArrayList<User> users = new ArrayList<>();
+        
+        try {
+            UserDAO dao = new UserDAO();
+            users = dao.getUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return users;
+    }
+
 }
