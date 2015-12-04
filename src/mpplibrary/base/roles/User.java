@@ -5,7 +5,9 @@
  */
 package mpplibrary.base.roles;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import mpplibrary.base.Person;
 import mpplibrary.dao.UserDAO;
 
@@ -25,16 +27,23 @@ public class User extends Person implements Role {
     private Date lastlogin;
     private UserDAO dataAccess;
 
+    private List<Role> roles;
+
     public User() {
+        roles = new ArrayList<>();
         this.dataAccess = new UserDAO();
     }
 
     public User(long id) {
         super(id);
+        roles = new ArrayList<>();
+
         this.dataAccess = new UserDAO();
     }
 
     public User(String username, String password) {
+        roles = new ArrayList<>();
+
         this.username = username;
         this.password = password;
         this.dataAccess = new UserDAO();
@@ -50,12 +59,16 @@ public class User extends Person implements Role {
         this.modifiedDate = modifiedDate;
         this.modifiedBy = modifiedBy;
         this.dataAccess = new UserDAO();
+        roles = new ArrayList<>();
+
     }
 
     public User(long id, String firstname, String lastname, String email, boolean active, String address, String phone, Date lastLoggedIn, String city, String state, String zip) {
         super(id, firstname, lastname, email, active, phone, address, city, state, zip);
         this.lastlogin = lastLoggedIn;
         this.dataAccess = new UserDAO();
+        roles = new ArrayList<>();
+
     }
 
     public Date getLastlogin() {
@@ -145,64 +158,119 @@ public class User extends Person implements Role {
 
     }
 
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+
     @Override
     public boolean canLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canLogin();
+        }
+        return ret;
     }
 
     @Override
     public boolean canAddBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canAddBook();
+        }
+        return ret;
     }
 
     @Override
     public boolean canEditBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canEditBook();
+        }
+        return ret;
     }
 
     @Override
     public boolean canDeleteBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canDeleteBook();
+        }
+        return ret;
     }
 
     @Override
     public boolean canCheckoutBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canCheckoutBook();
+        }
+        return ret;
     }
 
     @Override
     public boolean canCheckinBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canCheckinBook();
+        }
+        return ret;
     }
 
     @Override
     public boolean canAddMember() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canAddMember();
+        }
+        return ret;
     }
 
     @Override
     public boolean canEditMember() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canEditMember();
+        }
+        return ret;
     }
 
     @Override
     public boolean canDeleteMember() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canDeleteMember();
+        }
+        return ret;
     }
 
     @Override
     public boolean canAddAuthor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canAddAuthor();
+        }
+        return ret;
     }
 
     @Override
     public boolean canDeleteAuthor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canDeleteAuthor();
+        }
+        return ret;
     }
 
     @Override
     public boolean canEditAuthor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ret = false;
+        for (Role r : this.roles) {
+            ret = ret || r.canEditAuthor();
+        }
+        return ret;
     }
 
 }

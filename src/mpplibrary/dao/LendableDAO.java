@@ -39,14 +39,14 @@ public class LendableDAO {
 
             Query q = db.getQuery(true);
             q.select("l.uniqueid").from("lendablecopies as l");
-            q.join("LEFT", "books as b", " b.id=l.bookid");
+            q.join("LEFT", "books as b", " b.id=l.book_id");
 
             q.where("b.isbn=" + q.quote(String.valueOf(isbn)));
             System.out.println(q.getQuery());
             rs = db.getResultSet();
             while (rs.next()) {
                 LendableCopy b;
-                b = new LendableCopy(rs.getLong("uniqueid"), rs.getLong("bookid"), rs.getString("title"), rs.getString("isbn"), rs.getBoolean("available"));
+                b = new LendableCopy(rs.getLong("uniqueid"), rs.getLong("book_id"), rs.getString("title"), rs.getString("isbn"), rs.getBoolean("available"));
                 copies.add(b);
             }
 
@@ -67,7 +67,7 @@ public class LendableDAO {
 
             Query q = db.getQuery(true);
             q.select("l.uniqueid,b.*").from("lendablecopies as l");
-            q.join("LEFT", "books as b", " b.id=l.bookid");
+            q.join("LEFT", "books as b", " b.id=l.book_id");
 
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
             System.out.println(q.getQuery());
@@ -98,14 +98,12 @@ public class LendableDAO {
             q.select("count(*) as cnt").from("lendablecopies as l");
 
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
-            System.out.println(q.getQuery());
             rs = db.getResultSet();
             
             while (rs.next()) {
                 
                 int rowcount=rs.getInt("cnt");
                 isValid=rowcount>0;
-                System.out.println("Count"+rowcount);
 
             }
 

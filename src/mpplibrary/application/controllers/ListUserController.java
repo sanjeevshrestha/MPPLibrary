@@ -191,7 +191,7 @@ public class ListUserController {
     void refreshListData() {
         usersList.clear();
         usersList.addAll(userModel.getUsers());
-        usersList.clear();
+        filteredUsersList.clear();
         filteredUsersList.addAll(usersList);
         tblViewUsers.setItems(filteredUsersList);
         txtSearchQuery.setText("");
