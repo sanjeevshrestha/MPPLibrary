@@ -110,4 +110,14 @@ public class MenuController {
 //        memberController = new MemberController(mainFramePane);
         windowFrame = LoadWindowFrame.getInstance(mainFramePane);
     }
+    
+    @FXML
+    protected void onAddNewUserMenuItemSelected(ActionEvent event){
+        windowFrame.setSceneAddUser();
+    }
+    
+    @FXML
+    protected void onListUserMenuItemClicked(ActionEvent event){
+        windowFrame.setSceneListUsers();
+    }
 }

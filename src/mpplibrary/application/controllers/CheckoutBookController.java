@@ -5,84 +5,102 @@
  */
 package mpplibrary.application.controllers;
 
+import java.time.LocalDate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import mpplibrary.helper.LoadWindowFrame;
+import javafx.util.Callback;
+import mpplibrary.base.LendableCopy;
 
 /**
- * FXML Controller class
  *
- * @author Anish
+ * @author user
  */
 public class CheckoutBookController {
 
     @FXML
-    TextField filterStudentTxt, studentIdTxt, bookUniqueIdTxt, landableDaysTxt;
+    TextField txtStudentID, txtBookUniqueID, txtLendableDays;
 
     @FXML
-    DatePicker checkOutDate;
+    DatePicker dtCheckoutDate;
 
     @FXML
-    TableView checkedoutBookTable, checkedOutBookDetailsTable, bookAddedTable;
+    TableColumn tblColumnUniqueID, tblColumnBookTitle, tblColumnDueDate;
 
     @FXML
-    TableColumn studentIDColumn, checkOutDateColumn;
+    Button btnCheckout, btnAddBook,btnCancel;
 
-    @FXML
-    TableColumn bookIdColumn, dueDateColumn, fineColumn;
+    private ObservableList<LendableCopy> bookList;
 
-    @FXML
-    TableColumn bookUniqueIdColumn, bookTitleColumn, checkOutDueDateColumn;
+    private ListCheckoutsController listCheckoutController;
 
-    /**
-     * Initializes the controller class.
-     */
+    private Stage dialogStage;
+
+    Callback<TableColumn<LendableCopy, Object>, TableCell<LendableCopy, Object>> cellFactory;
+
+    public void setCheckoutListController(ListCheckoutsController controller, Stage dialogStage) {
+        this.listCheckoutController = controller;
+        this.dialogStage = dialogStage;
+    }
+
     @FXML
     public void initialize() {
-        // TODO
+        bookList = FXCollections.observableArrayList();
+        tblColumnUniqueID.setCellValueFactory(new PropertyValueFactory<LendableCopy, Object>("uniqueID"));
+        tblColumnUniqueID.setCellFactory(cellFactory);
+        tblColumnBookTitle.setCellValueFactory(new PropertyValueFactory<LendableCopy, Object>("title"));
+        tblColumnBookTitle.setCellFactory(cellFactory);
+        tblColumnDueDate.setCellValueFactory(new PropertyValueFactory<LendableCopy, Object>("dueDate"));
+        tblColumnDueDate.setCellFactory(cellFactory);
+
     }
 
     @FXML
-    protected void onNewCheckoutBttnClicked(ActionEvent event) {
+    public void onBtnCheckoutClicked(ActionEvent e) {
+
+        System.out.println("Clicked Checkout");
+    }
+
+    @FXML
+    public void onBtnAddBookClicked(ActionEvent e) {
+
         try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/CheckOutBooks.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            String uniqueID = txtBookUniqueID.getText();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Checkout Books");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.initOwner();
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+            String lendableDays = txtLendableDays.getText();
 
-            // Set the add book window into the controller.
-//            ((BookController) loader.getController()).initialize();
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
+            LocalDate dtCheckout = dtCheckoutDate.getValue();;
+            if (dtCheckout == null) {
+                dtCheckout = LocalDate.now();
+            }
+
+            LendableCopy cp = new LendableCopy(Integer.parseInt(uniqueID), Integer.parseInt(lendableDays));
+            if (cp.isValidCopy()) {
+                cp.loadBookDetail();
+                cp.calculateDueDate(dtCheckout);
+                this.bookList.add(cp);
+                System.out.println("isValid");
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Invalid Copy");
+                alert.setContentText("The Copy you are tying to checkout is invalid. Please check the uniqueID and try again");
+                alert.showAndWait();
+            }
+            
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-    }
-
-    @FXML
-    protected void onAddBookBttnClicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    protected void onCheckoutBttnClicked(ActionEvent event) {
 
     }
 

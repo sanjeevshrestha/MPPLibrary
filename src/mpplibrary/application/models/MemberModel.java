@@ -53,7 +53,6 @@ public class MemberModel {
         }
 
         return members;
-
     }
 
     public boolean save(long ID, String firstname, String lastname, boolean active, double amt, String email, String phone, String mobile, String note, String address, String city, String state, String zip) {
@@ -61,14 +60,14 @@ public class MemberModel {
         return m.saveMember();
 
     }
-    
-    public boolean delete(long ID)
-    {
-        Member m=new Member(ID);
-        return m.delete();
+
+    public static void main(String[] args) {
+        BookModel bm = new BookModel();
+        bm.searchBooks("ISBN", "test");
     }
 
- 
-
-
+    public boolean delete(long ID) {
+        Member m = new Member(ID);
+        return m.delete();
+    }
 }

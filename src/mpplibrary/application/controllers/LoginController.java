@@ -49,14 +49,11 @@ public class LoginController {
         if (um.login(userName, password)) {
             loadHomeScreen();
             User loggedUser = MPPLibraryFactory.getLoggedInUser();
-            System.out.println(loggedUser.canCheckoutBook());
-            System.out.println(loggedUser.canAddAuthor());
 
         } else {
-            
-                     txtLoginInfo.setText("Login unsuccessfull");
+
+            txtLoginInfo.setText("Login unsuccessfull");
             txtLoginInfo.setVisible(true);
-            System.out.println("Login unsuccessfull");
         }
 
         //get userName and password from the directory and match and show appropriate login

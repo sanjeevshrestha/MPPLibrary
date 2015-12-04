@@ -22,7 +22,7 @@ import mpplibrary.rulesets.RuleSetFactory;
 public class AddMemberController {
 
     @FXML
-    TextField txtMemberId, txtFirstName, txtLastName, txtAddress, txtCity, txtState, txtZip, txtPhone, txtEmail;
+    TextField  txtFirstName, txtLastName, txtAddress, txtCity, txtState, txtZip, txtPhone, txtEmail;
 
     @FXML
     Label errorLabel;
@@ -42,10 +42,7 @@ public class AddMemberController {
     private Stage dialogStage;
     
     public void initialize() {
-        //errorLabel = new Label("");
-        Tooltip toolTip = new Tooltip("Member id must be numeric");
-        txtMemberId.setTooltip(toolTip);
-
+  
         Tooltip nameToolTip = new Tooltip("Name must not be empty");
         txtFirstName.setTooltip(nameToolTip);
     }
@@ -53,7 +50,6 @@ public class AddMemberController {
     @FXML
     protected void onAddMemberClicked() {
 
-        this.memberId = txtMemberId.getText();
         this.firstName = txtFirstName.getText();
         this.lastName = txtLastName.getText();
         this.address = txtAddress.getText();
@@ -81,9 +77,9 @@ public class AddMemberController {
         }
     }
 
-    public TextField getMemberComponent() {
-        return txtMemberId;
-    }
+//    public TextField getMemberComponent() {
+//        return txtMemberId;
+//    }
 
     public TextField getFirstNameComponent() {
         return txtFirstName;
@@ -125,6 +121,4 @@ public class AddMemberController {
        this.listMembersController = memberListController;
        this.dialogStage = dialogStage;
     }
-
-
 }
