@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import mpplibrary.MPPLibraryFactory;
 import mpplibrary.base.CheckoutRecord;
 import mpplibrary.base.CheckoutRecordEntry;
@@ -54,7 +55,7 @@ public class CheckoutRecordDAO {
                 Member m = new Member(rs.getInt("checkout_by"));
                 m.loadMember();
 
-                LocalDate ld = LocalDate.parse(rs.getString("created"));
+                LocalDate ld = LocalDate.parse(rs.getString("checkout_date"));
                 r = new CheckoutRecord(rs.getLong("id"), ld, m);
                 this.records.add(r);
             }
@@ -88,7 +89,7 @@ public class CheckoutRecordDAO {
                 CheckoutRecord r;
                 Member m = new Member(rs.getInt("checkout_by"));
                 m.loadMember();
-                LocalDate ld = LocalDate.parse(rs.getString("created"));
+                LocalDate ld = LocalDate.parse(rs.getString("checkout_date"));
                 r = new CheckoutRecord(rs.getLong("id"), ld, m);
                 this.records.add(r);
             }
@@ -148,20 +149,48 @@ public class CheckoutRecordDAO {
 
                 q.insert("recordentries");
                 q.column("checkout_record_id").value(String.valueOf(insertid));
-                q.column("lendable_id").value(String.valueOf(r.getBook().getID()));
+                q.column("lendable_id").value(String.valueOf(r.getBook().getUniqueID()));
                 q.column("checkout_date").value(record.getCheckoutDate().toString());
-                
+
                 q.column("due_date").value(r.calculateDueDateWithCheckoutDate(record.getCheckoutDate()).toString());
                 q.column("checked_in").value("false");
                 db.execute();
                 r.getBook().makeUnavailable();
-                
+
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public void load(CheckoutRecord r) {
+
+        List<CheckoutRecordEntry> entries=new ArrayList<>();
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+            q.select("*").from("recordentries");
+            q.where("checkout_record_id="+q.quote(String.valueOf(r.getID())));
+            ResultSet rs=db.getResultSet();
+            while(rs.next())
+            {
+                LendableCopy l=new LendableCopy(rs.getLong("lendable_id"));
+                l.loadBookDetail();
+                CheckoutRecordEntry e=new CheckoutRecordEntry(l,LocalDate.parse(rs.getString("checkout_date")));
+                e.setDueDate(LocalDate.parse(rs.getString("due_date")));
+                entries.add(e);
+               // r.addRecordEntry(e);
+            }
+            r.setCheckoutItems(entries);
+            
+            
+
+        } catch (Exception e) {
+        }
+
+        
     }
 
 }

@@ -92,6 +92,9 @@ public class CheckoutBookController {
                     entries.addAll(this.bookList);
                     CheckoutRecord r = new CheckoutRecord(m, dtCheckout, entries);
                     r.save();
+                    this.dialogStage.close();
+                    this.listCheckoutController.refreshListData();
+                    
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("No Items to Checkout");

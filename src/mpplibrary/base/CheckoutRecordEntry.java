@@ -48,9 +48,20 @@ public class CheckoutRecordEntry {
 
     }
 
+    public CheckoutRecordEntry(LendableCopy book, LocalDate checkoutDate) {
+        this.book = book;
+        this.checkoutDate = checkoutDate;
+        this.dataAccess = new CheckoutRecordEntryDAO();
+
+    }
+
     public CheckoutRecordEntry(long ID) {
         this.ID = ID;
         this.dataAccess = new CheckoutRecordEntryDAO();
+
+    }
+
+    public CheckoutRecordEntry() {
 
     }
 
@@ -90,12 +101,12 @@ public class CheckoutRecordEntry {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
+    public String getDueDateInString() {
+        return dueDate.toString();
     }
 
-    public CheckoutRecordEntry() {
-
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public String getTitle() {
@@ -122,6 +133,8 @@ public class CheckoutRecordEntry {
         return dt.plusDays(this.lendableDays);
     }
 
-  
+    public String getFine() {
+        return "$0.00";
+    }
 
 }

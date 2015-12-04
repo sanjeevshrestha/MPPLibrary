@@ -150,8 +150,10 @@ public class LendableDAO {
             Query q = db.getQuery(true);
 
             q.update("lendablecopies");
-            q.set("available", q.quote("false"));
+            q.set("available", "false");
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
+            
+            System.out.println(q.getQuery());
             db.execute();
 
         } catch (Exception e) {
