@@ -20,11 +20,14 @@ public class CheckoutRecord {
     private LocalDate checkoutDate;
 
     public CheckoutRecord() {
+        this.ID=0;
+        this.checkoutDate=LocalDate.now();
     }
 
-    public CheckoutRecord(long ID, Member member) {
+    public CheckoutRecord(long ID, LocalDate cd, Member member) {
         this.ID = ID;
         this.checkedOutBy = member;
+        this.checkoutDate=cd;
 
     }
 
@@ -66,6 +69,16 @@ public class CheckoutRecord {
 
     public void setCheckoutDate(LocalDate checkoutDate) {
         this.checkoutDate = checkoutDate;
+    }
+    
+    public String getMembername()
+    {
+        return this.checkedOutBy.getFullname();
+    }
+    
+    public String getStringCheckoutdate()
+    {
+        return checkoutDate.toString();
     }
 
     private List<CheckoutRecordEntry> checkoutItems;

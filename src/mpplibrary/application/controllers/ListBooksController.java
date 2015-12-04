@@ -51,6 +51,7 @@ public class ListBooksController {
     private ObservableList<Book> filteredBooksList;
 
     private BookModel bookModel;
+    
 
     @FXML
     public void initialize() {
@@ -132,10 +133,10 @@ public class ListBooksController {
         };
     }
 
-    class MyStringTableCell extends TableCell<Book, String> {
+    class MyStringTableCell extends TableCell<Book, Object> {
 
         @Override
-        public void updateItem(String item, boolean empty) {
+        public void updateItem(Object item, boolean empty) {
             super.updateItem(item, empty);
             setText(empty ? null : getString());
             setGraphic(null);

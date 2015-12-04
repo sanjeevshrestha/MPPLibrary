@@ -237,7 +237,6 @@ public class ListMembersController {
             fxTxtPhone.setText(m.getPhone());
             fxTxtAddress.setText(m.getFullAddress());
 
-            System.out.println(m.getEmail());
             selectedMemberPosition = index;
 
         }

@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import mpplibrary.MPPLibraryFactory;
+import mpplibrary.base.Author;
 import mpplibrary.base.Book;
+import mpplibrary.base.LendableCopy;
 import mpplibrary.base.roles.User;
 import mpplibrary.database.Database;
 import mpplibrary.database.DatabaseFactory;
@@ -102,8 +104,27 @@ public class BookDAO {
             q.column("created_by").value(String.valueOf(u.getID()));
             q.column("available").value(String.valueOf(b.isAvailable()));
             q.column("description").value(String.valueOf(b.getDescription()));
+            q.column("type").value(b.getType());
 
-            db.execute();
+            long insertid = db.execute();
+            for (Author a : b.getAuthors()) {
+                q = db.getQuery(true);
+                q.insert("books_authors");
+                q.column("book_id").value(String.valueOf(insertid));
+                q.column("author_id").value(String.valueOf(a.getID()));
+                db.execute();
+
+            }
+            
+            for (LendableCopy l : b.getLendableCopies()) {
+                q = db.getQuery(true);
+                q.insert("lendablecopies");
+                q.column("book_id").value(String.valueOf(insertid));
+                q.column("uniqueid").value(String.valueOf(l.getUniqueID()));
+                db.execute();
+
+            }
+
             return true;
 
         } catch (Exception e) {

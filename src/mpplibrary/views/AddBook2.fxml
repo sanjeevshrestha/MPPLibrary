@@ -3,12 +3,13 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.AddBookController">
+<AnchorPane id="AnchorPane" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.AddBookController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,14 +43,22 @@
                                     <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="177.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="ISBN*" GridPane.rowIndex="2" />
+                                    <Label fx:id="fxLblIsbn" text="ISBN*" GridPane.rowIndex="2" />
                                     <TextField fx:id="fxTxtIsbn" GridPane.rowIndex="3" />
                                     <Label text="Title*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <TextField fx:id="fxTxtTitle" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Label text="Description" GridPane.rowIndex="4" />
                                     <TextArea fx:id="fxTxtDescription" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                                     <Label text="Publication Type" />
-                                    <ComboBox prefHeight="27.0" prefWidth="202.0" promptText="Select Publication Type" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="fxComboPublicationType" prefHeight="27.0" prefWidth="202.0" promptText="Select Publication Type" GridPane.rowIndex="1">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Book" />
+                                                <String fx:value="Periodicals" />
+                                                <String fx:value="Others" />
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
                                  </children>
                               </GridPane>
                            </children>
@@ -76,9 +85,9 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <TableView prefHeight="380.0" prefWidth="200.0">
+                                                      <TableView fx:id="fxTblAuthors" prefHeight="380.0" prefWidth="200.0">
                                                         <columns>
-                                                          <TableColumn prefWidth="176.0" text="Name" />
+                                                          <TableColumn fx:id="tblColumnAuthorName" prefWidth="184.0" text="Name" />
                                                         </columns>
                                                          <columnResizePolicy>
                                                             
@@ -121,18 +130,18 @@
                                                          </font>
                                                       </Label>
                                                       <ComboBox prefHeight="27.0" prefWidth="250.0" promptText="Select Author" GridPane.columnIndex="1" />
-                                                      <Label text="First Name" GridPane.rowIndex="2" />
-                                                      <Label text="Last Name" GridPane.rowIndex="3" />
+                                                      <Label text="First Name*" GridPane.rowIndex="2" />
+                                                      <Label text="Last Name*" GridPane.rowIndex="3" />
                                                       <Label text="Email" GridPane.rowIndex="4" />
                                                       <Label alignment="TOP_LEFT" text="Credentials" GridPane.rowIndex="5" />
                                                       <Label text="Short Bio" GridPane.rowIndex="6" />
                                                       <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="2" />
-                                                      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                      <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                      <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                      <TextField prefHeight="67.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                                                      <TextArea prefHeight="49.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-                                                      <Button mnemonicParsing="false" text="Save New Author" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                      <TextField fx:id="fxTxtAuthorFirstName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="fxTxtAuthorLastName" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="fxTxtAuthorEmail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                      <TextField fx:id="fxTxtAuthorCredentials" prefHeight="67.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                                                      <TextArea fx:id="fxTxtAuthorBio" prefHeight="49.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                                                      <Button fx:id="fxBtnAddAuthor" mnemonicParsing="false" onAction="#onBtnAddAuthorClicked" text="Save New Author" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                                    </children>
                                                 </GridPane>
                                              </children>
@@ -173,20 +182,20 @@
                                              </font>
                                           </Label>
                                           <Label text="Unique ID" GridPane.rowIndex="1" />
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <TextField fx:id="fxTxtLendableCopyId" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets />
                                              </GridPane.margin>
                                           </TextField>
-                                          <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <Button fx:id="fxBtnAddLendable" mnemonicParsing="false" onAction="#onBtnAddLendableClicked" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </GridPane>
-                                    <TableView prefHeight="290.0" prefWidth="200.0">
+                                    <TableView fx:id="fxTblLendableIds" prefHeight="290.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="577.0" text="Copy Unique ID" />
+                                        <TableColumn fx:id="fxTblColumnLendableId" prefWidth="588.0" text="Copy Unique ID" />
                                       </columns>
                                        <columnResizePolicy>
                                           

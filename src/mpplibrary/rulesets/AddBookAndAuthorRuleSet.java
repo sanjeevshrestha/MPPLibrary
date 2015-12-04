@@ -7,7 +7,6 @@ package mpplibrary.rulesets;
 
 import mpplibrary.application.controllers.AddBookController;
 
-
 /**
  *
  * @author Anish
@@ -18,8 +17,8 @@ public class AddBookAndAuthorRuleSet implements RuleSet {
     public void applyRules(Object o) throws RuleException {
         AddBookController bc = (AddBookController) o;
         bc.getFxLabelError().setText("");
-//        bc.getTxtIsbn().setStyle("");
-//        bc.getTxtNoOfCopies().setStyle("");
+        bc.getFxTxtIsbn().setStyle("");
+        bc.getFxTxtTitle().setStyle("");
 //        bc.getTxtBookTitle().setStyle("");
 //        bc.getTxtFirstName().setStyle("");
 //        bc.getTxtLastName().setStyle("");
@@ -47,22 +46,30 @@ public class AddBookAndAuthorRuleSet implements RuleSet {
     }
 
     private void checkEmptyFields(AddBookController bc) throws RuleException {
-        if (bc.getIsbn().length() == 0) {
+        if (bc.getFxComboPublicationType().getSelectionModel().getSelectedItem() == null) {
+            throw new RuleException("Select a publication type", null);
+        }
+
+        System.out.println(bc.getFxComboPublicationType().getSelectionModel().getSelectedItem());
+        if (((String) bc.getFxComboPublicationType().getSelectionModel().getSelectedItem()).equalsIgnoreCase(AddBookController.PUBLICATION_TYPE_BOOK) && bc.getIsbn().length() == 0) {
+            System.out.println("throw isbn error");
             throw new RuleException("ISBN cannot be empty.", bc.getFxTxtIsbn());
         }
 
         if (bc.getTitle().length() == 0) {
-            throw new RuleException("First Name cannot be empty.", bc.getFxTxtTitle());
+            throw new RuleException("Book title cannot be empty.", bc.getFxTxtTitle());
+        }
+
+        if (bc.getLendableCopiesList().isEmpty()) {
+            throw new RuleException("Add Lendable copies", null);
         }
 
 //        if (bc.get.length() == 0) {
 //            throw new RuleException("Last Name cannot be empty.", bc.getTxtLastName());
 //        }
-
 //        if (bc.getTxtStreet().getText().length() == 0) {
 //            throw new RuleException("Street cannot be empty.", bc.getTxtStreet());
 //        }
-
 //        if (bc.getTxtCity().getText().length() == 0) {
 //            throw new RuleException("City cannot be empty.", bc.getTxtCity());
 //        }
