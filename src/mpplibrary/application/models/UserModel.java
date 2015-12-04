@@ -20,7 +20,7 @@ import mpplibrary.dao.UserDAO;
 public class UserModel {
 
     private static UserModel instance;
-    
+
     static {
         instance = new UserModel();
     }
@@ -37,14 +37,20 @@ public class UserModel {
             User lUser = null;
             switch (role) {
                 case "admin":
-                    lUser = new Admin(username, password);
+                    u.addRole(new Admin());
                     break;
                 case "librarian":
-                    lUser = new Librarian(username, password);
+                    u.addRole(new Librarian());
 
                     break;
+                case "both":
+                    u.addRole(new Admin());
+                    u.addRole(new Librarian());
+
+                    break;
+
             }
-            MPPLibraryFactory.setLoggedInUser(lUser);
+            MPPLibraryFactory.setLoggedInUser(u);
             return true;
         } else {
             return false;
@@ -55,20 +61,20 @@ public class UserModel {
         User user = new User(0, firstname, lastname, email, username, password, role, createdDate, createdBy, modifiedDate, modifiedBy, true, phone, address, city, state, zip);
         return user.saveMember();
     }
-    
-    public ArrayList<User> getUsers(){
+
+    public ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
-        
+
         try {
             UserDAO dao = new UserDAO();
             users = dao.getUsers();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return users;
     }
-    
+
     public boolean delete(long ID) {
         User m = new User(ID);
         return m.delete();
