@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import mpplibrary.application.controllers.LoginController;
 import mpplibrary.application.controllers.MenuController;
 import mpplibrary.helper.DataHelper;
+import mpplibrary.helper.LoadWindowFrame;
 import mpplibrary.interfaces.OnLoginSuccessListener;
 
 /**
@@ -28,7 +29,7 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener {
 
     @Override
     public void start(Stage primaryStage) {
-
+        
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/Login.fxml"));
