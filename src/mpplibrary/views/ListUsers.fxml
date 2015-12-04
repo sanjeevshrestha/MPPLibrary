@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="739.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="mpplibrary.application.controllers.ListUserController">
+<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="739.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListUserController">
     <stylesheets>
         <URL value="@/mpplibrary/views/css/listusers.css" />
     </stylesheets>
@@ -27,8 +27,8 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" text="Add New User" />
-                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="addNewUserBttn" mnemonicParsing="false" onAction="#onAddNewUserBttnClicked" text="Add New User" />
+                              <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#onDeleteBttnClicked" text="Delete" />
                            </items>
                         </ToolBar>
                         <GridPane>

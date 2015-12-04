@@ -9,64 +9,66 @@ package mpplibrary.base.roles;
  *
  * @author 984970
  */
-public class Librarian extends User implements Role {
-    
-     public Librarian()
-    {
-        super();
-    }
-    
-    public Librarian(String username,String password)
-    {
-        super(username,password);
-    }
+public class Librarian implements Role {
 
     @Override
     public boolean canLogin() {
-return true;     }
+        return true;
+    }
 
     @Override
     public boolean canAddBook() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canEditBook() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canDeleteBook() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canCheckoutBook() {
-return true;     }
+        return true;
+    }
 
     @Override
     public boolean canCheckinBook() {
-return true;     }
+        return true;
+    }
 
     @Override
     public boolean canAddMember() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canEditMember() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canDeleteMember() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canAddAuthor() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canDeleteAuthor() {
-return false;    }
+        return false;
+    }
 
     @Override
     public boolean canEditAuthor() {
-return false;    }
-    
+        return false;
+    }
+
 }

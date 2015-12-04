@@ -6,11 +6,16 @@
 package mpplibrary.application.controllers;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -21,8 +26,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import mpplibrary.application.models.UserModel;
-import mpplibrary.base.Member;
 import mpplibrary.base.roles.User;
+import mpplibrary.helper.LoadWindowFrame;
 
 /**
  *
@@ -59,9 +64,12 @@ public class ListUserController {
 
     Callback<TableColumn<User, Object>, TableCell<User, Object>> cellFactory;
 
+    private int selectedUserPosition;
+
     @FXML
     public void initialize() {
 
+        selectedUserPosition = -1;
         usersList = FXCollections.observableArrayList();
         filteredUsersList = FXCollections.observableArrayList();
         userModel = new UserModel();
@@ -76,7 +84,7 @@ public class ListUserController {
         tblColumnFullName.setCellValueFactory(new PropertyValueFactory<User, Object>("fullname"));
         tblColumnFullName.setCellFactory(cellFactory);
 
-        tblColumnStatus.setCellValueFactory(new PropertyValueFactory<User, Object>("status"));
+        tblColumnStatus.setCellValueFactory(new PropertyValueFactory<User, Object>("active"));
         tblColumnStatus.setCellFactory(cellFactory);
 
         filteredUsersList.addAll(usersList);
@@ -91,9 +99,52 @@ public class ListUserController {
 
     }
 
-    private void updateFilteredData() {
-        filteredUsersList.clear();
+    @FXML
+    public void onDeleteBttnClicked(ActionEvent event) {
+        if (selectedUserPosition >= 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete User");
+            User selectedUser = filteredUsersList.get(selectedUserPosition);
+            alert.setHeaderText("Are you sure you want to remove " + selectedUser.getFullname() + "?");
 
+            ButtonType buttonTypeConfirm = new ButtonType("Ok", ButtonBar.ButtonData.APPLY);
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeConfirm, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeConfirm) {
+
+//                if (userModel.delete(filteredUsersList.get(selectedUserPosition).getID())) {
+                if (userModel.delete(selectedUser.getID())) {
+                    refreshListData();
+                } else {
+                    System.out.println("Error in Deleting User");
+                }
+                alert.close();
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete User");
+            alert.setHeaderText("Select User to Delete");
+            alert.getButtonTypes().clear();
+            ButtonType buttonTypeCancel = new ButtonType("Ok", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().addAll(buttonTypeCancel);
+            alert.show();
+        }
+    }
+
+    @FXML
+    public void onAddNewUserBttnClicked(ActionEvent event) {
+        LoadWindowFrame lf = LoadWindowFrame.getInstance();
+        lf.setSceneAddUser();
+    }
+
+    private void updateFilteredData() {
+        selectedUserPosition = -1;
+        filteredUsersList.clear();
+        anchorPaneUserPreview.setVisible(false);
         for (User user : usersList) {
             if (matchesFilter(user)) {
                 filteredUsersList.add(user);
@@ -129,8 +180,8 @@ public class ListUserController {
         cellFactory = new Callback<TableColumn<User, Object>, TableCell<User, Object>>() {
             @Override
             public TableCell call(TableColumn p) {
-                ListUserController.MyStringTableCell cell = new ListUserController.MyStringTableCell();
-                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new ListUserController.MyEventHandler());
+                MyStringTableCell cell = new MyStringTableCell();
+                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
 
                 return cell;
             }
@@ -140,11 +191,13 @@ public class ListUserController {
     void refreshListData() {
         usersList.clear();
         usersList.addAll(userModel.getUsers());
-        tblViewUsers.setItems(usersList);
+        filteredUsersList.clear();
+        filteredUsersList.addAll(usersList);
+        tblViewUsers.setItems(filteredUsersList);
         txtSearchQuery.setText("");
     }
 
-    class MyStringTableCell extends TableCell<Member, Object> {
+    class MyStringTableCell extends TableCell<User, Object> {
 
         @Override
         public void updateItem(Object item, boolean empty) {

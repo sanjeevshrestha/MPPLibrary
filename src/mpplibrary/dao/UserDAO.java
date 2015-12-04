@@ -34,6 +34,7 @@ public class UserDAO extends DAO {
             if (rs != null) {
                 while (rs.next()) {
                     if (rs.getString("password").equals(u.getPassword())) {
+                        u.setID(rs.getLong("id"));
                         u.setRole(rs.getString("role"));
                         return true;
                     } else {
@@ -98,7 +99,6 @@ public class UserDAO extends DAO {
             users = new ArrayList<>();
             while (rs.next()) {
                 User u;
-                System.out.println(rs.getLong("id"));
                 u = new User(rs.getLong("id"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
@@ -121,6 +121,27 @@ public class UserDAO extends DAO {
         }
 
         return this.users;
+
+    }
+
+    public boolean deleteMember(User user) {
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+
+            User u = MPPLibraryFactory.getLoggedInUser();
+
+            q.delete("users");
+            q.where("id=" + q.quote(String.valueOf(user.getID())));
+
+            db.execute();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
 
     }
 

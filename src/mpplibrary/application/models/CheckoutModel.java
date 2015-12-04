@@ -46,13 +46,13 @@ public class CheckoutModel {
     }
     
     
-    public boolean isBookValid(String uniqueID)
+    public boolean isBookValid(long uniqueID)
     {
         return true;
         
     }
     
-    public boolean isBookAvailable(String uniqueID)
+    public boolean isBookAvailable(long uniqueID)
     {
         return true;
         

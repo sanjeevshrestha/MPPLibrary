@@ -33,23 +33,9 @@ public class LoadWindowFrame {
         this.mainFramePane = mainFramePane;
     }
 
-//    public void setSceneAddMember() {
-//        try {
-//            mainFramePane.getChildren().clear();
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddMember.fxml"));
-//            AnchorPane pane = loader.load();
-//            mainFramePane.getChildren().add(pane);
-//            ((AddMemberController) loader.getController()).initialize();
-////              initValidators();
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(MPPLibrary.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//  }
     public static LoadWindowFrame getInstance(AnchorPane mainFramePane) {
 
         instance = new LoadWindowFrame(mainFramePane);
-
         return instance;
     }
 
@@ -72,23 +58,17 @@ public class LoadWindowFrame {
     private void popUpAddBookScene(ListBooksController listBooksController) {
         AnchorPane pane;
         try {
-//            mainFramePane.getChildren().clear();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddBook2.fxml"));
             pane = loader.load();
-//            mainFramePane.getChildren().add(pane);
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Add Book");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.initOwner();
             dialogStage.initOwner(mainFramePane.getScene().getWindow());
             Scene scene = new Scene(pane);
             dialogStage.setScene(scene);
             dialogStage.setResizable(false);
             ((AddBookController) loader.getController()).setListBooksController(listBooksController, dialogStage);
-            // Set the add book window into the controller.
-//            ((BookController) loader.getController()).initialize();
-            // Show the dialog and wait until the user closes it
             dialogStage.show();
 
         } catch (IOException ex) {

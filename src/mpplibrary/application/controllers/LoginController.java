@@ -52,17 +52,11 @@ public class LoginController {
 
         } else {
 
-            txtLoginInfo.setText("Login unsuccessfull");
+            txtLoginInfo.setText("Invalid Username or Password");
             txtLoginInfo.setVisible(true);
         }
 
-        //get userName and password from the directory and match and show appropriate login
-//        if(userExists){
-        //Login
-//        }else{
-        //show error message; 
     }
-//        System.out.println("LoginClicked!!");
 
     @FXML
     protected void handleInputMethodActive(KeyEvent event) {

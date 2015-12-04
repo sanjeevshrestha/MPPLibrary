@@ -8,11 +8,14 @@ package mpplibrary.application.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mpplibrary.MPPLibraryFactory;
+import mpplibrary.base.roles.User;
 import mpplibrary.helper.LoadWindowFrame;
 
 /**
@@ -32,6 +35,9 @@ public class MenuController {
 
     @FXML
     AnchorPane mainFramePane;
+    
+    @FXML
+    Menu mnuMainLibrary,mnuMainMember,mnuMainBook,mnuMainAdmin;
 
     protected Stage primaryStage;
 
@@ -108,6 +114,10 @@ public class MenuController {
     public void initialize(Stage primaryStage) {
 //       vBoxMainWindow.getChildren().add(1, mainMenuBar);
 //        memberController = new MemberController(mainFramePane);
+        
+       User u= MPPLibraryFactory.getLoggedInUser();
+        System.out.println(u.getID());
+        
         windowFrame = LoadWindowFrame.getInstance(mainFramePane);
     }
     

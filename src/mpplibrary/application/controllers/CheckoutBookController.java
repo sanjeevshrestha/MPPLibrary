@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -40,6 +41,10 @@ public class CheckoutBookController {
     @FXML
     Button btnCheckout, btnAddBook,btnCancel;
 
+    @FXML
+    TableView tblBooksList;
+    
+    
     private ObservableList<LendableCopy> bookList;
 
     private ListCheckoutsController listCheckoutController;
@@ -62,6 +67,8 @@ public class CheckoutBookController {
         tblColumnBookTitle.setCellFactory(cellFactory);
         tblColumnDueDate.setCellValueFactory(new PropertyValueFactory<LendableCopy, Object>("dueDate"));
         tblColumnDueDate.setCellFactory(cellFactory);
+        
+        tblBooksList.setItems(bookList);
 
     }
 
@@ -89,7 +96,7 @@ public class CheckoutBookController {
                 cp.loadBookDetail();
                 cp.calculateDueDate(dtCheckout);
                 this.bookList.add(cp);
-                System.out.println("isValid");
+                
             } else {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Invalid Copy");

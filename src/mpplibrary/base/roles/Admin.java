@@ -9,18 +9,14 @@ package mpplibrary.base.roles;
  *
  * @author 984970
  */
-public class Admin extends User implements Role {
+public class Admin implements Role {
     
     public Admin()
     {
         super();
     }
     
-    public Admin(String username,String password)
-    {
-        super(username,password);
-    }
-
+  
     @Override
     public boolean canLogin() {
         return true;
@@ -81,10 +77,5 @@ public class Admin extends User implements Role {
         return true;
     }
 
-    public static void main(String[] args) {
-        Admin adm=new Admin("sanjeev","password");
-        adm.login();
-    }
- 
    
 }

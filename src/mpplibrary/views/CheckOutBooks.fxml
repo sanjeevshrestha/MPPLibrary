@@ -49,7 +49,7 @@
             <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="3" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="bookAddedTable" prefHeight="253.0" prefWidth="688.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+      <TableView fx:id="tblBooksList" prefHeight="253.0" prefWidth="688.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
         <columns>
           <TableColumn fx:id="tblColumnUniqueID" prefWidth="150.0" text="Book Unique ID" />
           <TableColumn fx:id="tblColumnBookTitle" prefWidth="438.0" text="Book Title" />

@@ -113,7 +113,6 @@ public class ListMembersController {
     public void onNewMemberButtonClick(ActionEvent event) {
         LoadWindowFrame lf = LoadWindowFrame.getInstance();
         lf.setSceneAddMember();
-
     }
 
     @FXML
@@ -122,7 +121,7 @@ public class ListMembersController {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Member");
             Member selectedMember = filteredMembersList.get(selectedMemberPosition);
-            alert.setHeaderText("Are you sure you want to remove " + selectedMember.getFullname());
+            alert.setHeaderText("Are you sure you want to remove " + selectedMember.getFullname() + "?");
 
             ButtonType buttonTypeConfirm = new ButtonType("Ok", ButtonData.APPLY);
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
@@ -133,10 +132,9 @@ public class ListMembersController {
             if (result.get() == buttonTypeConfirm) {
 
                 if (memberModel.delete(filteredMembersList.get(selectedMemberPosition).getID())) {
-
                     refreshListData();
                 } else {
-                    System.out.println("Error in deleteing member");
+                    System.out.println("Error in deleting member");
                 }
                 alert.close();
             }
