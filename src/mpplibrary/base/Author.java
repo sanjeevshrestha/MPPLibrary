@@ -28,7 +28,7 @@ public class Author extends Person {
     }
     
     
-     public Author(long ID, String firstname, String lastname, boolean active, double amt, String credentials, String bio, String note,String email, String address, String city, String state, String zip) {
+     public Author(long ID, String firstname, String lastname, boolean active,  String credentials, String bio, String note,String email, String address, String city, String state, String zip) {
         super(ID, firstname, lastname, active);
         this.setCredentials(credentials);
         this.setBio(bio);

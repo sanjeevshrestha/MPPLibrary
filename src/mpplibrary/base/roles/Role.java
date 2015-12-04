@@ -11,28 +11,11 @@ package mpplibrary.base.roles;
  */
 public interface Role {
 
-    boolean canLogin();
 
-    boolean canAddBook();
+    boolean canManageBook();
+    boolean canManageLibrary();
+    boolean canManageMember();
+    boolean canManageAdmin();
 
-    boolean canEditBook();
-
-    boolean canDeleteBook();
-
-    boolean canCheckoutBook();
-
-    boolean canCheckinBook();
-
-    boolean canAddMember();
-
-    boolean canEditMember();
-
-    boolean canDeleteMember();
-
-    boolean canAddAuthor();
-
-    boolean canDeleteAuthor();
-
-    boolean canEditAuthor();
 
 }

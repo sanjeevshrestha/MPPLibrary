@@ -10,72 +10,25 @@ package mpplibrary.base.roles;
  * @author 984970
  */
 public class Admin implements Role {
-    
-    public Admin()
-    {
-        super();
-    }
-    
-  
+
     @Override
-    public boolean canLogin() {
+    public boolean canManageBook() {
         return true;
     }
 
     @Override
-    public boolean canAddBook() {
-        return true;
-    }
-
-    @Override
-    public boolean canEditBook() {
-        return true;
-    }
-
-    @Override
-    public boolean canDeleteBook() {
-        return true;
-    }
-
-    @Override
-    public boolean canCheckoutBook() {
+    public boolean canManageLibrary() {
         return false;
     }
 
     @Override
-    public boolean canCheckinBook() {
-        return false;
-    }
-
-    @Override
-    public boolean canAddMember() {
+    public boolean canManageMember() {
         return true;
     }
 
     @Override
-    public boolean canEditMember() {
+    public boolean canManageAdmin() {
         return true;
     }
 
-    @Override
-    public boolean canDeleteMember() {
-        return true;
-    }
-
-    @Override
-    public boolean canAddAuthor() {
-        return true;
-    }
-
-    @Override
-    public boolean canDeleteAuthor() {
-        return true;
-    }
-
-    @Override
-    public boolean canEditAuthor() {
-        return true;
-    }
-
-   
 }

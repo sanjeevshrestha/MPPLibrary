@@ -35,9 +35,9 @@ public class MenuController {
 
     @FXML
     AnchorPane mainFramePane;
-    
+
     @FXML
-    Menu mnuMainLibrary,mnuMainMember,mnuMainBook,mnuMainAdmin;
+    Menu mnuMainLibrary, mnuMainMember, mnuMainBook, mnuMainAdmin;
 
     protected Stage primaryStage;
 
@@ -114,20 +114,40 @@ public class MenuController {
     public void initialize(Stage primaryStage) {
 //       vBoxMainWindow.getChildren().add(1, mainMenuBar);
 //        memberController = new MemberController(mainFramePane);
-        
-       User u= MPPLibraryFactory.getLoggedInUser();
-        System.out.println(u.getID());
-        
+
+        User u = MPPLibraryFactory.getLoggedInUser();
+        mnuMainAdmin.setDisable(true);
+        mnuMainBook.setDisable(true);
+        mnuMainLibrary.setDisable(true);
+        mnuMainMember.setDisable(true);
+
+        if (u.canManageAdmin()) {
+            mnuMainAdmin.setDisable(false);
+        }
+
+        if (u.canManageBook()) {
+            mnuMainBook.setDisable(false);
+
+        }
+
+        if (u.canManageMember()) {
+            mnuMainMember.setDisable(false);
+        }
+
+        if (u.canManageLibrary()) {
+            mnuMainLibrary.setDisable(false);
+        }
+
         windowFrame = LoadWindowFrame.getInstance(mainFramePane);
     }
-    
+
     @FXML
-    protected void onAddNewUserMenuItemSelected(ActionEvent event){
+    protected void onAddNewUserMenuItemSelected(ActionEvent event) {
         windowFrame.setSceneAddUser();
     }
-    
+
     @FXML
-    protected void onListUserMenuItemClicked(ActionEvent event){
+    protected void onListUserMenuItemClicked(ActionEvent event) {
         windowFrame.setSceneListUsers();
     }
 }

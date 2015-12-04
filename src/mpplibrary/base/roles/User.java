@@ -159,112 +159,37 @@ public class User extends Person implements Role {
     }
 
     @Override
-    public boolean canLogin() {
-
+    public boolean canManageBook() {
         boolean ret = false;
         for (Role r : this.roles) {
-            ret = ret || r.canLogin();
+            ret = ret || r.canManageBook();
         }
         return ret;
     }
 
     @Override
-    public boolean canAddBook() {
-
+    public boolean canManageLibrary() {
         boolean ret = false;
         for (Role r : this.roles) {
-            ret = ret || r.canAddBook();
+            ret = ret || r.canManageLibrary();
         }
         return ret;
     }
 
     @Override
-    public boolean canEditBook() {
+    public boolean canManageMember() {
         boolean ret = false;
         for (Role r : this.roles) {
-            ret = ret || r.canEditBook();
+            ret = ret || r.canManageMember();
         }
         return ret;
     }
 
     @Override
-    public boolean canDeleteBook() {
+    public boolean canManageAdmin() {
         boolean ret = false;
         for (Role r : this.roles) {
-            ret = ret || r.canDeleteBook();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canCheckoutBook() {
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canCheckoutBook();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canCheckinBook() {
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canCheckinBook();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canAddMember() {
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canAddMember();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canEditMember() {
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canEditMember();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canDeleteMember() {
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canDeleteMember();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canAddAuthor() {
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canAddAuthor();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canDeleteAuthor() {
-
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canDeleteAuthor();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean canEditAuthor() {
-        boolean ret = false;
-        for (Role r : this.roles) {
-            ret = ret || r.canEditAuthor();
+            ret = ret || r.canManageAdmin();
         }
         return ret;
     }
