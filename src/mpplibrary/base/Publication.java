@@ -15,19 +15,11 @@ import java.util.List;
 abstract public class Publication {
 
     private long ID;
-    private String title;
-    private String description;
-    private List<Author> authors;
-    private List<LendableCopy> lendableCopies;
+    private String title = "";
+    private String description = "";
+    private List<Author> authors = new ArrayList<>();
+    private List<LendableCopy> lendableCopies = new ArrayList<>();
     private String type;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Publication() {
         this.authors = new ArrayList<>();
@@ -55,6 +47,14 @@ abstract public class Publication {
         this.type = type;
         this.authors = new ArrayList<>();
         this.lendableCopies = new ArrayList<>();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getType() {
@@ -106,6 +106,5 @@ abstract public class Publication {
     public void setLendableCopies(List<LendableCopy> lendableCopies) {
         this.lendableCopies = lendableCopies;
     }
-    
-    
+
 }

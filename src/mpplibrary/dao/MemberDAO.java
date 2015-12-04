@@ -185,5 +185,35 @@ public class MemberDAO {
         return false;
 
     }
+    
+    
+    public boolean isValid(Member m)
+    {
+         boolean isValid = false;
+        ResultSet rs = null;
+        try {
+
+            Database db = DatabaseFactory.getInstance();
+
+            Query q = db.getQuery(true);
+            q.select("count(*) as cnt").from("members");
+
+            q.where("id=" + q.quote(String.valueOf(m.getID())));
+            rs = db.getResultSet();
+            
+            while (rs.next()) {
+                
+                int rowcount=rs.getInt("cnt");
+                isValid=rowcount>0;
+
+            }
+
+            rs.close();
+        } catch (QueryException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return isValid;
+    }
 
 }

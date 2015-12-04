@@ -27,7 +27,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Student ID">
+            <Label text="Member ID">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
@@ -35,7 +35,7 @@
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font></Label>
-            <TextField fx:id="txtStudentID" GridPane.rowIndex="1">
+            <TextField fx:id="txtMemberID" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>

@@ -71,5 +71,11 @@ public class Member extends Person {
         return this.dataAccess.deleteMember(this);
 
     }
+    
+    
+    public boolean isValid()
+    {
+        return this.dataAccess.isValid(this);
+    }
 
 }
