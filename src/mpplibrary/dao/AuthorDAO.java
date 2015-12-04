@@ -55,6 +55,7 @@ public class AuthorDAO {
                         rs.getString("credentials"),
                         rs.getString("bio"),
                         rs.getString("note"),
+                        rs.getString("email"),
                         rs.getString("address"),
                         rs.getString("city"), rs.getString("state"), rs.getString("zip"));
                 this.authors.add(m);
@@ -88,10 +89,11 @@ public class AuthorDAO {
             while (rs.next()) {
                 Author m;
 
-                m = new Author(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"), rs.getDouble("amount_due"),
+                 m = new Author(rs.getLong("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getBoolean("active"), rs.getDouble("amount_due"),
                         rs.getString("credentials"),
                         rs.getString("bio"),
                         rs.getString("note"),
+                        rs.getString("email"),
                         rs.getString("address"),
                         rs.getString("city"), rs.getString("state"), rs.getString("zip"));
                 this.authors.add(m);

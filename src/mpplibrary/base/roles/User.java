@@ -142,11 +142,7 @@ public class User extends Person implements Role {
 
     public boolean login() {
 
-        if (this.getDataAccess().login(this)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.getDataAccess().login(this);
     }
 
     public boolean saveMember() {

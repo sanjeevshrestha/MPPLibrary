@@ -6,8 +6,10 @@
 package mpplibrary.application.models;
 
 import java.util.ArrayList;
+import mpplibrary.base.Author;
 import mpplibrary.base.Book;
 import mpplibrary.base.LendableCopy;
+import mpplibrary.dao.AuthorDAO;
 import mpplibrary.dao.BookDAO;
 import mpplibrary.dao.LendableDAO;
 
@@ -69,6 +71,20 @@ public class BookModel {
         }
 
         return copies;
+
+    }
+    
+    public ArrayList<Author> getAllAuthors() {
+
+        ArrayList<Author> authors = new ArrayList<>();
+        try {
+            AuthorDAO ad = new AuthorDAO();
+            authors = ad.getAuthors();
+
+        } catch (Exception e) {
+        }
+
+        return authors;
 
     }
 

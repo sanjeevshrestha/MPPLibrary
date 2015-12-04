@@ -28,7 +28,7 @@ public class Author extends Person {
     }
     
     
-     public Author(long ID, String firstname, String lastname, boolean active, double amt, String credentials, String bio, String note, String address, String city, String state, String zip) {
+     public Author(long ID, String firstname, String lastname, boolean active, double amt, String credentials, String bio, String note,String email, String address, String city, String state, String zip) {
         super(ID, firstname, lastname, active);
         this.setCredentials(credentials);
         this.setBio(bio);
@@ -36,6 +36,7 @@ public class Author extends Person {
         this.setCity(city);
         this.setState(state);
         this.setZip(zip);
+        this.setEmail(email);
         
         this.dataAccess = new AuthorDAO();
 

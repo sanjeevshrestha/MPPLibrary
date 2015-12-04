@@ -14,14 +14,14 @@
                         <MenuItem fx:id="menuExit" mnemonicParsing="false" onAction="#onMenuExitSelected" text="Exit" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Library">
+                <Menu fx:id="mnuMainLibrary" mnemonicParsing="false" text="Library">
                     <items>
                         <MenuItem fx:id="checkOutMenuItem" mnemonicParsing="false" onAction="#onCheckOutMenuItemClicked" text="Checkouts" />
                         <MenuItem fx:id="checkInMenuItem" mnemonicParsing="false" onAction="#onCheckInMenuItemClicked" text="CheckIn Book" />
                         <MenuItem fx:id="searchCheckedOutMenuItem" mnemonicParsing="false" onAction="#onSearchCheckedOutMenuItemClicked" text="Search" />
                     </items>
                 </Menu>
-                <Menu fx:id="mainMenuMember" mnemonicParsing="false" text="Member">
+                <Menu fx:id="mnuMainMember" mnemonicParsing="false" text="Member">
                     <items>
                         <MenuItem fx:id="menuAddMember" mnemonicParsing="false" onAction="#onMenuAddMemberSelected" text="Add New Member" />
                         <MenuItem fx:id="menuListMembers" mnemonicParsing="false" onAction="#onMenuListMembersSelected" text="Members List" />
@@ -29,7 +29,7 @@
                         <MenuItem fx:id="menuSearchMember" mnemonicParsing="false" onAction="#onMenuSearchMemberSelected" text="Search" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Book">
+                <Menu fx:id="mnuMainBook" mnemonicParsing="false" text="Book">
                     <items>
                         <MenuItem fx:id="menuAddBook" mnemonicParsing="false" onAction="#onMenuAddBookSelected" text="Add New Book" />
                         <MenuItem fx:id="menuListBooks" mnemonicParsing="false" onAction="#onMenuListBooks" text="List Books" />
@@ -37,7 +37,7 @@
                         <MenuItem fx:id="menuSearchBook" mnemonicParsing="false" onAction="#onMenuSearchBookSelected" text="Search" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Admin">
+                <Menu fx:id="mnuMainAdmin" mnemonicParsing="false" text="Admin">
                     <items>
                         <MenuItem fx:id="addNewUserMenuItem" mnemonicParsing="false" onAction="#onAddNewUserMenuItemSelected" text="Add New User" />
                   <MenuItem fx:id="listUserMenuItem" mnemonicParsing="false" onAction="#onListUserMenuItemClicked" text="List User(s)" />
