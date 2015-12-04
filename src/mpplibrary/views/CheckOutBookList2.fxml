@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.CheckoutBookController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListCheckoutsController">
     <stylesheets>
         <URL value="@/mpplibrary/views/css/checkoutbook.css" />
     </stylesheets>
@@ -50,11 +50,11 @@
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </GridPane>
-                        <TableView fx:id="checkedoutBookTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="470.0">
+                        <TableView fx:id="tblCheckedoutList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="470.0">
                            <columns>
-                              <TableColumn prefWidth="50.0" text="ID" />
-                              <TableColumn prefWidth="208.0" text="Member Name" />
-                              <TableColumn prefWidth="124.0" text="Checkout Date" />
+                              <TableColumn fx:id="tblColumnID" prefWidth="50.0" text="ID" />
+                              <TableColumn fx:id="tblColumnName" prefWidth="208.0" text="Member Name" />
+                              <TableColumn fx:id="tblColumnCheckoutDate" prefWidth="124.0" text="Checkout Date" />
                            </columns>
                         </TableView>
                      </children>
@@ -102,9 +102,9 @@
                         </Label>
                         <TableView fx:id="checkedOutBookDetailsTable" prefHeight="378.0">
                            <columns>
-                              <TableColumn prefWidth="210.0" text="Book" />
-                              <TableColumn prefWidth="108.0" text="Due Date" />
-                              <TableColumn minWidth="4.0" prefWidth="45.0" text="Fine " />
+                              <TableColumn fx:id="tblColumnBook" prefWidth="210.0" text="Book" />
+                              <TableColumn fx:id="tblColumnDueDate" prefWidth="108.0" text="Due Date" />
+                              <TableColumn fx:id="tblColumnFine" minWidth="4.0" prefWidth="45.0" text="Fine " />
                            </columns>
                         </TableView>
                         <ToolBar prefHeight="40.0" prefWidth="200.0">

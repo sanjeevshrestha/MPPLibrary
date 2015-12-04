@@ -17,7 +17,7 @@ public class AddMemberRuleSet implements RuleSet {
     public void applyRules(Object o) throws RuleException {
         AddMemberController amc = (AddMemberController) o;
         amc.getErrorLabel().setText("");
-        amc.getMemberComponent().setStyle("");
+       // amc.getMemberComponent().setStyle("");
         amc.getFirstNameComponent().setStyle("");
         amc.getLastNameComponent().setStyle("");
         amc.getAddressComponent().setStyle("");
@@ -42,15 +42,15 @@ public class AddMemberRuleSet implements RuleSet {
             throw new RuleException("Zip field should be exactly of 5 digits.", amc.getZipComponent());
         }
 
-        if (amc.getZipComponent().getText().equals(amc.getMemberComponent().getText())) {
-            throw new RuleException("ID and ZIP cannot be same.", amc.getZipComponent());
-        }
+//        if (amc.getZipComponent().getText().equals(amc.getMemberComponent().getText())) {
+//            throw new RuleException("ID and ZIP cannot be same.", amc.getZipComponent());
+//        }
     }
 
     private void checkEmptyFields(AddMemberController amc) throws RuleException {
-        if (amc.getMemberComponent().getText().length() == 0) {
-            throw new RuleException("ID cannot be empty.", amc.getMemberComponent());
-        }
+//        if (amc.getMemberComponent().getText().length() == 0) {
+//            throw new RuleException("ID cannot be empty.", amc.getMemberComponent());
+//        }
 
         if (amc.getFirstNameComponent().getText().length() == 0) {
             throw new RuleException("First Name cannot be empty.", amc.getFirstNameComponent());
@@ -92,17 +92,17 @@ public class AddMemberRuleSet implements RuleSet {
 
     private void numericRule(AddMemberController amc) throws RuleException {
         String zipCode = amc.getZipComponent().getText();
-        String id = amc.getMemberComponent().getText();
+     //   String id = amc.getMemberComponent().getText();
         try {
             Integer.parseInt(zipCode);
         } catch (NumberFormatException e) {
             throw new RuleException("ZIP must be numeric.", amc.getZipComponent());
         }
 
-        try {
-            Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new RuleException("ID must be numeric.", amc.getMemberComponent());
-        }
+//        try {
+//            Integer.parseInt(id);
+//        } catch (NumberFormatException e) {
+//            throw new RuleException("ID must be numeric.", amc.getMemberComponent());
+//        }
     }
 }

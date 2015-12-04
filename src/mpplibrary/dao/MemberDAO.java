@@ -117,7 +117,7 @@ public class MemberDAO {
             while (rs.next()) {
 
                 m.setID(rs.getInt("id"));
-                m.setFirstname(rs.getString("fristname"));
+                m.setFirstname(rs.getString("firstname"));
                 m.setLastname(rs.getString("lastname"));
                 m.setActive(rs.getBoolean("active"));
                 m.setEmail(rs.getString("email"));
