@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import mpplibrary.application.controllers.LoginController;
 import mpplibrary.application.controllers.MenuController;
 import mpplibrary.helper.DataHelper;
-import mpplibrary.helper.LoadWindowFrame;
 import mpplibrary.interfaces.OnLoginSuccessListener;
 
 /**
@@ -29,7 +28,12 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener {
 
     @Override
     public void start(Stage primaryStage) {
-        
+        this.primaryStage = primaryStage;
+        loadLoginWindow();
+
+    }
+
+    public void loadLoginWindow() {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/Login.fxml"));
@@ -37,13 +41,12 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener {
             ((LoginController) loader.getController()).initialize(this);
             Scene scene = new Scene(root, DataHelper.WINDOW_WIDTH, DataHelper.WINDOW_HEIGHT);
 
-            
             primaryStage.setResizable(false);
 
             primaryStage.setTitle("Login");
             primaryStage.setScene(scene);
             primaryStage.show();
-            this.primaryStage = primaryStage;
+
         } catch (IOException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,7 +65,7 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/MainWindow.fxml"));
             Parent root = loader.load();
-            ((MenuController) loader.getController()).initialize(primaryStage);
+            ((MenuController) loader.getController()).initialize(primaryStage, this);
             Scene scene = new Scene(root, DataHelper.MAIN_WINDOW_WIDTH, DataHelper.MAIN_WINDOW_HEIGHT);
             primaryStage.setTitle("MPP Library Management");
             primaryStage.setScene(scene);
