@@ -18,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mpplibrary.MPPLibrary;
 import mpplibrary.MPPLibraryFactory;
 import mpplibrary.base.roles.User;
 import mpplibrary.helper.DataHelper;
@@ -93,24 +94,8 @@ public class MenuController {
 
     @FXML
     protected void onMenuLogOutSelected(ActionEvent event) {
-//        System.out.println("OnLogoutSelected");
-//        Platform.exit();
         ((Node) mainFramePane.getParent()).getScene().getWindow().hide();
-//        ((Node) mainFramePane).getScene().getWindow().hide();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/Login.fxml"));
-            Parent root = loader.load();
-//            ((LoginController) loader.getController()).initialize();
-            Scene scene = new Scene(root, DataHelper.WINDOW_WIDTH, DataHelper.WINDOW_HEIGHT);
-
-            primaryStage.setResizable(false);
-
-            primaryStage.setTitle("Login");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        lib.loadLoginWindow();
     }
 
     @FXML
@@ -133,10 +118,12 @@ public class MenuController {
 
     }
 
-    public void initialize(Stage primaryStage) {
+    MPPLibrary lib;
+
+    public void initialize(Stage primaryStage, MPPLibrary lib) {
 //       vBoxMainWindow.getChildren().add(1, mainMenuBar);
 //        memberController = new MemberController(mainFramePane);
-
+        this.lib = lib;
         User u = MPPLibraryFactory.getLoggedInUser();
         mnuMainAdmin.setDisable(true);
         mnuMainBook.setDisable(true);
