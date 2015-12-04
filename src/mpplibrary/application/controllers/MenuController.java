@@ -108,7 +108,7 @@ public class MenuController {
     public void initialize(Stage primaryStage) {
 //       vBoxMainWindow.getChildren().add(1, mainMenuBar);
 //        memberController = new MemberController(mainFramePane);
-        windowFrame = new LoadWindowFrame(mainFramePane);
+        windowFrame = LoadWindowFrame.getInstance(mainFramePane);
     }
     
     @FXML

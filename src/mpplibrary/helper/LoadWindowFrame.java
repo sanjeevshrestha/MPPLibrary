@@ -13,8 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import mpplibrary.application.controllers.AddBookController;
 import mpplibrary.application.controllers.AddMemberController;
-import mpplibrary.application.controllers.BookController;
+import mpplibrary.application.controllers.ListBooksController;
 import mpplibrary.application.controllers.ListMembersController;
 
 /**
@@ -25,11 +26,14 @@ public class LoadWindowFrame {
 
     private final AnchorPane mainFramePane;
 
+    private static LoadWindowFrame instance;
+
     public LoadWindowFrame(AnchorPane mainFramePane) {
+
         this.mainFramePane = mainFramePane;
     }
 
-    public void setSceneAddMember() {
+//    public void setSceneAddMember() {
 //        try {
 //            mainFramePane.getChildren().clear();
 //            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddMember.fxml"));
@@ -41,20 +45,52 @@ public class LoadWindowFrame {
 //        } catch (IOException ex) {
 //            Logger.getLogger(MPPLibrary.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+//  }
+    public static LoadWindowFrame getInstance(AnchorPane mainFramePane) {
 
+        instance = new LoadWindowFrame(mainFramePane);
+
+        return instance;
+    }
+
+    public static LoadWindowFrame getInstance() {
+
+        return instance;
+    }
+
+    public void setSceneAddMember() {
         ListMembersController memberListController = setSceneListMembers();
         popUpAddMemberScene(memberListController);
     }
 
     public void setSceneAddBook() {
+        ListBooksController listBooksController = setSceneListBooks();
+        popUpAddBookScene(listBooksController);
 
+    }
+
+    private void popUpAddBookScene(ListBooksController listBooksController) {
         AnchorPane pane;
         try {
-            mainFramePane.getChildren().clear();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddBook.fxml"));
+//            mainFramePane.getChildren().clear();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/AddBook2.fxml"));
             pane = loader.load();
-            mainFramePane.getChildren().add(pane);
-            ((BookController) loader.getController()).initialize();
+//            mainFramePane.getChildren().add(pane);
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add Book");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+//            dialogStage.initOwner();
+            dialogStage.initOwner(mainFramePane.getScene().getWindow());
+            Scene scene = new Scene(pane);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            ((AddBookController) loader.getController()).setListBooksController(listBooksController, dialogStage);
+            // Set the add book window into the controller.
+//            ((BookController) loader.getController()).initialize();
+            // Show the dialog and wait until the user closes it
+            dialogStage.show();
+
         } catch (IOException ex) {
             Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,7 +131,7 @@ public class LoadWindowFrame {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add Book");
+            dialogStage.setTitle("Add Member");
             dialogStage.initModality(Modality.WINDOW_MODAL);
 //            dialogStage.initOwner();
             dialogStage.initOwner(mainFramePane.getScene().getWindow());
@@ -112,10 +148,10 @@ public class LoadWindowFrame {
         }
     }
 
-    public void setSceneListBooks() {
-
+    public ListBooksController setSceneListBooks() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListBooks2.fxml"));
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListBooks2.fxml"));
+
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().clear();
             mainFramePane.getChildren().add(pane);
@@ -123,6 +159,8 @@ public class LoadWindowFrame {
         } catch (IOException ex) {
             Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return loader.getController();
     }
 
     public void setSceneListUsers() {

@@ -6,11 +6,19 @@
 package mpplibrary.application.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -23,6 +31,7 @@ import javafx.util.Callback;
 import mpplibrary.application.models.MemberModel;
 import mpplibrary.base.Book;
 import mpplibrary.base.Member;
+import mpplibrary.helper.LoadWindowFrame;
 
 /**
  *
@@ -54,14 +63,21 @@ public class ListMembersController {
     @FXML
     Label fxTxtEmail, fxTxtPhone, fxTxtAddress, fxMemberNameTitle;
 
+    @FXML
+    Button fxBtnNewMember, fxBtnDeleteMember;
+
     private ObservableList<Member> membersList;
 
     private ObservableList<Member> filteredMembersList;
 
     private MemberModel memberModel;
-    
+    private LoadWindowFrame windowFrame;
+
+    private int selectedMemberPosition;
+
     @FXML
     public void initialize() {
+        selectedMemberPosition =-1;
         membersList = FXCollections.observableArrayList();
         filteredMembersList = FXCollections.observableArrayList();
         memberModel = new MemberModel();
@@ -73,7 +89,7 @@ public class ListMembersController {
         onTableRowClicked();
         tblColumnMemberId.setCellValueFactory(new PropertyValueFactory<Member, Object>("ID"));
         tblColumnMemberId.setCellFactory(cellFactory);
-        
+
         tblColumnFName.setCellValueFactory(new PropertyValueFactory<Member, Object>("fullname"));
         tblColumnFName.setCellFactory(cellFactory);
 //        tblColumnLName.setCellValueFactory(new PropertyValueFactory<Member, Object>("lastname"));
@@ -93,9 +109,53 @@ public class ListMembersController {
 
     }
 
-    private void updateFilteredData() {
-        filteredMembersList.clear();
+    @FXML
+    public void onNewMemberButtonClick(ActionEvent event) {
+        LoadWindowFrame lf = LoadWindowFrame.getInstance();
+        lf.setSceneAddMember();
 
+    }
+
+    @FXML
+    public void onDeleteMemberButtonClicked(ActionEvent event) {
+        if (selectedMemberPosition >= 0) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Member");
+            Member selectedMember = filteredMembersList.get(selectedMemberPosition);
+            alert.setHeaderText("Are you sure you want to remove " + selectedMember.getFullname());
+
+            ButtonType buttonTypeConfirm = new ButtonType("Ok", ButtonData.APPLY);
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeConfirm, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeConfirm) {
+
+                if (memberModel.delete(filteredMembersList.get(selectedMemberPosition).getID())) {
+
+                    refreshListData();
+                } else {
+                    System.out.println("Error in deleteing member");
+                }
+                alert.close();
+            }
+
+        } else {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Member");
+            alert.setHeaderText("Select a member to delete");
+            alert.getButtonTypes().clear();
+            ButtonType buttonTypeCancel = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);      
+            alert.getButtonTypes().addAll(buttonTypeCancel);
+            alert.show();
+        }
+    }
+
+    private void updateFilteredData() {
+        selectedMemberPosition = -1;
+        filteredMembersList.clear();
+        anchorPaneMemberPreview.setVisible(false);
         for (Member member : membersList) {
             if (matchesFilter(member)) {
                 filteredMembersList.add(member);
@@ -132,20 +192,22 @@ public class ListMembersController {
     private void onTableRowClicked() {
         cellFactory
                 = new Callback<TableColumn<Member, Object>, TableCell<Member, Object>>() {
-                    @Override
-                    public TableCell call(TableColumn p) {
-                        MyStringTableCell cell = new MyStringTableCell();
-                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+            @Override
+            public TableCell call(TableColumn p) {
+                MyStringTableCell cell = new MyStringTableCell();
+                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
 
-                        return cell;
-                    }
-                };
+                return cell;
+            }
+        };
     }
 
     void refreshListData() {
         membersList.clear();
         membersList.addAll(memberModel.getMembers());
-        tblViewMembers.setItems(membersList);
+        filteredMembersList.clear();
+        filteredMembersList.addAll(membersList);
+        tblViewMembers.setItems(filteredMembersList);
         txtSearchQuery.setText("");
     }
 
@@ -176,7 +238,10 @@ public class ListMembersController {
             fxTxtEmail.setText(m.getEmail());
             fxTxtPhone.setText(m.getPhone());
             fxTxtAddress.setText(m.getFullAddress());
+
             System.out.println(m.getEmail());
+            selectedMemberPosition = index;
+
         }
     }
 }

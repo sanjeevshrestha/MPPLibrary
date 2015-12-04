@@ -66,4 +66,8 @@ public class MemberModel {
         bm.searchBooks("ISBN", "test");
     }
 
+    public boolean delete(long ID) {
+        Member m = new Member(ID);
+        return m.delete();
+    }
 }

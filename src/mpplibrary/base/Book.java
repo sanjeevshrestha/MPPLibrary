@@ -5,6 +5,8 @@
  */
 package mpplibrary.base;
 
+import mpplibrary.dao.BookDAO;
+
 /**
  *
  * @author 984970
@@ -14,13 +16,22 @@ public class Book extends Publication {
     private boolean isAvailable;
     private String ISBN;
 
+    private BookDAO dataAccess;
+
     public Book() {
 
+    }
+
+    public Book(long ID) {
+        super(ID);
     }
 
     public Book(long ID, String title) {
         super(ID, title);
     }
+    
+
+   
 
     public Book(long ID, String title, String ISBN, boolean isAvailable) {
         super(ID, title);
@@ -28,7 +39,7 @@ public class Book extends Publication {
         this.isAvailable = isAvailable;
     }
 
-    public boolean isIsAvailable() {
+    public boolean isAvailable() {
         return isAvailable;
     }
 
@@ -42,5 +53,14 @@ public class Book extends Publication {
 
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
+    }
+
+    public boolean save() {
+        return this.dataAccess.save(this);
+    }
+    
+    public boolean delete()
+    {
+        return this.dataAccess.delete(this);
     }
 }

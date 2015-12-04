@@ -8,7 +8,9 @@ package mpplibrary.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import mpplibrary.MPPLibraryFactory;
 import mpplibrary.base.Book;
+import mpplibrary.base.roles.User;
 import mpplibrary.database.Database;
 import mpplibrary.database.DatabaseFactory;
 import mpplibrary.database.Query;
@@ -19,7 +21,6 @@ import mpplibrary.database.QueryException;
  * @author 984970
  */
 public class BookDAO {
-
 
     private Book book;
 
@@ -89,11 +90,48 @@ public class BookDAO {
         return this.books;
 
     }
-    
-    
-    public boolean save(Book b)
-    {
-        return true;
+
+    public boolean save(Book b) {
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+            User u = MPPLibraryFactory.getLoggedInUser();
+            q.insert("books");
+            q.column("title").value(b.getTitle());
+            q.column("ISBN").value(b.getISBN());
+            q.column("created_by").value(String.valueOf(u.getID()));
+            q.column("available").value(String.valueOf(b.isAvailable()));
+            q.column("description").value(String.valueOf(b.getDescription()));
+
+            db.execute();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+    }
+
+    public boolean delete(Book b) {
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+
+            User u = MPPLibraryFactory.getLoggedInUser();
+
+            q.delete("books");
+            q.where("id=" + q.quote(String.valueOf(b.getID())));
+
+            db.execute();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+
     }
 
 }

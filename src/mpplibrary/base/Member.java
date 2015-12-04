@@ -52,9 +52,7 @@ public class Member extends Person {
     public boolean loadMember() {
 
         this.dataAccess.loadMember(this);
-
         return true;
-
     }
 
     public boolean saveMember() {
@@ -67,6 +65,11 @@ public class Member extends Person {
 
     public void setAmountDue(double amount_due) {
         this.amount_due = amount_due;
+    }
+
+    public boolean delete() {
+        return this.dataAccess.deleteMember(this);
+
     }
 
 }

@@ -57,28 +57,30 @@ public class BookModel {
         return books;
 
     }
-    
-    public ArrayList<LendableCopy> getLendableCopies(String isbn)
-    {
-        
-        ArrayList<LendableCopy> copies=new ArrayList<>();
+
+    public ArrayList<LendableCopy> getLendableCopies(String isbn) {
+
+        ArrayList<LendableCopy> copies = new ArrayList<>();
         try {
-                    LendableDAO lcd=new LendableDAO();
-                    copies=lcd.getLendableCopies(isbn);
+            LendableDAO lcd = new LendableDAO();
+            copies = lcd.getLendableCopies(isbn);
 
         } catch (Exception e) {
         }
-        
-        
+
         return copies;
-        
+
     }
 
-    public static void main(String[] args) {
-        BookModel bm = new BookModel();
-        bm.searchBooks("ISBN", "test");
+    public boolean save(long ID, String title, String ISBN, boolean available) {
+        Book b = new Book(ID, title, ISBN, available);
+        return b.save();
+
     }
-    
-    
+
+    public boolean delete(long ID) {
+        Book b = new Book(ID);
+        return b.delete();
+    }
 
 }
