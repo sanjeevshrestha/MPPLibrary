@@ -9,10 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import mpplibrary.MPPLibraryFactory;
 import mpplibrary.base.CheckoutRecord;
 import mpplibrary.base.CheckoutRecordEntry;
 import mpplibrary.base.LendableCopy;
 import mpplibrary.base.Member;
+import mpplibrary.base.roles.User;
 import mpplibrary.database.Database;
 import mpplibrary.database.DatabaseFactory;
 import mpplibrary.database.Query;
@@ -123,6 +125,41 @@ public class CheckoutRecordDAO {
         }
 
         return entries;
+
+    }
+
+    public void save(CheckoutRecord record) {
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+
+            User u = MPPLibraryFactory.getLoggedInUser();
+
+            q.insert("checkoutrecords");
+            q.column("checkout_by").value(String.valueOf(record.getCheckedOutBy().getID()));
+            q.column("checkout_date").value(record.getCheckoutDate().toString());
+            q.column("created_by").value(String.valueOf(u.getID()));
+            q.column("created").value(LocalDate.now().toString());
+
+            long insertid = db.execute();
+
+            for (CheckoutRecordEntry r : record.getCheckoutItems()) {
+                q = db.getQuery(true);
+
+                q.insert("recordentries");
+                q.column("checkout_record_id").value(String.valueOf(insertid));
+                q.column("lendable_id").value(String.valueOf(r.getBook().getID()));
+                q.column("checkout_date").value(record.getCheckoutDate().toString());
+                
+                q.column("due_date").value(r.calculateDueDateWithCheckoutDate(record.getCheckoutDate()).toString());
+                q.column("checked_in").value("false");
+                db.execute();
+                
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 

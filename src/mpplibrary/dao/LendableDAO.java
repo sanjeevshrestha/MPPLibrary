@@ -42,7 +42,6 @@ public class LendableDAO {
             q.join("LEFT", "books as b", " b.id=l.book_id");
 
             q.where("b.isbn=" + q.quote(String.valueOf(isbn)));
-            System.out.println(q.getQuery());
             rs = db.getResultSet();
             while (rs.next()) {
                 LendableCopy b;
@@ -68,17 +67,18 @@ public class LendableDAO {
             Query q = db.getQuery(true);
             q.select("l.uniqueid,b.*").from("lendablecopies as l");
             q.join("LEFT", "books as b", " b.id=l.book_id");
+            
 
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
-            System.out.println(q.getQuery());
             rs = db.getResultSet();
-            while (rs.next()) {
+           while (rs.next()) {
 
                 l.setTitle(rs.getString("title"));
                 l.setISBN(rs.getString("isbn"));
 
             }
 
+            System.out.println(l.getTitle());
             rs.close();
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());

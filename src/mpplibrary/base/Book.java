@@ -21,18 +21,18 @@ public class Book extends Publication {
 
     public Book() {
 
-        this.dataAccess=new BookDAO();
+        this.dataAccess = new BookDAO();
     }
 
     public Book(long ID) {
         super(ID);
-                this.dataAccess=new BookDAO();
+        this.dataAccess = new BookDAO();
 
     }
 
     public Book(long ID, String title) {
         super(ID, title);
-                this.dataAccess=new BookDAO();
+        this.dataAccess = new BookDAO();
 
     }
 
@@ -41,12 +41,10 @@ public class Book extends Publication {
         this.ISBN = isbn;
 
         this.setAuthors(authors);
-        for(String s:lencopies)
-        {
+        for (String s : lencopies) {
             this.addLendableCopies(Integer.parseInt(s));
         }
-                this.dataAccess=new BookDAO();
-
+        this.dataAccess = new BookDAO();
 
     }
 
@@ -54,7 +52,7 @@ public class Book extends Publication {
         super(ID, title);
         this.ISBN = ISBN;
         this.isAvailable = isAvailable;
-                this.dataAccess=new BookDAO();
+        this.dataAccess = new BookDAO();
 
     }
 

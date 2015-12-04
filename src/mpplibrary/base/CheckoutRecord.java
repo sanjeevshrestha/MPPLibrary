@@ -6,7 +6,9 @@
 package mpplibrary.base;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import mpplibrary.dao.CheckoutRecordDAO;
 
 /**
  *
@@ -19,15 +21,31 @@ public class CheckoutRecord {
     private Member checkedOutBy;
     private LocalDate checkoutDate;
 
+    private List<CheckoutRecordEntry> checkoutItems;
+    private List<Fine> fines;
+
+    private CheckoutRecordDAO dataAccess;
+
     public CheckoutRecord() {
-        this.ID=0;
-        this.checkoutDate=LocalDate.now();
+        this.ID = 0;
+        this.checkoutDate = LocalDate.now();
+        this.dataAccess = new CheckoutRecordDAO();
     }
 
     public CheckoutRecord(long ID, LocalDate cd, Member member) {
         this.ID = ID;
         this.checkedOutBy = member;
-        this.checkoutDate=cd;
+        this.checkoutDate = cd;
+        this.checkoutItems = new ArrayList<>();
+        this.dataAccess = new CheckoutRecordDAO();
+
+    }
+
+    public CheckoutRecord(Member checkedOutBy, LocalDate checkoutDate, List<CheckoutRecordEntry> entries) {
+        this.checkedOutBy = checkedOutBy;
+        this.checkoutDate = checkoutDate;
+        this.checkoutItems = entries;
+        this.dataAccess = new CheckoutRecordDAO();
 
     }
 
@@ -70,18 +88,18 @@ public class CheckoutRecord {
     public void setCheckoutDate(LocalDate checkoutDate) {
         this.checkoutDate = checkoutDate;
     }
-    
-    public String getMembername()
-    {
+
+    public String getMembername() {
         return this.checkedOutBy.getFullname();
     }
-    
-    public String getStringCheckoutdate()
-    {
+
+    public String getStringCheckoutdate() {
         return checkoutDate.toString();
     }
 
-    private List<CheckoutRecordEntry> checkoutItems;
-    private List<Fine> fines;
+    public void save() {
+        this.dataAccess.save(this);
+
+    }
 
 }
