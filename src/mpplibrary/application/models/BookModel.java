@@ -5,6 +5,7 @@
  */
 package mpplibrary.application.models;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import mpplibrary.base.Author;
 import mpplibrary.base.Book;
@@ -12,6 +13,9 @@ import mpplibrary.base.LendableCopy;
 import mpplibrary.dao.AuthorDAO;
 import mpplibrary.dao.BookDAO;
 import mpplibrary.dao.LendableDAO;
+import mpplibrary.database.Database;
+import mpplibrary.database.DatabaseFactory;
+import mpplibrary.database.Query;
 
 /**
  *
@@ -106,6 +110,32 @@ public class BookModel {
         b.loadBook();
         return b;
                 
+    }
+    
+    
+    public boolean isUniqueISBN(String isbn)
+    {
+        try {
+            ResultSet rs = null;
+            
+             Database db = DatabaseFactory.getInstance();
+
+            Query q = db.getQuery(true);
+            q.select("count(*) as cnt").from("books");
+
+            q.where("ISBN=" + q.quote(isbn));
+             rs = db.getResultSet();
+            while (rs.next()) {
+                int rowcount=rs.getInt("cnt");
+                return (rowcount==0);
+                
+            }
+            rs.close();
+            
+        } catch (Exception e) {
+        }
+        
+        return true;
     }
 
 }
