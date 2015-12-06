@@ -28,6 +28,7 @@ import javafx.util.Callback;
 import mpplibrary.application.models.BookModel;
 import mpplibrary.base.Author;
 import mpplibrary.base.Book;
+import mpplibrary.base.LendableCopy;
 import mpplibrary.base.Member;
 import mpplibrary.helper.LoadWindowFrame;
 
@@ -36,42 +37,48 @@ import mpplibrary.helper.LoadWindowFrame;
  * @author user
  */
 public class ListBooksController {
-    
+
     @FXML
     TextField txtSearchQuery;
-    
+
     @FXML
     TableView tblViewBooks;
-    
+
+    @FXML
+    TableView tblLendableCopies;
+
     @FXML
     AnchorPane anchorPaneBookPreview;
-    
+
     @FXML
     TableColumn<Book, String> tblColumnIsbn;
-    
+
     @FXML
     TableColumn<Book, String> tblColumnTitle;
-    
+
+    @FXML
+    TableColumn<LendableCopy, String> fxColumnLendableCopy;
+
     @FXML
     TableColumn<Book, String> tblColumnAvailable;
-    
+
     @FXML
     Button fxBtnAddNewBook, fxBtnDeleteBook;
-    
+
     private ObservableList<Book> booksList;
-    
+
     private ObservableList<Book> filteredBooksList;
-    
+
     private BookModel bookModel;
-    
+
     private int selectedBookPosition;
-    
+
     @FXML
     private Label fxTxtBookTitle, fxTxtBookDescription, fxTxtAuthors;
-    
+
     @FXML
     private AnchorPane fxAnchorPaneDetails;
-    
+
     @FXML
     public void initialize() {
         fxAnchorPaneDetails.setVisible(false);
@@ -79,20 +86,20 @@ public class ListBooksController {
         booksList = FXCollections.observableArrayList();
         filteredBooksList = FXCollections.observableArrayList();
         bookModel = new BookModel();
-        
+
         booksList.addAll(bookModel.getBooks());
         System.out.println("Books:" + booksList.size());
         onTableRowClicked();
-        
+
         tblColumnIsbn.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
         tblColumnIsbn.setCellFactory(cellFactory);
-        
+
         tblColumnTitle.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         tblColumnTitle.setCellFactory(cellFactory);
-        
+
         tblColumnAvailable.setCellValueFactory(new PropertyValueFactory<Book, String>("available"));
         tblColumnAvailable.setCellFactory(cellFactory);
-        
+
         filteredBooksList.addAll(booksList);
         tblViewBooks.setItems(filteredBooksList);
         txtSearchQuery.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
@@ -100,11 +107,11 @@ public class ListBooksController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 updateFilteredData();
             }
-            
+
         });
-        
+
     }
-    
+
     private void updateFilteredData() {
         filteredBooksList.clear();
         selectedBookPosition = -1;
@@ -114,34 +121,34 @@ public class ListBooksController {
                 filteredBooksList.add(book);
             }
         }
-        
+
         reapplyTableSortOrder();
     }
-    
+
     private boolean matchesFilter(Book book) {
         String queryText = txtSearchQuery.getText();
         if (queryText == null || queryText.isEmpty()) {
             // No filter --> Add all.
             return true;
         }
-        
+
         String lowerCaseFilterString = queryText.toLowerCase();
-        
+
         if (book.getTitle().toLowerCase().contains(lowerCaseFilterString)) {
             return true;
         }
-        
+
         return false; // Does not match
     }
-    
+
     private void reapplyTableSortOrder() {
         ArrayList<TableColumn<Book, ?>> sortOrder = new ArrayList<>(tblViewBooks.getSortOrder());
         tblViewBooks.getSortOrder().clear();
         tblViewBooks.getSortOrder().addAll(sortOrder);
     }
-    
+
     Callback<TableColumn<Book, String>, TableCell<Book, String>> cellFactory;
-    
+
     private void onTableRowClicked() {
         cellFactory
                 = new Callback<TableColumn<Book, String>, TableCell<Book, String>>() {
@@ -149,12 +156,12 @@ public class ListBooksController {
             public TableCell call(TableColumn p) {
                 MyStringTableCell cell = new MyStringTableCell();
                 cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
-                
+
                 return cell;
             }
         };
     }
-    
+
     void refreshListData() {
         booksList.clear();
         booksList.addAll(bookModel.getBooks());
@@ -163,45 +170,51 @@ public class ListBooksController {
         tblViewBooks.setItems(filteredBooksList);
         txtSearchQuery.setText("");
     }
-    
+
     class MyStringTableCell extends TableCell<Book, Object> {
-        
+
         @Override
         public void updateItem(Object item, boolean empty) {
             super.updateItem(item, empty);
             setText(empty ? null : getString());
             setGraphic(null);
         }
-        
+
         private String getString() {
             return getItem() == null ? "" : getItem().toString();
         }
     }
-    
+
     class MyEventHandler implements EventHandler<MouseEvent> {
-        
+
         @Override
         public void handle(MouseEvent t) {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
-         //   System.out.println("id = " + filteredBooksList.get(index).getISBN());
-          //  System.out.println("name = " + filteredBooksList.get(index).getTitle());
+
+
             selectedBookPosition = index;
             fxAnchorPaneDetails.setVisible(true);
-            
+
             Book book = new Book(filteredBooksList.get(index).getID());
             book.loadBook();
-            System.out.println(book.getTitle());
+            System.out.println("title = " + book.getTitle());
+            System.out.println("description = " + book.getDescription());
             fxTxtBookTitle.setText(book.getTitle());
             fxTxtBookDescription.setText(book.getDescription());
             String author = "";
-            for(int i=0; i<book.getAuthors().size(); i++){
-                author += (i+1) + "." + book.getAuthors().get(i)+"\n";
+            for (int i = 0; i < book.getAuthors().size(); i++) {
+                author += (i + 1) + "." + book.getAuthors().get(i) + "\n";
             }
             fxTxtAuthors.setText(author);
+
+            fxColumnLendableCopy.setCellValueFactory(new PropertyValueFactory<LendableCopy, String>("UniqueID"));
+            ObservableList<LendableCopy> lendables = FXCollections.observableArrayList();
+            lendables.addAll(book.getLendableCopies());
+            tblLendableCopies.setItems(booksList);
         }
     }
-    
+
     @FXML
     private void onBtnDeleteBookCLicked() {
         if (selectedBookPosition >= 0) {
@@ -209,24 +222,24 @@ public class ListBooksController {
             alert.setTitle("Delete Book");
             Book selectedBook = filteredBooksList.get(selectedBookPosition);
             alert.setHeaderText("Are you sure you want to remove " + selectedBook.getTitle());
-            
+
             ButtonType buttonTypeConfirm = new ButtonType("Ok", ButtonBar.ButtonData.APPLY);
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-            
+
             alert.getButtonTypes().setAll(buttonTypeConfirm, buttonTypeCancel);
-            
+
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == buttonTypeConfirm) {
-                
+
                 if (bookModel.delete(filteredBooksList.get(selectedBookPosition).getID())) {
-                    
+
                     refreshListData();
                 } else {
                     System.out.println("Error in deleteing member");
                 }
                 alert.close();
             }
-            
+
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Member");
@@ -237,7 +250,7 @@ public class ListBooksController {
             alert.show();
         }
     }
-    
+
     @FXML
     private void onBtnAddNewBookClicked() {
         LoadWindowFrame lf = LoadWindowFrame.getInstance();

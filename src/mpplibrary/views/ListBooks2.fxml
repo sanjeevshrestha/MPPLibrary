@@ -97,7 +97,7 @@
                               </VBox>
                            </content>
                         </ScrollPane>
-                        <TableView prefHeight="340.0" prefWidth="353.0">
+                        <TableView fx:id="tblLendableCopies" prefHeight="340.0" prefWidth="353.0">
                           <columns>
                             <TableColumn fx:id="fxColumnLendableCopy" prefWidth="333.0" text="Lendable Copy" />
                           </columns>
