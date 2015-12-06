@@ -23,7 +23,7 @@ import mpplibrary.rulesets.RuleSetFactory;
 public class AddMemberController {
 
     @FXML
-    TextField  txtFirstName, txtLastName, txtAddress, txtCity, txtState, txtZip, txtPhone, txtEmail;
+    TextField txtFirstName, txtLastName, txtAddress, txtCity, txtState, txtZip, txtPhone, txtEmail;
 
     @FXML
     Label errorLabel;
@@ -39,11 +39,11 @@ public class AddMemberController {
     private String email;
 
     private ListMembersController listMembersController;
-    
+
     private Stage dialogStage;
-    
+
     public void initialize() {
-  
+
         Tooltip nameToolTip = new Tooltip("Name must not be empty");
         txtFirstName.setTooltip(nameToolTip);
     }
@@ -63,17 +63,17 @@ public class AddMemberController {
         try {
             RuleSet addressRules = RuleSetFactory.getRuleSet(AddMemberController.this);
             addressRules.applyRules(AddMemberController.this);
-            if(MemberModel.getInstance().save(0, firstName, lastName, true, 0.00, email, "", phone, "", address, city, state, zip)){
-                      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Member Saved");
-                        alert.setContentText("Successfully added member");
-                        alert.showAndWait();
+            if (MemberModel.getInstance().save(0, firstName, lastName, true, 0.00, email, "", phone, "", address, city, state, zip)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Member Saved");
+                alert.setContentText("Successfully added member");
+                alert.showAndWait();
                 listMembersController.refreshListData();
                 this.dialogStage.close();
-            }else{
+            } else {
                 System.out.println("Error in saving member");
             }
-            
+
         } catch (RuleException e) {
             TextField errorTextField = (TextField) e.getErrorObject();
             errorLabel.setText(e.getMessage());
@@ -85,7 +85,6 @@ public class AddMemberController {
 //    public TextField getMemberComponent() {
 //        return txtMemberId;
 //    }
-
     public TextField getFirstNameComponent() {
         return txtFirstName;
     }
@@ -123,7 +122,7 @@ public class AddMemberController {
     }
 
     public void setMemberController(ListMembersController memberListController, Stage dialogStage) {
-       this.listMembersController = memberListController;
-       this.dialogStage = dialogStage;
+        this.listMembersController = memberListController;
+        this.dialogStage = dialogStage;
     }
 }
