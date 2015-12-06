@@ -101,5 +101,17 @@ public class CheckoutRecord {
         this.dataAccess.save(this);
 
     }
+    
+    public void loadRecord()
+    {
+        this.checkedOutBy.loadMember();
+        this.dataAccess.load(this);
+        
+    }
+    
+    public void addRecordEntry(CheckoutRecordEntry e)
+    {
+        this.checkoutItems.add(e);
+    }
 
 }

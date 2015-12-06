@@ -14,7 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import mpplibrary.application.models.CheckoutModel;
 import mpplibrary.base.CheckoutRecord;
+import mpplibrary.base.CheckoutRecordEntry;
 import mpplibrary.helper.LoadWindowFrame;
 
 /**
@@ -40,20 +41,30 @@ public class ListCheckoutsController {
     TextField txtSearchQuery;
 
     @FXML
-    TableView tblCheckedoutList;
+    TableView tblCheckedoutList,tblCheckoutRecordEntries;
 
     @FXML
     TableColumn tblColumnID, tblColumnName, tblColumnCheckoutDate, tblColumnBook, tblColumnFine, tblColumnDueDate;
 
+    @FXML
+    Label lblResultTotalFine, lblResultMember, lblResultCheckoutDate;
+
+    @FXML
+    AnchorPane pnCheckoutRecord;
+
     private ObservableList<CheckoutRecord> checkoutList;
 
     private ObservableList<CheckoutRecord> filteredCheckoutList;
+
+    private ObservableList<CheckoutRecordEntry> entriesList;
 
     private CheckoutModel checkoutModel;
 
     private int selectedCheckoutsPosition;
 
     Callback<TableColumn<CheckoutRecord, Object>, TableCell<CheckoutRecord, Object>> cellFactory;
+
+    Callback<TableColumn<CheckoutRecordEntry, Object>, TableCell<CheckoutRecordEntry, Object>> cellFactoryEntry;
 
     /**
      * Initializes the controller class.
@@ -64,6 +75,7 @@ public class ListCheckoutsController {
         selectedCheckoutsPosition = -1;
 
         checkoutList = FXCollections.observableArrayList();
+        entriesList=FXCollections.observableArrayList();
         filteredCheckoutList = FXCollections.observableArrayList();
         checkoutModel = new CheckoutModel();
 
@@ -78,7 +90,17 @@ public class ListCheckoutsController {
         tblColumnCheckoutDate.setCellValueFactory(new PropertyValueFactory<CheckoutRecord, Object>("stringCheckoutdate"));
         tblColumnCheckoutDate.setCellFactory(cellFactory);
         filteredCheckoutList.addAll(checkoutList);
+
         tblCheckedoutList.setItems(filteredCheckoutList);
+
+        tblColumnBook.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("title"));
+        tblColumnDueDate.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("dueDateInString"));
+
+        tblColumnFine.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("fine"));
+        
+        tblCheckoutRecordEntries.setItems(entriesList);
+        
+
         txtSearchQuery.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -103,6 +125,7 @@ public class ListCheckoutsController {
 //            dialogStage.initOwner();
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
+            ((CheckoutBookController) loader.getController()).setCheckoutListController(this, dialogStage);
 
             // Set the add book window into the controller.
 //            ((BookController) loader.getController()).initialize();
@@ -132,6 +155,17 @@ public class ListCheckoutsController {
                         cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
 
                         return cell;
+                    }
+                };
+
+        cellFactoryEntry
+                = new Callback<TableColumn<CheckoutRecordEntry, Object>, TableCell<CheckoutRecordEntry, Object>>() {
+                    @Override
+                    public TableCell call(TableColumn p) {
+                        MyStringTableCell cell = new MyStringTableCell();
+                       // cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+
+                       return cell;
                     }
                 };
     }
@@ -171,6 +205,15 @@ public class ListCheckoutsController {
         tblCheckedoutList.getSortOrder().addAll(sortOrder);
     }
 
+    void refreshListData() {
+        checkoutList.clear();
+        checkoutList.addAll(checkoutModel.getCheckoutRecords());
+        filteredCheckoutList.clear();
+        filteredCheckoutList.addAll(checkoutList);
+        tblCheckedoutList.setItems(checkoutList);
+        txtSearchQuery.setText("");
+    }
+
     class MyStringTableCell extends TableCell<CheckoutRecord, Object> {
 
         @Override
@@ -191,14 +234,22 @@ public class ListCheckoutsController {
         public void handle(MouseEvent t) {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
-            //  anchorPaneMemberPreview.setVisible(true);
+            pnCheckoutRecord.setVisible(true);
 
             CheckoutRecord r = filteredCheckoutList.get(index);
+            r.loadRecord();
+
+            lblResultMember.setText(r.getCheckedOutBy().getFullname());
+            lblResultCheckoutDate.setText(r.getCheckoutDate().toString());
+            lblResultTotalFine.setText("$0.00");
+            entriesList.clear();
+            entriesList.addAll(r.getCheckoutItems());
+            
+
 //            fxMemberNameTitle.setText(m.getFirstname() + " " + m.getLastname());
 //            fxTxtEmail.setText(m.getEmail());
 //            fxTxtPhone.setText(m.getPhone());
 //            fxTxtAddress.setText(m.getFullAddress());
-
             selectedCheckoutsPosition = index;
 
         }

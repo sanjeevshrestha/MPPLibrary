@@ -118,6 +118,10 @@ public class AddBookController {
 
             Book book = new Book(0, title, isbn, description, type, al, lcl);
             if (book.save()) {
+                 Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Book Saved");
+                        alert.setContentText("Successfully added book");
+                        alert.showAndWait();
                 dialogStage.close();
                 listBooksController.refreshListData();
             }
@@ -194,7 +198,6 @@ public class AddBookController {
         });
 
     }
-
 
     @FXML
     public void onSelectExistingAuthor() {

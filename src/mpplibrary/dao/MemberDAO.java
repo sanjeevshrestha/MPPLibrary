@@ -189,6 +189,8 @@ public class MemberDAO {
     
     public boolean isValid(Member m)
     {
+        System.out.println(m.getID());
+        if(m.getID()==0) return false;
          boolean isValid = false;
         ResultSet rs = null;
         try {
