@@ -15,8 +15,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mpplibrary.application.controllers.AddBookController;
 import mpplibrary.application.controllers.AddMemberController;
+import mpplibrary.application.controllers.AddUserController;
 import mpplibrary.application.controllers.ListBooksController;
 import mpplibrary.application.controllers.ListMembersController;
+import mpplibrary.application.controllers.ListUserController;
 
 /**
  *
@@ -77,29 +79,8 @@ public class LoadWindowFrame {
     }
 
     public void setSceneAddUser() {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/AddUser.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add User");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.initOwner();
-            dialogStage.initOwner(mainFramePane.getScene().getWindow());
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-            dialogStage.setResizable(false);
-//            ((AddMemberController)loader.getController()).setMemberController(memberListController, dialogStage);
-            // Set the add book window into the controller.
-//            ((BookController) loader.getController()).initialize();
-            // Show the dialog and wait until the user closes it
-            dialogStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ListUserController userListController = setSceneListUsers();
+        popUpAddUserScene(userListController);
     }
 
     public void popUpAddMemberScene(ListMembersController memberListController) {
@@ -128,6 +109,32 @@ public class LoadWindowFrame {
         }
     }
 
+    public void popUpAddUserScene(ListUserController listcontroller) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/AddUser.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add User");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+//            dialogStage.initOwner();
+            dialogStage.initOwner(mainFramePane.getScene().getWindow());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            ((AddUserController) loader.getController()).setUserlistController(listcontroller, dialogStage);
+            // Set the add book window into the controller.
+//            ((BookController) loader.getController()).initialize();
+            // Show the dialog and wait until the user closes it
+            dialogStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ListBooksController setSceneListBooks() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListBooks2.fxml"));
         try {
@@ -143,9 +150,10 @@ public class LoadWindowFrame {
         return loader.getController();
     }
 
-    public void setSceneListUsers() {
+    public ListUserController setSceneListUsers() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListUsers.fxml"));
+
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mpplibrary/views/ListUsers.fxml"));
             AnchorPane pane = loader.load();
             mainFramePane.getChildren().clear();
             mainFramePane.getChildren().add(pane);
@@ -153,6 +161,8 @@ public class LoadWindowFrame {
         } catch (IOException ex) {
             Logger.getLogger(LoadWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return loader.getController();
     }
 
     public ListMembersController setSceneListMembers() {
