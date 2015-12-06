@@ -111,6 +111,7 @@ public class UserDAO extends DAO {
                         rs.getString("state"),
                         rs.getString("zip"));
 
+                u.setUsername(rs.getString("username"));
                 this.users.add(u);
             }
 

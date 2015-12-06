@@ -98,6 +98,14 @@ abstract public class Publication {
 
         this.lendableCopies.add(l);
     }
+    
+    
+    public void addAuthor(Author a)
+    {
+        this.authors.add(a);
+    }
+    
+    
 
     public List<LendableCopy> getLendableCopies() {
         return lendableCopies;

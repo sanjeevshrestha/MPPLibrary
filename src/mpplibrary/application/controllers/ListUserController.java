@@ -42,7 +42,7 @@ public class ListUserController {
     TableView tblViewUsers;
 
     @FXML
-    Label fxTxtEmail, fxTxtAddress, fxTxtPhone, fxLastLoggedIn, fxUserNameTitle;
+    Label fxTxtEmail, fxTxtAddress, fxTxtPhone, fxLastLoggedIn, fxUserNameTitle,fxTxtUsername;
 
     @FXML
     AnchorPane anchorPaneUserPreview;
@@ -225,6 +225,8 @@ public class ListUserController {
                 fxTxtEmail.setText(user.getEmail());
                 fxTxtPhone.setText(user.getPhone());
                 fxTxtAddress.setText(user.getFullAddress());
+                
+                fxTxtUsername.setText(user.getUsername());
 //                System.out.println(user.getEmail());
             } catch (Exception e) {
             }
