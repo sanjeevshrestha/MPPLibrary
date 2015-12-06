@@ -6,6 +6,7 @@
 package mpplibrary.application.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -63,6 +64,10 @@ public class AddMemberController {
             RuleSet addressRules = RuleSetFactory.getRuleSet(AddMemberController.this);
             addressRules.applyRules(AddMemberController.this);
             if(MemberModel.getInstance().save(0, firstName, lastName, true, 0.00, email, "", phone, "", address, city, state, zip)){
+                      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Member Saved");
+                        alert.setContentText("Successfully added member");
+                        alert.showAndWait();
                 listMembersController.refreshListData();
                 this.dialogStage.close();
             }else{

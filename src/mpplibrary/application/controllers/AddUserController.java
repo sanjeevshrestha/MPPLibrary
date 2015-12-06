@@ -8,6 +8,7 @@ package mpplibrary.application.controllers;
 import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -74,8 +75,11 @@ public class AddUserController {
         try {
             User u = MPPLibraryFactory.getLoggedInUser();
             if (UserModel.getInstance().save(0, firstname, lastname, email, username, password, role, new Date(), u.getID(), new Date(), u.getID(), true, phone, address, city, state, zip)) {
+                      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("User Saved");
+                        alert.setContentText("Successfully added user");
+                        alert.showAndWait();
                 listUserController.refreshListData();
-                JOptionPane.showMessageDialog(null, "One Record Inserted...");
             }
         } catch (Exception e) {
             e.printStackTrace();
