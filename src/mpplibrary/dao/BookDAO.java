@@ -156,4 +156,51 @@ public class BookDAO {
 
     }
 
+    public boolean loadBook(Book bin) {
+        ResultSet rs = null, rs1 = null;
+        try {
+
+            Database db = DatabaseFactory.getInstance();
+
+            Query q = db.getQuery(true);
+            q.select("*").from("books");
+
+            q.where("id=" + q.quote(String.valueOf(bin.getID())));
+
+            rs = db.getResultSet();
+            while (rs.next()) {
+                Book b;
+                b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
+                q = db.getQuery(true);
+                q.select("*").from("lendablecopies").where("book_id=" + q.quote(String.valueOf(b.getID())));
+                rs1 = db.getResultSet();
+                while (rs1.next()) {
+                    LendableCopy lc = new LendableCopy(rs1.getLong("uniqueid"), rs1.getLong("book_id"));
+                    lc.loadBookDetail();
+                    b.addLendableCopies(lc);
+                }
+
+                q = db.getQuery(true);
+                q.select("*").from("books_authors").where("book_id=" + q.quote(String.valueOf(b.getID())));
+                rs1 = db.getResultSet();
+
+                while (rs1.next()) {
+                    Author a = new Author(rs1.getLong("author_id"));
+                    a.loadAuthor();
+                    b.addAuthor(a);
+
+                }
+
+                return true;
+            }
+            rs.close();
+
+        } catch (QueryException | SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        return false;
+
+    }
+
 }

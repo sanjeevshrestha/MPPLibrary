@@ -98,5 +98,14 @@ public class BookModel {
         Book b = new Book(ID);
         return b.delete();
     }
+    
+    
+    public Book getBook(long ID)
+    {
+        Book b=new Book(ID);
+        b.loadBook();
+        return b;
+                
+    }
 
 }
