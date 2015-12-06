@@ -184,13 +184,14 @@ public class ListBooksController {
         public void handle(MouseEvent t) {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
-            System.out.println("id = " + filteredBooksList.get(index).getISBN());
-            System.out.println("name = " + filteredBooksList.get(index).getTitle());
+         //   System.out.println("id = " + filteredBooksList.get(index).getISBN());
+          //  System.out.println("name = " + filteredBooksList.get(index).getTitle());
             selectedBookPosition = index;
             fxAnchorPaneDetails.setVisible(true);
             
             Book book = new Book(filteredBooksList.get(index).getID());
             book.loadBook();
+            System.out.println(book.getTitle());
             fxTxtBookTitle.setText(book.getTitle());
             fxTxtBookDescription.setText(book.getDescription());
             String author = "";
