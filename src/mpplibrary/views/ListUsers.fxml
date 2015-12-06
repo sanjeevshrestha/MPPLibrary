@@ -59,7 +59,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneUserPreview" prefHeight="495.0" prefWidth="362.0">
+            <AnchorPane fx:id="anchorPaneUserPreview" prefHeight="495.0" prefWidth="362.0" visible="false">
                <children>
                   <VBox prefHeight="573.0" prefWidth="277.0">
                      <children>

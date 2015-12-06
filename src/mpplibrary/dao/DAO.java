@@ -11,7 +11,4 @@ package mpplibrary.dao;
  */
 abstract public class DAO {
     
-
-    
-    
 }
