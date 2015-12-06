@@ -20,12 +20,14 @@ public class Author extends Person {
     
     public Author()
     {
-        
+        this.dataAccess=new AuthorDAO();
     }
     
     public Author(long ID)
     {
       this.setID(ID);
+              this.dataAccess=new AuthorDAO();
+
     }
 
     public Author(String firstName, String lastName, String email, String credentials, String bio) {
