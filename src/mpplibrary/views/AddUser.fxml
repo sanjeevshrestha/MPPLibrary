@@ -19,7 +19,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="errorLabel" text="            " />
+                  <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="138.0" text="            " />
               </items>
             </ToolBar>
             <TabPane prefHeight="400.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
