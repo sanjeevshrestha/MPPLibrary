@@ -192,13 +192,14 @@ public class ListBooksController {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
 
+
             selectedBookPosition = index;
             fxAnchorPaneDetails.setVisible(true);
 
             Book book = new Book(filteredBooksList.get(index).getID());
             book.loadBook();
-            System.out.println("id = " + book.getTitle());
-            System.out.println("name = " + book.getDescription());
+            System.out.println("title = " + book.getTitle());
+            System.out.println("description = " + book.getDescription());
             fxTxtBookTitle.setText(book.getTitle());
             fxTxtBookDescription.setText(book.getDescription());
             String author = "";

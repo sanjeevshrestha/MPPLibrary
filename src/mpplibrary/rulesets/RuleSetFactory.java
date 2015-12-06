@@ -3,6 +3,7 @@ package mpplibrary.rulesets;
 import java.util.HashMap;
 import mpplibrary.application.controllers.AddBookController;
 import mpplibrary.application.controllers.AddMemberController;
+import mpplibrary.application.controllers.AddUserController;
 
 final public class RuleSetFactory {
 
@@ -13,6 +14,7 @@ final public class RuleSetFactory {
     static {
         map.put(AddMemberController.class, new AddMemberRuleSet());
         map.put(AddBookController.class, new AddBookAndAuthorRuleSet());
+        map.put(AddUserController.class, new AddUserRuleSet());
         
     }
 

@@ -11,12 +11,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mpplibrary.MPPLibraryFactory;
 import mpplibrary.application.models.UserModel;
 import mpplibrary.base.roles.User;
+import mpplibrary.rulesets.RuleException;
+import mpplibrary.rulesets.RuleSet;
+import mpplibrary.rulesets.RuleSetFactory;
 
 /**
  *
@@ -25,10 +29,29 @@ import mpplibrary.base.roles.User;
 public class AddUserController {
 
     @FXML
-    TextField usernameTxt, firstNameTxt, lastNameTxt, phoneTxt, emailTxt, addressTxt, cityTxt, stateTxt, zipTxt;
+    private TextField usernameTxt;
+    @FXML
+    private TextField firstNameTxt;
+    @FXML
+    private TextField lastNameTxt;
+    @FXML
+    private TextField phoneTxt;
+    @FXML
+    private TextField emailTxt;
+    @FXML
+    private TextField addressTxt;
+    @FXML
+    private TextField cityTxt;
+    @FXML
+    private TextField stateTxt;
+    @FXML
+    private TextField zipTxt;
 
     @FXML
-    PasswordField passwordTxt;
+    private PasswordField passwordTxt;
+
+    @FXML
+    private Label errorLabel;
 
     @FXML
     ComboBox accountTypeComboBox;
@@ -74,6 +97,8 @@ public class AddUserController {
         this.role = accountTypeComboBox.getValue().toString();
 
         try {
+            RuleSet addressRules = RuleSetFactory.getRuleSet(AddUserController.this);
+            addressRules.applyRules(AddUserController.this);
             User u = MPPLibraryFactory.getLoggedInUser();
             if (UserModel.getInstance().save(0, firstname, lastname, email, username, password, role, new Date(), u.getID(), new Date(), u.getID(), true, phone, address, city, state, zip)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -82,14 +107,98 @@ public class AddUserController {
                 alert.showAndWait();
                 listUserController.refreshListData();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (RuleException e) {
+            TextField errorTextField = (TextField) e.getErrorObject();
+            errorLabel.setText(e.getMessage());
+            errorLabel.setStyle("-fx-text-fill:red; -fx-font-size: 14pt; -fx-opacity: 0.6; -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );");
+            errorTextField.setStyle("-fx-border-color: red; -fx-border-width: 2px ;");
+//            e.printStackTrace();
         }
     }
 
     @FXML
     protected void onCancelBttnClicked(ActionEvent event) {
 
+    }
+
+    public TextField getUsernameTxt() {
+        return usernameTxt;
+    }
+
+    public void setUsernameTxt(TextField usernameTxt) {
+        this.usernameTxt = usernameTxt;
+    }
+
+    public TextField getFirstNameTxt() {
+        return firstNameTxt;
+    }
+
+    public void setFirstNameTxt(TextField firstNameTxt) {
+        this.firstNameTxt = firstNameTxt;
+    }
+
+    public TextField getLastNameTxt() {
+        return lastNameTxt;
+    }
+
+    public void setLastNameTxt(TextField lastNameTxt) {
+        this.lastNameTxt = lastNameTxt;
+    }
+
+    public TextField getPhoneTxt() {
+        return phoneTxt;
+    }
+
+    public void setPhoneTxt(TextField phoneTxt) {
+        this.phoneTxt = phoneTxt;
+    }
+
+    public TextField getEmailTxt() {
+        return emailTxt;
+    }
+
+    public void setEmailTxt(TextField emailTxt) {
+        this.emailTxt = emailTxt;
+    }
+
+    public TextField getAddressTxt() {
+        return addressTxt;
+    }
+
+    public void setAddressTxt(TextField addressTxt) {
+        this.addressTxt = addressTxt;
+    }
+
+    public TextField getCityTxt() {
+        return cityTxt;
+    }
+
+    public void setCityTxt(TextField cityTxt) {
+        this.cityTxt = cityTxt;
+    }
+
+    public TextField getStateTxt() {
+        return stateTxt;
+    }
+
+    public void setStateTxt(TextField stateTxt) {
+        this.stateTxt = stateTxt;
+    }
+
+    public TextField getZipTxt() {
+        return zipTxt;
+    }
+
+    public void setZipTxt(TextField zipTxt) {
+        this.zipTxt = zipTxt;
+    }
+
+    public PasswordField getPasswordTxt() {
+        return passwordTxt;
+    }
+
+    public void setPasswordTxt(PasswordField passwordTxt) {
+        this.passwordTxt = passwordTxt;
     }
 
     public void setUserlistController(ListUserController userListController, Stage dialogStage) {
