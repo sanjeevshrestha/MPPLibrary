@@ -79,4 +79,9 @@ public class Book extends Publication {
     public boolean delete() {
         return this.dataAccess.delete(this);
     }
+    
+    public void loadBook()
+    {
+        this.dataAccess.loadBook(this);
+    }
 }

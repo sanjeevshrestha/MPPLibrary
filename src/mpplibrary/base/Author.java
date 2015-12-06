@@ -18,6 +18,15 @@ public class Author extends Person {
     
     private AuthorDAO dataAccess;
     
+    public Author()
+    {
+        
+    }
+    
+    public Author(long ID)
+    {
+      this.setID(ID);
+    }
 
     public Author(String firstName, String lastName, String email, String credentials, String bio) {
         super(0, firstName, lastName, true, "", email, "");
@@ -65,6 +74,12 @@ public class Author extends Person {
     public boolean save()
     {
        return  this.dataAccess.saveAuthor(this);
+    }
+    
+    
+    public void loadAuthor()
+    {
+        this.dataAccess.loadAuthor(this);
     }
 
     @Override
