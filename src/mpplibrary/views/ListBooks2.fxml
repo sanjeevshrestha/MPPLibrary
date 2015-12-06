@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListBooksController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListBooksController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
@@ -71,13 +71,13 @@
                            <content>
                               <VBox prefHeight="254.0" prefWidth="340.0">
                                  <children>
-                                    <Label fx:id="fxTxtBookTitle">
+                                    <Label fx:id="fxTxtBookTitle" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="174.0" text="Book Title">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="fxTxtBookDescription" />
-                                    <Label text="Authors">
+                                    <Label fx:id="fxTxtBookDescription" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="273.0" text="Description" />
+                                    <Label maxWidth="1.7976931348623157E308" text="Authors">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
@@ -85,7 +85,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="fxTxtAuthors">
+                                    <Label fx:id="fxTxtAuthors" maxWidth="1.7976931348623157E308">
                                        <VBox.margin>
                                           <Insets top="5.0" />
                                        </VBox.margin>
@@ -97,7 +97,7 @@
                               </VBox>
                            </content>
                         </ScrollPane>
-                        <TableView prefHeight="340.0" prefWidth="353.0">
+                        <TableView fx:id="tblLendableCopies" prefHeight="340.0" prefWidth="353.0">
                           <columns>
                             <TableColumn fx:id="fxColumnLendableCopy" prefWidth="333.0" text="Lendable Copy" />
                           </columns>

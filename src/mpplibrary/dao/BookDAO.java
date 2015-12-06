@@ -166,28 +166,38 @@ public class BookDAO {
             q.select("*").from("books");
 
             q.where("id=" + q.quote(String.valueOf(bin.getID())));
+           
 
             rs = db.getResultSet();
             while (rs.next()) {
-                Book b;
-                b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
+                //b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
+                bin.setTitle(rs.getString("title"));
+                bin.setID(rs.getLong("id"));
+                bin.setISBN(rs.getString("ISBN"));
+               bin.setIsAvailable(rs.getBoolean("available"));
+               bin.setDescription(rs.getString("description"));
+               
                 q = db.getQuery(true);
-                q.select("*").from("lendablecopies").where("book_id=" + q.quote(String.valueOf(b.getID())));
+                q.select("*").from("lendablecopies").where("book_id=" + q.quote(String.valueOf(bin.getID())));
+                
+                System.out.println(q.getQuery());
                 rs1 = db.getResultSet();
                 while (rs1.next()) {
                     LendableCopy lc = new LendableCopy(rs1.getLong("uniqueid"), rs1.getLong("book_id"));
+                    lc.setIsAvailable(rs1.getBoolean("available"));
+                    
                     lc.loadBookDetail();
-                    b.addLendableCopies(lc);
+                    bin.addLendableCopies(lc);
                 }
 
                 q = db.getQuery(true);
-                q.select("*").from("books_authors").where("book_id=" + q.quote(String.valueOf(b.getID())));
+                q.select("*").from("books_authors").where("book_id=" + q.quote(String.valueOf(bin.getID())));
                 rs1 = db.getResultSet();
 
                 while (rs1.next()) {
                     Author a = new Author(rs1.getLong("author_id"));
                     a.loadAuthor();
-                    b.addAuthor(a);
+                    bin.addAuthor(a);
 
                 }
 
@@ -202,5 +212,6 @@ public class BookDAO {
         return false;
 
     }
+ 
 
 }
