@@ -188,7 +188,9 @@ public class ListBooksController {
             System.out.println("name = " + filteredBooksList.get(index).getTitle());
             selectedBookPosition = index;
             fxAnchorPaneDetails.setVisible(true);
-            Book book = filteredBooksList.get(index);
+            
+            Book book = new Book(filteredBooksList.get(index).getID());
+            book.loadBook();
             fxTxtBookTitle.setText(book.getTitle());
             fxTxtBookDescription.setText(book.getDescription());
             String author = "";
