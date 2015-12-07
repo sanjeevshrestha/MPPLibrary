@@ -20,6 +20,15 @@ public class CheckoutRecordEntry {
     private LocalDate checkoutDate;
     private LocalDate dueDate;
     private int lendableDays;
+    private boolean checked_in;
+
+    public boolean isChecked_in() {
+        return checked_in;
+    }
+
+    public void setChecked_in(boolean checked_in) {
+        this.checked_in = checked_in;
+    }
 
     private CheckoutRecordEntryDAO dataAccess;
 

@@ -180,6 +180,8 @@ public class CheckoutRecordDAO {
                 l.loadBookDetail();
                 CheckoutRecordEntry e=new CheckoutRecordEntry(l,LocalDate.parse(rs.getString("checkout_date")));
                 e.setDueDate(LocalDate.parse(rs.getString("due_date")));
+                e.setChecked_in(rs.getBoolean("checked_in"));
+              
                 entries.add(e);
                // r.addRecordEntry(e);
             }

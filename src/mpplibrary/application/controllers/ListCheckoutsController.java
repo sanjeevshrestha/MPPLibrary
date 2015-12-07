@@ -42,7 +42,7 @@ public class ListCheckoutsController {
     TextField txtSearchQuery;
 
     @FXML
-    TableView tblCheckedoutList,tblCheckoutRecordEntries;
+    TableView tblCheckedoutList, tblCheckoutRecordEntries;
 
     @FXML
     TableColumn tblColumnID, tblColumnName, tblColumnCheckoutDate, tblColumnBook, tblColumnFine, tblColumnDueDate;
@@ -52,9 +52,9 @@ public class ListCheckoutsController {
 
     @FXML
     AnchorPane pnCheckoutRecord;
-    
+
     @FXML
-    Button btnCheckin,btnCalculateFine;
+    Button btnCheckin, btnCalculateFine;
 
     private ObservableList<CheckoutRecord> checkoutList;
 
@@ -79,7 +79,7 @@ public class ListCheckoutsController {
         selectedCheckoutsPosition = -1;
 
         checkoutList = FXCollections.observableArrayList();
-        entriesList=FXCollections.observableArrayList();
+        entriesList = FXCollections.observableArrayList();
         filteredCheckoutList = FXCollections.observableArrayList();
         checkoutModel = new CheckoutModel();
 
@@ -101,9 +101,8 @@ public class ListCheckoutsController {
         tblColumnDueDate.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("dueDateInString"));
 
         tblColumnFine.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("fine"));
-        
+
         tblCheckoutRecordEntries.setItems(entriesList);
-        
 
         txtSearchQuery.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
             @Override
@@ -122,7 +121,6 @@ public class ListCheckoutsController {
             loader.setLocation(LoadWindowFrame.class.getResource("/mpplibrary/views/CheckOutBooks.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Checkouts");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -131,9 +129,6 @@ public class ListCheckoutsController {
             dialogStage.setScene(scene);
             ((CheckoutBookController) loader.getController()).setCheckoutListController(this, dialogStage);
 
-            // Set the add book window into the controller.
-//            ((BookController) loader.getController()).initialize();
-            // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,12 +136,12 @@ public class ListCheckoutsController {
     }
 
     @FXML
-    protected void onAddBookBttnClicked(ActionEvent event) {
 
-    }
-
-    @FXML
-    protected void onCheckoutBttnClicked(ActionEvent event) {
+    protected void onBtnCheckinClicked(ActionEvent ev) {
+        try {
+            System.out.println("Testing");
+        } catch (Exception e) {
+        }
 
     }
 
@@ -167,9 +162,9 @@ public class ListCheckoutsController {
                     @Override
                     public TableCell call(TableColumn p) {
                         MyStringTableCell cell = new MyStringTableCell();
-                       // cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+                        // cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
 
-                       return cell;
+                        return cell;
                     }
                 };
     }
@@ -248,12 +243,7 @@ public class ListCheckoutsController {
             lblResultTotalFine.setText("$0.00");
             entriesList.clear();
             entriesList.addAll(r.getCheckoutItems());
-            
 
-//            fxMemberNameTitle.setText(m.getFirstname() + " " + m.getLastname());
-//            fxTxtEmail.setText(m.getEmail());
-//            fxTxtPhone.setText(m.getPhone());
-//            fxTxtAddress.setText(m.getFullAddress());
             selectedCheckoutsPosition = index;
 
         }
