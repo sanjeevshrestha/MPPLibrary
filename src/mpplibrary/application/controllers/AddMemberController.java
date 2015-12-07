@@ -71,7 +71,10 @@ public class AddMemberController {
                 listMembersController.refreshListData();
                 this.dialogStage.close();
             } else {
-                System.out.println("Error in saving member");
+                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Member could not be saved");
+                alert.setContentText("Could not add  member");
+                alert.showAndWait();
             }
 
         } catch (RuleException e) {

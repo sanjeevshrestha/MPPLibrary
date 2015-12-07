@@ -83,9 +83,7 @@ public class ListMembersController {
         memberModel = new MemberModel();
 
         membersList.addAll(memberModel.getMembers());
-//        for (Member mem : membersList) {
-//            System.out.println("mem:" + mem.getID());
-//        }
+
         onTableRowClicked();
         tblColumnMemberId.setCellValueFactory(new PropertyValueFactory<Member, Object>("ID"));
         tblColumnMemberId.setCellFactory(cellFactory);

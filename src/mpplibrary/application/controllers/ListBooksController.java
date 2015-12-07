@@ -88,7 +88,6 @@ public class ListBooksController {
         bookModel = new BookModel();
 
         booksList.addAll(bookModel.getBooks());
-        System.out.println("Books:" + booksList.size());
         onTableRowClicked();
 
         tblColumnIsbn.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
@@ -194,9 +193,7 @@ public class ListBooksController {
 
             Book book = new Book(filteredBooksList.get(index).getID());
             book.loadBook();
-            System.out.println("title = " + book.getTitle());
-            System.out.println("description = " + book.getDescription());
-            System.out.println("lendables = " + book.getLendableCopies().size());
+         
             fxTxtBookTitle.setText(book.getTitle());
             fxTxtBookDescription.setText(book.getDescription());
             String author = "";

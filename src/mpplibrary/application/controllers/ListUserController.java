@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -101,7 +102,6 @@ public class ListUserController {
 
     @FXML
     public void onDeleteBttnClicked(ActionEvent event) {
-        System.out.println("Position:: " + selectedUserPosition);
         if (selectedUserPosition >= 0) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete User");
@@ -117,10 +117,15 @@ public class ListUserController {
             if (result.get() == buttonTypeConfirm) {
 
                 if (userModel.delete(filteredUsersList.get(selectedUserPosition).getID())) {
-                    //if (userModel.delete(selectedUser.getID())) {
+                    alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("User Saved");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Successfully saved user");
+
+                    alert.showAndWait();
                     refreshListData();
                 } else {
-                    System.out.println("Error in Deleting User");
+                    System.out.println("Error in deleting User");
                 }
                 alert.close();
             }
@@ -219,7 +224,7 @@ public class ListUserController {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
             selectedUserPosition = index;
-            System.out.println("Position:: "+selectedUserPosition);
+            System.out.println("Position:: " + selectedUserPosition);
             anchorPaneUserPreview.setVisible(true);
 
             User user = filteredUsersList.get(index);
@@ -229,10 +234,8 @@ public class ListUserController {
             fxTxtAddress.setText(user.getFullAddress());
 
 //            fxTxtUsername.setText(user.getUsername());
-            
 //                System.out.println(user.getEmail());
         }
     }
-    
-    
+
 }

@@ -77,7 +77,6 @@ public class LendableDAO {
 
             }
 
-            System.out.println(l.getTitle());
             rs.close();
         } catch (QueryException | SQLException e) {
             System.out.println(e.getMessage());
@@ -126,7 +125,7 @@ public class LendableDAO {
             q.select("count(*) as cnt").from("lendablecopies as l");
 
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
-            q.where("available=" + q.quote("true"));
+            q.where("available=" + q.quote("1"));
             rs = db.getResultSet();
 
             while (rs.next()) {
@@ -150,7 +149,7 @@ public class LendableDAO {
             Query q = db.getQuery(true);
 
             q.update("lendablecopies");
-            q.set("available", "false");
+            q.set("available", "0");
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
             
             System.out.println(q.getQuery());

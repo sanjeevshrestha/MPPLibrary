@@ -171,7 +171,6 @@ public class AddBookController {
             }
         });
 
-        System.out.println("Authorlist:" + existingAuthorsList.size());
         fxComboSelectAuthor.setItems(existingAuthorsList);
         fxComboSelectAuthor.setCellFactory(new Callback<ListView<Author>, ListCell<Author>>() {
             @Override
@@ -183,7 +182,6 @@ public class AddBookController {
                         super.updateItem(author, bln);
 
                         if (author != null) {
-                            System.out.println("Author:" + author.getFirstname() + " " + author.getLastname());
                             setText(author.getAuthorFullName());
                         } else {
                             setText(null);
@@ -314,7 +312,6 @@ public class AddBookController {
         } else {
             Author author = new Author(authorFName, authorLName, authorEmail, authorCredentials, authorBio);
             if (author.save()) {
-                System.out.println(author.getID());
             }
 
             addedAuthorsList.add(author);
