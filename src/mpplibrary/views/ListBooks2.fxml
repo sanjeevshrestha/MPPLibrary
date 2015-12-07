@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListBooksController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpplibrary.application.controllers.ListBooksController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
@@ -48,9 +48,8 @@
                         </GridPane>
                         <TableView fx:id="tblViewBooks" minWidth="-Infinity" prefHeight="480.0" prefWidth="390.0">
                            <columns>
-                              <TableColumn fx:id="tblColumnIsbn" prefWidth="95.0" text="ISBN" />
-                              <TableColumn fx:id="tblColumnTitle" prefWidth="230.0" text="TITLE" />
-                              <TableColumn fx:id="tblColumnAvailable" minWidth="0.0" prefWidth="86.0" text="AVAILABLE" />
+                              <TableColumn fx:id="tblColumnIsbn" prefWidth="133.0" text="ISBN" />
+                              <TableColumn fx:id="tblColumnTitle" prefWidth="285.0" text="TITLE" />
                            </columns>
                            <VBox.margin>
                               <Insets />
@@ -97,9 +96,10 @@
                               </VBox>
                            </content>
                         </ScrollPane>
-                        <TableView fx:id="tblLendableCopies" prefHeight="340.0" prefWidth="353.0">
+                        <TableView fx:id="tblLendableCopies" prefWidth="217.0">
                           <columns>
-                            <TableColumn fx:id="fxColumnLendableCopy" prefWidth="333.0" text="Lendable Copy" />
+                            <TableColumn fx:id="fxColumnLendableCopy" maxWidth="231.0" minWidth="-1.0" prefWidth="179.0" text="Lendable Copy" />
+                              <TableColumn fx:id="tblColumnAvailable" maxWidth="252.0" minWidth="-1.0" prefWidth="173.0" resizable="false" text="AVAILABLE" />
                           </columns>
                         </TableView>
                      </children></VBox>
