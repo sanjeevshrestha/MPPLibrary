@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import mpplibrary.MPPLibraryFactory;
 import mpplibrary.application.models.UserModel;
 import mpplibrary.base.roles.User;
@@ -94,7 +95,14 @@ public class AddUserController {
         this.city = cityTxt.getText();
         this.state = stateTxt.getText();
         this.zip = zipTxt.getText();
-        this.role = accountTypeComboBox.getValue().toString();
+        try {
+            this.role = accountTypeComboBox.getValue().toString();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Select User Type.");
+            alert.showAndWait();
+        }
 
         try {
             RuleSet addressRules = RuleSetFactory.getRuleSet(AddUserController.this);
@@ -116,9 +124,24 @@ public class AddUserController {
         }
     }
 
+    private void clearAllFields() {
+        usernameTxt.setText("");
+        passwordTxt.setText("");
+        firstNameTxt.setText("");
+        lastNameTxt.setText("");
+        phoneTxt.setText("");
+        emailTxt.setText("");
+        addressTxt.setText("");
+        cityTxt.setText("");
+        stateTxt.setText("");
+        zipTxt.setText("");
+    }
+
     @FXML
     protected void onCancelBttnClicked(ActionEvent event) {
-
+        Window stage = dialogStage.getScene().getWindow();
+        stage.hide();
+        listUserController.refreshListData();
     }
 
     public TextField getUsernameTxt() {

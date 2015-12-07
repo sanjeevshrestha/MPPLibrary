@@ -42,7 +42,7 @@ public class ListUserController {
     TableView tblViewUsers;
 
     @FXML
-    Label fxTxtEmail, fxTxtAddress, fxTxtPhone, fxLastLoggedIn, fxUserNameTitle,fxTxtUsername;
+    Label fxTxtEmail, fxTxtAddress, fxTxtPhone, fxLastLoggedIn, fxUserNameTitle, fxTxtUsername;
 
     @FXML
     AnchorPane anchorPaneUserPreview;
@@ -101,6 +101,7 @@ public class ListUserController {
 
     @FXML
     public void onDeleteBttnClicked(ActionEvent event) {
+        System.out.println("Position:: " + selectedUserPosition);
         if (selectedUserPosition >= 0) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete User");
@@ -115,8 +116,8 @@ public class ListUserController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == buttonTypeConfirm) {
 
-//                if (userModel.delete(filteredUsersList.get(selectedUserPosition).getID())) {
-                if (userModel.delete(selectedUser.getID())) {
+                if (userModel.delete(filteredUsersList.get(selectedUserPosition).getID())) {
+                    //if (userModel.delete(selectedUser.getID())) {
                     refreshListData();
                 } else {
                     System.out.println("Error in Deleting User");
@@ -215,21 +216,23 @@ public class ListUserController {
 
         @Override
         public void handle(MouseEvent t) {
-            try {
-                TableCell c = (TableCell) t.getSource();
-                int index = c.getIndex();
-                anchorPaneUserPreview.setVisible(true);
+            TableCell c = (TableCell) t.getSource();
+            int index = c.getIndex();
+            selectedUserPosition = index;
+            System.out.println("Position:: "+selectedUserPosition);
+            anchorPaneUserPreview.setVisible(true);
 
-                User user = filteredUsersList.get(index);
-                fxUserNameTitle.setText(user.getFirstname() + " " + user.getLastname());
-                fxTxtEmail.setText(user.getEmail());
-                fxTxtPhone.setText(user.getPhone());
-                fxTxtAddress.setText(user.getFullAddress());
-                
-                fxTxtUsername.setText(user.getUsername());
+            User user = filteredUsersList.get(index);
+            fxUserNameTitle.setText(user.getFirstname() + " " + user.getLastname());
+            fxTxtEmail.setText(user.getEmail());
+            fxTxtPhone.setText(user.getPhone());
+            fxTxtAddress.setText(user.getFullAddress());
+
+//            fxTxtUsername.setText(user.getUsername());
+            
 //                System.out.println(user.getEmail());
-            } catch (Exception e) {
-            }
         }
     }
+    
+    
 }

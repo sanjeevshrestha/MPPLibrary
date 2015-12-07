@@ -170,18 +170,22 @@ public class BookDAO {
 
             rs = db.getResultSet();
             while (rs.next()) {
-                Book b;
                 //b = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("ISBN"), rs.getBoolean("available"));
                 bin.setTitle(rs.getString("title"));
                 bin.setID(rs.getLong("id"));
                 bin.setISBN(rs.getString("ISBN"));
                bin.setIsAvailable(rs.getBoolean("available"));
+               bin.setDescription(rs.getString("description"));
                
                 q = db.getQuery(true);
                 q.select("*").from("lendablecopies").where("book_id=" + q.quote(String.valueOf(bin.getID())));
+                
+                System.out.println(q.getQuery());
                 rs1 = db.getResultSet();
                 while (rs1.next()) {
                     LendableCopy lc = new LendableCopy(rs1.getLong("uniqueid"), rs1.getLong("book_id"));
+                    lc.setIsAvailable(rs1.getBoolean("available"));
+                    
                     lc.loadBookDetail();
                     bin.addLendableCopies(lc);
                 }

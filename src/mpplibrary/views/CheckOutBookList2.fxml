@@ -112,8 +112,8 @@
                         </TableView>
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                           <items>
-                              <Button mnemonicParsing="false" text="Checkin" />
-                            <Button mnemonicParsing="false" text="Calculate Fine" />
+                              <Button fx:id="btnCheckin" mnemonicParsing="false" text="Checkin" />
+                            <Button fx:id="btnCalculateFine" mnemonicParsing="false" text="Calculate Fine" />
                           </items>
                         </ToolBar>
                      </children>

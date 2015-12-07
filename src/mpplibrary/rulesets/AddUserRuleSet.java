@@ -16,8 +16,8 @@ public class AddUserRuleSet implements RuleSet {
     @Override
     public void applyRules(Object o) throws RuleException {
         AddUserController amc = (AddUserController) o;
-        amc.getUsernameTxt().setText("");
-        // amc.getMemberComponent().setStyle("");
+        amc.getUsernameTxt().setStyle("");
+        amc.getPasswordTxt().setStyle("");
         amc.getFirstNameTxt().setStyle("");
         amc.getLastNameTxt().setStyle("");
         amc.getPhoneTxt().setStyle("");
@@ -52,12 +52,28 @@ public class AddUserRuleSet implements RuleSet {
 //            throw new RuleException("ID cannot be empty.", amc.getMemberComponent());
 //        }
 
+        if (amc.getUsernameTxt().getText().length() == 0) {
+            throw new RuleException("Username cannot be empty.", amc.getUsernameTxt());
+        }
+
+        if (amc.getPasswordTxt().getText().length() == 0) {
+            throw new RuleException("Password cannot be empty.", amc.getPasswordTxt());
+        }
+
         if (amc.getFirstNameTxt().getText().length() == 0) {
             throw new RuleException("First Name cannot be empty.", amc.getFirstNameTxt());
         }
 
         if (amc.getLastNameTxt().getText().length() == 0) {
             throw new RuleException("Last Name cannot be empty.", amc.getLastNameTxt());
+        }
+
+        if (amc.getPhoneTxt().getText().length() == 0) {
+            throw new RuleException("Phone cannot be empty.", amc.getPhoneTxt());
+        }
+
+        if (amc.getEmailTxt().getText().length() == 0) {
+            throw new RuleException("Email cannot be empty.", amc.getEmailTxt());
         }
 
         if (amc.getAddressTxt().getText().length() == 0) {
@@ -74,14 +90,6 @@ public class AddUserRuleSet implements RuleSet {
 
         if (amc.getZipTxt().getText().length() == 0) {
             throw new RuleException("ZIP cannot be empty.", amc.getZipTxt());
-        }
-
-        if (amc.getPhoneTxt().getText().length() == 0) {
-            throw new RuleException("Phone cannot be empty.", amc.getPhoneTxt());
-        }
-
-        if (amc.getEmailTxt().getText().length() == 0) {
-            throw new RuleException("Email cannot be empty.", amc.getEmailTxt());
         }
 
         EmailValidator ev = new EmailValidator();

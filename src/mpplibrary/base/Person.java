@@ -41,7 +41,6 @@ abstract public class Person {
 
     public Person(long ID, String firstname, String lastname, boolean active, String phone, String email, String mobile) {
         this.ID = ID;
-
         this.firstname = firstname;
         this.lastname = lastname;
         this.active = active;
