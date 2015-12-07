@@ -107,6 +107,7 @@ public class AddBookController {
         description = getFxTxtDescription().getText();
 
         try {
+
             RuleSet addressRules = RuleSetFactory.getRuleSet(AddBookController.this);
             addressRules.applyRules(AddBookController.this);
             String type = fxComboPublicationType.getSelectionModel().getSelectedItem().toString();
@@ -118,10 +119,10 @@ public class AddBookController {
 
             Book book = new Book(0, title, isbn, description, type, al, lcl);
             if (book.save()) {
-                 Alert alert = new Alert(AlertType.INFORMATION);
-                        alert.setTitle("Book Saved");
-                        alert.setContentText("Successfully added book");
-                        alert.showAndWait();
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Book Saved");
+                alert.setContentText("Successfully added book");
+                alert.showAndWait();
                 dialogStage.close();
                 listBooksController.refreshListData();
             }
@@ -329,6 +330,10 @@ public class AddBookController {
      */
     public ComboBox getFxComboPublicationType() {
         return fxComboPublicationType;
+    }
+
+    public boolean isUniqueIsbn() {
+        return BookModel.getInstance().isUniqueISBN(isbn);
     }
 
 }

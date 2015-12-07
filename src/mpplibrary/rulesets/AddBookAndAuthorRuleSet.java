@@ -50,10 +50,13 @@ public class AddBookAndAuthorRuleSet implements RuleSet {
             throw new RuleException("Select a publication type", null);
         }
 
-        System.out.println(bc.getFxComboPublicationType().getSelectionModel().getSelectedItem());
-        if (((String) bc.getFxComboPublicationType().getSelectionModel().getSelectedItem()).equalsIgnoreCase(AddBookController.PUBLICATION_TYPE_BOOK) && bc.getIsbn().length() == 0) {
-            System.out.println("throw isbn error");
-            throw new RuleException("ISBN cannot be empty.", bc.getFxTxtIsbn());
+        if (bc.getIsbn().length() == 0) {
+            if (((String) bc.getFxComboPublicationType().getSelectionModel().getSelectedItem()).equalsIgnoreCase(AddBookController.PUBLICATION_TYPE_BOOK)) {
+                System.out.println("throw isbn error");
+                throw new RuleException("ISBN cannot be empty.", bc.getFxTxtIsbn());
+            }
+        } else if (!bc.isUniqueIsbn()) {
+            throw new RuleException("ISBN already exists", bc.getFxTxtIsbn());
         }
 
         if (bc.getTitle().length() == 0) {
