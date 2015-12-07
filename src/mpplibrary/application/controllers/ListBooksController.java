@@ -26,10 +26,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import mpplibrary.application.models.BookModel;
-import mpplibrary.base.Author;
 import mpplibrary.base.Book;
 import mpplibrary.base.LendableCopy;
-import mpplibrary.base.Member;
 import mpplibrary.helper.LoadWindowFrame;
 
 /**

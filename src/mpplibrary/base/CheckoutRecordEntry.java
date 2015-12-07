@@ -21,6 +21,7 @@ public class CheckoutRecordEntry {
     private LocalDate dueDate;
     private int lendableDays;
     private boolean checked_in;
+    private CheckoutRecordEntryDAO dataAccess;
 
     public boolean isChecked_in() {
         return checked_in;
@@ -30,7 +31,6 @@ public class CheckoutRecordEntry {
         this.checked_in = checked_in;
     }
 
-    private CheckoutRecordEntryDAO dataAccess;
 
     public CheckoutRecordEntry(long ID, LendableCopy book, LocalDate checkoutDate, LocalDate dueDate) {
         this.ID = ID;
@@ -71,6 +71,7 @@ public class CheckoutRecordEntry {
     }
 
     public CheckoutRecordEntry() {
+        this.dataAccess = new CheckoutRecordEntryDAO();
 
     }
 
@@ -144,6 +145,11 @@ public class CheckoutRecordEntry {
 
     public String getFine() {
         return "$0.00";
+    }
+    
+    public boolean checkin()
+    {
+       return this.dataAccess.checkin(this);
     }
 
 }

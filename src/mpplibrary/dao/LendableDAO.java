@@ -72,6 +72,7 @@ public class LendableDAO {
             rs = db.getResultSet();
             while (rs.next()) {
 
+                l.setUniqueID(rs.getLong("uniqueid"));
                 l.setTitle(rs.getString("title"));
                 l.setISBN(rs.getString("isbn"));
 

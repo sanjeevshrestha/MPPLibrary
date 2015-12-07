@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -64,7 +65,7 @@ public class ListCheckoutsController {
 
     private CheckoutModel checkoutModel;
 
-    private int selectedCheckoutsPosition;
+    private int selectedEntryPosition, selectedCheckoutPosition;
 
     Callback<TableColumn<CheckoutRecord, Object>, TableCell<CheckoutRecord, Object>> cellFactory;
 
@@ -76,7 +77,7 @@ public class ListCheckoutsController {
     @FXML
     public void initialize() {
 
-        selectedCheckoutsPosition = -1;
+        selectedEntryPosition = -1;
 
         checkoutList = FXCollections.observableArrayList();
         entriesList = FXCollections.observableArrayList();
@@ -98,9 +99,13 @@ public class ListCheckoutsController {
         tblCheckedoutList.setItems(filteredCheckoutList);
 
         tblColumnBook.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("title"));
+        tblColumnBook.setCellFactory(cellFactoryEntry);
+
         tblColumnDueDate.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("dueDateInString"));
+        tblColumnDueDate.setCellFactory(cellFactoryEntry);
 
         tblColumnFine.setCellValueFactory(new PropertyValueFactory<CheckoutRecordEntry, Object>("fine"));
+        tblColumnFine.setCellFactory(cellFactoryEntry);
 
         tblCheckoutRecordEntries.setItems(entriesList);
 
@@ -139,7 +144,36 @@ public class ListCheckoutsController {
 
     protected void onBtnCheckinClicked(ActionEvent ev) {
         try {
-            System.out.println("Testing");
+            if (selectedEntryPosition > -1) {
+                CheckoutRecordEntry en = entriesList.get(selectedEntryPosition);
+                if (en.checkin()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Checked in");
+                    alert.setContentText("Successfully checked in book");
+                    alert.showAndWait();
+                    checkoutList.clear();
+                    checkoutList.addAll(checkoutModel.getCheckoutRecords());
+                    filteredCheckoutList.clear();
+                    filteredCheckoutList.addAll(checkoutList);
+
+                    entriesList.clear();
+                    selectedEntryPosition = -1;
+                    selectedCheckoutPosition = -1;
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Checked in");
+                    alert.setContentText("Could not checkin book. Please try again");
+                    alert.showAndWait();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Book");
+                alert.setContentText("Select book to checkin");
+                alert.showAndWait();
+
+            }
+
         } catch (Exception e) {
         }
 
@@ -161,8 +195,8 @@ public class ListCheckoutsController {
                 = new Callback<TableColumn<CheckoutRecordEntry, Object>, TableCell<CheckoutRecordEntry, Object>>() {
                     @Override
                     public TableCell call(TableColumn p) {
-                        MyStringTableCell cell = new MyStringTableCell();
-                        // cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+                        MyEntryTableCell cell = new MyEntryTableCell();
+                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEntryEventHandler());
 
                         return cell;
                     }
@@ -170,9 +204,8 @@ public class ListCheckoutsController {
     }
 
     private void updateFilteredData() {
-        selectedCheckoutsPosition = -1;
+        selectedEntryPosition = -1;
         filteredCheckoutList.clear();
-        //anchorPaneMemberPreview.setVisible(false);
         for (CheckoutRecord cr : checkoutList) {
             if (matchesFilter(cr)) {
                 filteredCheckoutList.add(cr);
@@ -227,6 +260,20 @@ public class ListCheckoutsController {
         }
     }
 
+    class MyEntryTableCell extends TableCell<CheckoutRecord, Object> {
+
+        @Override
+        public void updateItem(Object item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(empty ? null : getString());
+            setGraphic(null);
+        }
+
+        private String getString() {
+            return getItem() == null ? "" : getItem().toString();
+        }
+    }
+
     class MyEventHandler implements EventHandler<MouseEvent> {
 
         @Override
@@ -244,7 +291,19 @@ public class ListCheckoutsController {
             entriesList.clear();
             entriesList.addAll(r.getCheckoutItems());
 
-            selectedCheckoutsPosition = index;
+            selectedCheckoutPosition = index;
+
+        }
+    }
+
+    class MyEntryEventHandler implements EventHandler<MouseEvent> {
+
+        @Override
+        public void handle(MouseEvent t) {
+            TableCell c = (TableCell) t.getSource();
+            int index = c.getIndex();
+
+            selectedEntryPosition = index;
 
         }
     }

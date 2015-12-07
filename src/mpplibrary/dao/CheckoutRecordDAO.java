@@ -46,9 +46,12 @@ public class CheckoutRecordDAO {
         try {
 
             Database db = DatabaseFactory.getInstance();
+            //select r.* from checkoutrecords  as r where (select count(*) from recordentries where checkout_record_id=r.id )>0
 
             Query q = db.getQuery(true);
-            q.select("*").from("checkoutrecords");
+            q.select("r.*").from("checkoutrecords as r");
+            q.where("(select count(*) from recordentries where checkout_record_id=r.id and checked_in!=1)>0");
+            
             rs = db.getResultSet();
             while (rs.next()) {
                 CheckoutRecord r;
@@ -153,7 +156,7 @@ public class CheckoutRecordDAO {
                 q.column("checkout_date").value(record.getCheckoutDate().toString());
 
                 q.column("due_date").value(r.calculateDueDateWithCheckoutDate(record.getCheckoutDate()).toString());
-                q.column("checked_in").value("false");
+                q.column("checked_in").value("0");
                 db.execute();
                 r.getBook().makeUnavailable();
 
@@ -173,14 +176,18 @@ public class CheckoutRecordDAO {
             Query q = db.getQuery(true);
             q.select("*").from("recordentries");
             q.where("checkout_record_id="+q.quote(String.valueOf(r.getID())));
+            q.where("checked_in!=1");
             ResultSet rs=db.getResultSet();
             while(rs.next())
             {
                 LendableCopy l=new LendableCopy(rs.getLong("lendable_id"));
                 l.loadBookDetail();
+            
                 CheckoutRecordEntry e=new CheckoutRecordEntry(l,LocalDate.parse(rs.getString("checkout_date")));
                 e.setDueDate(LocalDate.parse(rs.getString("due_date")));
                 e.setChecked_in(rs.getBoolean("checked_in"));
+                e.setID(rs.getLong("id"));
+               
               
                 entries.add(e);
                // r.addRecordEntry(e);

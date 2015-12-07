@@ -19,7 +19,32 @@ import mpplibrary.database.Query;
  * @author sanjeev
  */
 public class CheckoutRecordEntryDAO {
-    
-    
+
+    public boolean checkin(CheckoutRecordEntry entry) {
+
+        try {
+            Database db = DatabaseFactory.getInstance();
+            Query q = db.getQuery(true);
+            q.update("recordentries");
+            q.set("checked_in", "1");
+            q.where("id=" + q.quote(String.valueOf(entry.getID())));
+     
+            db.execute();
+            
+            q = db.getQuery(true);
+            q.update("lendablecopies");
+            q.set("available", "1");
+            q.where("uniqueid=" + q.quote(String.valueOf(entry.getBook().getUniqueID())));
+            System.out.println(q.getQuery());
+            db.execute();
+     
+            return true;
+
+        } catch (Exception e) {
+            return false;
+
+        }
+
+    }
 
 }
