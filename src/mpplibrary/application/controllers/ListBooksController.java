@@ -60,7 +60,7 @@ public class ListBooksController {
     TableColumn<LendableCopy, String> fxColumnLendableCopy;
 
     @FXML
-    TableColumn<Book, String> tblColumnAvailable;
+    TableColumn<LendableCopy, String> tblColumnAvailable;
 
     @FXML
     Button fxBtnAddNewBook, fxBtnDeleteBook;
@@ -96,9 +96,6 @@ public class ListBooksController {
 
         tblColumnTitle.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         tblColumnTitle.setCellFactory(cellFactory);
-
-        tblColumnAvailable.setCellValueFactory(new PropertyValueFactory<Book, String>("available"));
-        tblColumnAvailable.setCellFactory(cellFactory);
 
         filteredBooksList.addAll(booksList);
         tblViewBooks.setItems(filteredBooksList);
@@ -192,7 +189,6 @@ public class ListBooksController {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
 
-
             selectedBookPosition = index;
             fxAnchorPaneDetails.setVisible(true);
 
@@ -200,6 +196,7 @@ public class ListBooksController {
             book.loadBook();
             System.out.println("title = " + book.getTitle());
             System.out.println("description = " + book.getDescription());
+            System.out.println("lendables = " + book.getLendableCopies().size());
             fxTxtBookTitle.setText(book.getTitle());
             fxTxtBookDescription.setText(book.getDescription());
             String author = "";
@@ -208,10 +205,12 @@ public class ListBooksController {
             }
             fxTxtAuthors.setText(author);
 
-            fxColumnLendableCopy.setCellValueFactory(new PropertyValueFactory<LendableCopy, String>("UniqueID"));
+            fxColumnLendableCopy.setCellValueFactory(new PropertyValueFactory<LendableCopy, String>("strUniqueId"));
+            tblColumnAvailable.setCellValueFactory(new PropertyValueFactory<LendableCopy, String>("isAvailable"));
+
             ObservableList<LendableCopy> lendables = FXCollections.observableArrayList();
             lendables.addAll(book.getLendableCopies());
-            tblLendableCopies.setItems(booksList);
+            tblLendableCopies.setItems(lendables);
         }
     }
 

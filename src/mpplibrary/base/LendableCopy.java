@@ -16,6 +16,8 @@ public class LendableCopy extends Book {
 
     private long uniqueID;
     private LendableDAO dataAccess;
+    
+    
 
     public LendableCopy() {
 
@@ -82,5 +84,9 @@ public class LendableCopy extends Book {
     public void makeUnavailable()
     {
         this.dataAccess.makeUnvailable(this);
+    }
+    
+    public String getStrUniqueId(){
+        return (uniqueID+"");
     }
 }
