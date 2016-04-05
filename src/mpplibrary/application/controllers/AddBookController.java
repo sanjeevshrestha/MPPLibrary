@@ -167,7 +167,7 @@ public class AddBookController {
                 } else {
                     fxLblIsbn.setText("ISBN");
                 }
-                System.out.println(t1);
+               // System.out.println(t1);
 
             }
         });

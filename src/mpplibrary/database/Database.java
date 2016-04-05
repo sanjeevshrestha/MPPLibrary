@@ -6,6 +6,9 @@
 package mpplibrary.database;
 
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.sql.*;
 
@@ -19,14 +22,29 @@ public class Database {
     private Query query;
     private Connection c;
 
+    private boolean installed = false;
+
     public Database() {
+        installed = false;
 
         try {
+
             this.query = new Query();
             prop = new Properties();
             InputStream infile = Database.class.getResourceAsStream("/mpplibrary/resources/mpplibrary.properties");
             prop.load(infile);
+
+            Path path = Paths.get("./mpplibrary.db");
+
+            if (Files.exists(path)) {
+                installed = true;
+            }
+
             this.connect();
+
+            if (!installed) {
+                this.initialize();
+            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -73,7 +91,6 @@ public class Database {
         ResultSet rs = null;
         try {
             String sql = this.query.getQuery();
-            System.out.println(sql);
             Statement stmt = null;
             stmt = this.c.createStatement();
             rs = stmt.executeQuery(sql);
@@ -122,21 +139,15 @@ public class Database {
         return this;
     }
 
-    
-    public void close() throws SQLException
-    {
-         this.c.close();
-        
-    }
-    
+    public void close() throws SQLException {
+        this.c.close();
 
-    
+    }
+
     public static void main(String[] args) {
         Database db = new Database();
         db.connect();
         db.initialize();
     }
-    
-    
 
 }

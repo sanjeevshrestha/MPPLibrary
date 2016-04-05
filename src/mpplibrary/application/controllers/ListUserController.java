@@ -224,17 +224,17 @@ public class ListUserController {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
             selectedUserPosition = index;
-            System.out.println("Position:: " + selectedUserPosition);
+           // System.out.println("Position:: " + selectedUserPosition);
             anchorPaneUserPreview.setVisible(true);
 
-            User user = filteredUsersList.get(index);
+            User user = usersList.get(index);
             fxUserNameTitle.setText(user.getFirstname() + " " + user.getLastname());
             fxTxtEmail.setText(user.getEmail());
             fxTxtPhone.setText(user.getPhone());
             fxTxtAddress.setText(user.getFullAddress());
+            fxTxtUsername.setText(user.getUsername());
 
-//            fxTxtUsername.setText(user.getUsername());
-//                System.out.println(user.getEmail());
+
         }
     }
 

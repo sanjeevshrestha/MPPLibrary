@@ -87,7 +87,7 @@ public class MenuController {
 
     @FXML
     protected void onMenuListBooks(ActionEvent event) {
-        System.out.println("OnListBooksSelected");
+       // System.out.println("OnListBooksSelected");
 //        new BookController().listBooks();
         windowFrame.setSceneListBooks();
     }

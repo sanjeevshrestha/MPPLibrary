@@ -20,11 +20,9 @@ public class Test {
         q.where("password=\"123\"");
         q.order("title ASC");
         q.group("username");
-        System.out.println(q.getQuery());
 
         q = db.getQuery(true);
         q.insert("users").column("username").value("sanjeev").column("password").value("123");
-        System.out.println(q.getQuery());
 
         q = db.getQuery(true);
         q.update("users").set("username", "sanjeev").set("password", "1212");
@@ -36,7 +34,6 @@ public class Test {
         q=db.getQuery(true);
         q.delete("users").where("username="+q.quote("sanjeev"));
         
-        System.out.println(q.getQuery());
 
      //   db.setQuery(q);
     }

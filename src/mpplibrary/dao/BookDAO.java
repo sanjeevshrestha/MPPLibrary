@@ -158,7 +158,6 @@ public class BookDAO {
     
     public boolean loadBook(Book bin) {
         ResultSet rs = null, rs1 = null;
-        System.out.println("called");
         try {
             
             Database db = DatabaseFactory.getInstance();
@@ -183,7 +182,6 @@ public class BookDAO {
                 rs1 = db.getResultSet();
                 while (rs1.next()) {
                     LendableCopy lc = new LendableCopy(rs1.getLong("uniqueid"), rs1.getLong("book_id"));
-                    System.out.println(rs1.getBoolean("available"));
                     
                     lc.setIsAvailable(rs1.getBoolean("available"));
                     

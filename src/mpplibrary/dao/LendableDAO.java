@@ -153,7 +153,6 @@ public class LendableDAO {
             q.set("available", "0");
             q.where("uniqueid=" + q.quote(String.valueOf(l.getUniqueID())));
             
-            System.out.println(q.getQuery());
             db.execute();
 
         } catch (Exception e) {

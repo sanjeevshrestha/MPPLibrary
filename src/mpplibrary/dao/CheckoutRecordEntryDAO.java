@@ -35,7 +35,6 @@ public class CheckoutRecordEntryDAO {
             q.update("lendablecopies");
             q.set("available", "1");
             q.where("uniqueid=" + q.quote(String.valueOf(entry.getBook().getUniqueID())));
-            System.out.println(q.getQuery());
             db.execute();
      
             return true;

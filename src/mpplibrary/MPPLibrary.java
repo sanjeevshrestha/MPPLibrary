@@ -57,6 +57,7 @@ public class MPPLibrary extends Application implements OnLoginSuccessListener {
      */
     public static void main(String[] args) {
 
+  
         launch(args);
     }
 
